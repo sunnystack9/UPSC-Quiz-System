@@ -1,0 +1,52 @@
+[
+  {
+    "question_id": "UPSC_SAMPLE_001",
+    "exam": "UPSC",
+    "paper": "1",
+    "year": 2026,
+    "part": "GS",
+    "theme": "Polity",
+    "subtopic": "Constitution",
+    "difficulty": "easy",
+    "question_type": "factual",
+    "source": "Placeholder — replace with PYQ-sourced content",
+    "question": "Who is regarded as the chief architect of the Constitution of India?",
+    "options": [
+      {"label": "A", "text": "Mahatma Gandhi"},
+      {"label": "B", "text": "Dr. B. R. Ambedkar"},
+      {"label": "C", "text": "Jawaharlal Nehru"},
+      {"label": "D", "text": "Sardar Vallabhbhai Patel"}
+    ],
+    "answer": "B",
+    "explanation": "Dr. B. R. Ambedkar chaired the Constitution Drafting Committee and is widely regarded as the chief architect of the Constitution of India, which was adopted on 26 November 1949.",
+    "shared_with": [],
+    "section_tags": [],
+    "answer_status": "confirmed",
+    "verification_note": "Placeholder sample question for format demonstration only — not a real PYQ. Safe to delete once real content is loaded."
+  },
+  {
+    "question_id": "UPSC_SAMPLE_002",
+    "exam": "UPSC",
+    "paper": "1",
+    "year": 2026,
+    "part": "GS",
+    "theme": "Geography",
+    "subtopic": "Physical Geography",
+    "difficulty": "easy",
+    "question_type": "factual",
+    "source": "Placeholder — replace with PYQ-sourced content",
+    "question": "Which is the longest river flowing entirely within India?",
+    "options": [
+      {"label": "A", "text": "Godavari"},
+      {"label": "B", "text": "Yamuna"},
+      {"label": "C", "text": "Ganga"},
+      {"label": "D", "text": "Narmada"}
+    ],
+    "answer": "C",
+    "explanation": "The Ganga is the longest river flowing entirely within Indian territory, running roughly 2,525 km from its Himalayan source to the Bay of Bengal.",
+    "shared_with": [],
+    "section_tags": [],
+    "answer_status": "confirmed",
+    "verification_note": "Placeholder sample question for format demonstration only — not a real PYQ. Safe to delete once real content is loaded."
+  }
+]

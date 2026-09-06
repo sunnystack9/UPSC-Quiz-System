@@ -1,0 +1,52 @@
+[
+  {
+    "question_id": "HCS_SAMPLE_001",
+    "exam": "HCS",
+    "paper": "1",
+    "year": 2026,
+    "part": "GS",
+    "theme": "Haryana History & Culture",
+    "subtopic": "State Formation",
+    "difficulty": "easy",
+    "question_type": "factual",
+    "source": "Placeholder — replace with PYQ-sourced content",
+    "question": "On what date was the state of Haryana carved out of Punjab?",
+    "options": [
+      {"label": "A", "text": "1 November 1956"},
+      {"label": "B", "text": "1 November 1966"},
+      {"label": "C", "text": "26 January 1950"},
+      {"label": "D", "text": "15 August 1966"}
+    ],
+    "answer": "B",
+    "explanation": "Haryana was carved out of Punjab and formed as a separate state on 1 November 1966.",
+    "shared_with": [],
+    "section_tags": [],
+    "answer_status": "confirmed",
+    "verification_note": "Placeholder sample question for format demonstration only — not a real PYQ. Safe to delete once real content is loaded."
+  },
+  {
+    "question_id": "HCS_SAMPLE_002",
+    "exam": "HCS",
+    "paper": "1",
+    "year": 2026,
+    "part": "GS",
+    "theme": "Polity",
+    "subtopic": "State Government",
+    "difficulty": "easy",
+    "question_type": "factual",
+    "source": "Placeholder — replace with PYQ-sourced content",
+    "question": "Who acts as the constitutional (ceremonial) head of a state government in India?",
+    "options": [
+      {"label": "A", "text": "Chief Minister"},
+      {"label": "B", "text": "Governor"},
+      {"label": "C", "text": "Speaker of the Assembly"},
+      {"label": "D", "text": "Chief Justice of the High Court"}
+    ],
+    "answer": "B",
+    "explanation": "The Governor, appointed by the President, is the constitutional head of a state, while the Chief Minister holds real executive power.",
+    "shared_with": [],
+    "section_tags": [],
+    "answer_status": "confirmed",
+    "verification_note": "Placeholder sample question for format demonstration only — not a real PYQ. Safe to delete once real content is loaded."
+  }
+]
