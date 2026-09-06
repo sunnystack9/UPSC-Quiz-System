@@ -3635,12 +3635,18 @@ def render_reviewed_question(q, user, show_caption=True):
 
     my_bookmarks = load_bookmarks().get(user, {})
     is_bookmarked = q["question_id"] in my_bookmarks
-    bookmark_now = st.checkbox(
-        "⭐ Bookmark this Qn",
-        value=is_bookmarked,
+    # A plain toggle button rather than st.checkbox -- by request, after a
+    # checkbox here didn't register taps at all on at least one Android
+    # tablet. A checkbox's actual clickable target is a small custom
+    # indicator that can end up misaligned or under-sized on some touch
+    # browsers even though it looks fine and works fine with a mouse; a
+    # full-width button has a much larger, more standard tap target and
+    # calls toggle_bookmark() directly on click instead of comparing
+    # against a separate value= on every rerun.
+    if st.button(
+        "★ Bookmarked" if is_bookmarked else "⭐ Bookmark this Qn",
         key=f"bookmark_review_{q['question_id']}",
-    )
-    if bookmark_now != is_bookmarked:
+    ):
         toggle_bookmark(user, q["question_id"])
         st.rerun()
 
@@ -4144,37 +4150,17 @@ def render_question(practice_questions, user):
     my_bookmarks = load_bookmarks().get(user, {})
     is_bookmarked = q["question_id"] in my_bookmarks
 
-    # Narrow, equal-width columns (with a spacer soaking up the rest of the
-    # row) rather than a 50/50 split -- previously Next question stretched
-    # to fill half the row while the bare checkbox next to it stayed tiny by
-    # comparison, even though they were nominally in equal columns. Boxing
-    # the checkbox in a bordered st.container() and giving both boxes the
-    # same narrow column width makes them read as two same-sized boxes
-    # instead. Colors follow the same green="proceed/positive" and
-    # amber="save/star" language used elsewhere (Submit and Smart Quiz are
-    # also green; Bookmarks tab is also amber) -- same scoped st-key
-    # container-CSS pattern as those, just applied to the container itself
-    # for the checkbox box rather than to a nested button, since a checkbox
-    # has no button element to target.
+    # Colors follow the same green="proceed/positive" and amber="save/star"
+    # language used elsewhere (Submit and Smart Quiz are also green;
+    # Bookmarks tab is also amber) -- same scoped st-key container-CSS
+    # pattern as Next question, skip, etc. Was a checkbox boxed in a
+    # hand-written <style> block (a checkbox has no button element for
+    # inject_button_tint_css to target); now a plain button like every
+    # other one here, since a checkbox's small custom indicator wasn't
+    # registering taps at all on at least one Android tablet, while a
+    # full-width button is a much larger, more standard touch target.
     inject_button_tint_css("nextbox", "#f0fdf4", "#86efac", "#15803d", hover_bg="#dcfce7")
-    st.markdown(
-        """
-        <style>
-        [class*="st-key-bookmarkbox"] {
-            background-color: #fffbeb !important;
-            border: 1px solid #fcd34d !important;
-            border-radius: 0.5rem !important;
-            padding: 0.5rem 1rem !important;
-            display: flex !important;
-            align-items: center !important;
-        }
-        [class*="st-key-bookmarkbox"] p {
-            color: #b45309 !important;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    inject_button_tint_css("bookmarkbox", "#fffbeb", "#fcd34d", "#b45309", hover_bg="#fef3c7")
     # Back to a plain 50/50 split (was narrowed with a trailing spacer
     # column before) -- that narrow width was what caused "Bookmark this Qn"
     # to wrap onto two lines, and clustered both boxes on the left side of
@@ -4205,23 +4191,14 @@ def render_question(practice_questions, user):
         # really a pre-answer decision ("I don't want this session after
         # all"), not a post-reveal one, so it makes more sense paired with
         # Submit/Skip than with Next question.
-        #
-        # border=True dropped here -- Streamlit's own bordered-container
-        # padding (a fixed ~1rem by default) was taller than a button's
-        # natural padding, which is why this box was visibly taller than
-        # "Next question" next to it. Building the border/padding entirely
-        # from the CSS above instead (rather than overriding Streamlit's
-        # own, whichever nested element it's actually applied to) sidesteps
-        # that mismatch directly, sized to approximate a button's height.
         with st.container(key=f"bookmarkbox_{idx}"):
-            bookmark_now = st.checkbox(
-                "⭐ Bookmark this Qn",
-                value=is_bookmarked,
+            if st.button(
+                "★ Bookmarked" if is_bookmarked else "⭐ Bookmark this Qn",
                 key=f"bookmark_{q['question_id']}_{idx}",
-            )
-    if bookmark_now != is_bookmarked:
-        toggle_bookmark(user, q["question_id"])
-        st.rerun()
+                use_container_width=True,
+            ):
+                toggle_bookmark(user, q["question_id"])
+                st.rerun()
 
     # Reuses the same plaintext formatter as Bookmarks/Question Bank
     # (format_question_plaintext) instead of the hand-built copy_text this
