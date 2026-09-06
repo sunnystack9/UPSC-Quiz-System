@@ -1178,8 +1178,8 @@ def log_edit(user, question_id, field, old_value, new_value, source=None):
     avoid.
 
     source is optional and currently only set by apply_explanation_edit()
-    when the saved text traces back to an accepted AI Explanation Import
-    suggestion (see its ai_model parameter) -- e.g. "AI Explanation Import
+    when the saved text comes from an Import AI Explanation auto-save (see
+    its ai_model parameter) -- e.g. "Import AI Explanation
     (gemini-2.5-flash)". Omitted (not just blank) for every other edit type,
     so old log entries and manual edits don't gain a stray null field."""
     with _locked_file(EDITS_FILE, []) as log:
@@ -1360,8 +1360,8 @@ def apply_explanation_edit(question_id, new_explanation_text, user, source_file_
     that's ever actually needed).
 
     ai_model is optional -- when render_explanation_editor() passes one
-    through (the resolved model_version from a "Use this" click on an AI
-    Explanation Import suggestion), the log_edit() entry below records it as
+    through (the resolved model_version from an accepted AI Explanation
+    Import suggestion), the log_edit() entry below records it as
     the edit's source, so the permanent edit log shows which model touched a
     given explanation even though the app itself always calls a "-latest"
     alias rather than a pinned version.
@@ -1389,7 +1389,7 @@ def apply_explanation_edit(question_id, new_explanation_text, user, source_file_
         old_explanation = target.get("explanation", "")
         cleaned = (new_explanation_text or "").strip()
         if cleaned and cleaned != old_explanation:
-            source = f"AI Explanation Import ({ai_model})" if ai_model else None
+            source = f"Import AI Explanation ({ai_model})" if ai_model else None
             log_edit(user, question_id, "explanation", old_explanation, cleaned, source=source)
             target["explanation"] = cleaned
             changed_fields.append("explanation")
@@ -1409,7 +1409,27 @@ def apply_explanation_edit(question_id, new_explanation_text, user, source_file_
     return {"changed": changed_fields, "github_ok": github_ok, "github_msg": github_msg}
 
 
-# ---------- AI Explanation Import (Gemini Flash) ----------
+def ai_saved_explanations(edit_log):
+    """Questions whose CURRENT explanation traces back to an Import AI
+    Explanation auto-save -- i.e. the most recent explanation-edit log
+    entry for that question has an "Import AI Explanation (...)" source.
+    edit_log is append-only in chronological order, so the last matching
+    entry seen for a given question_id is its current state; keying a dict
+    by question_id while walking the log naturally keeps only that latest
+    one. A question that was AI-saved and later manually edited no longer
+    has an AI-sourced latest entry, so it drops out of this list on its
+    own -- no separate "already handled" bookkeeping needed."""
+    latest_by_qid = {}
+    for entry in edit_log:
+        if entry.get("field") == "explanation":
+            latest_by_qid[entry.get("question_id")] = entry
+    return [
+        e for e in latest_by_qid.values()
+        if (e.get("source") or "").startswith("Import AI Explanation")
+    ]
+
+
+# ---------- Import AI Explanation (Gemini Flash) ----------
 # One feature, two modes, picked automatically from whether the question
 # already has an explanation on file: "generate" writes one from scratch,
 # "improve" refines an existing draft. Deliberately a single button rather
@@ -1418,13 +1438,13 @@ def apply_explanation_edit(question_id, new_explanation_text, user, source_file_
 # expander, so the button should just do the right thing either way rather
 # than asking the admin to pick a mode themselves.
 #
-# The suggestion is never saved directly -- "Use this" only copies it into
-# the existing editable text area below (see the explfix_{qid} session_state
-# write in render_explanation_editor()), so the existing "Save explanation"
-# button -- with its own GitHub commit / logging -- stays the one and only
-# save path, and a human still has to actually click Save. This matches the
-# caption immediately below it: explanation changes should trace back to a
-# primary source, not just be accepted from an AI wholesale.
+# The suggestion is saved and committed immediately, with no manual review
+# step in between (by request) -- see render_explanation_editor() for the
+# save call. The only safety net is after the fact: every question whose
+# current explanation came from this feature shows up in the Session
+# Report tab's "Auto AI Explanation Saves" expander (see
+# ai_saved_explanations()), so a bad one can still be caught and manually
+# corrected later, just not un-done with a single click.
 
 _AI_EXPLANATION_SCHEMA = {
     "type": "object",
@@ -1474,9 +1494,20 @@ def _build_ai_explanation_prompt(q, mode):
         "details implied by the question. Do not invent facts, dates, "
         "article numbers, or figures not implied by the question itself. "
         "If you are not confident a factual detail is correct, note it in "
-        "issues_found instead of stating it as fact. Otherwise make the "
-        "explanation clear, exam-oriented, and easy to remember. Return "
-        "only the requested JSON."
+        "issues_found instead of stating it as fact.\n\n"
+        "Format revised_explanation as follows:\n"
+        "- Cite the specific fact, date, article/provision, or data point "
+        "that supports the answer.\n"
+        "- Structure it as short bullet points, not paragraphs or tables.\n"
+        "- Add a short 'Often confused with' bullet if relevant -- related "
+        "or similarly-worded facts/provisions a student might mix this up "
+        "with on a differently-phrased question, and the one or two "
+        "details that actually distinguish them.\n"
+        "- Write any formula or fraction in plain, readable text (e.g., "
+        "\"one-third of Rajya Sabha members retire every two years\") "
+        "rather than LaTeX or other special math notation.\n"
+        "- Keep it concise and exam-focused.\n\n"
+        "Return only the requested JSON."
     )
 
 
@@ -1555,11 +1586,17 @@ def render_explanation_editor(q, user, source_file_by_id):
     exactly when a missing or wrong explanation is most likely to get
     noticed.
 
-    Includes the AI Explanation Import button (see suggest_ai_explanation()
+    Includes the Import AI Explanation button (see suggest_ai_explanation()
     above) -- generates a fresh explanation when there isn't one yet, or a
-    suggested revision when there already is. Either way, "Use this" only
-    populates the text area below; the existing "Save explanation" button
-    is still the only thing that actually commits anything.
+    suggested revision when there already is. It saves and commits the
+    result immediately, with no manual "Save" step and no way to undo it
+    from here (by request) -- the only place a bad auto-save can be caught
+    is the Session Report tab's "Auto AI Explanation Saves" expander (see
+    ai_saved_explanations()), which lists every question whose current
+    explanation still traces back to this feature, for manual correction
+    later. The separate text area + "Save explanation" button below are
+    for manual edits (typing a correction yourself, or further editing an
+    AI-saved one) and still require an explicit click, same as before.
 
     source_file_by_id is load_questions()'s mapping of question_id -> the
     /data filename that actually won the merge for this question -- passed
@@ -1573,57 +1610,77 @@ def render_explanation_editor(q, user, source_file_by_id):
         )
 
         mode = "improve" if (q.get("explanation") or "").strip() else "generate"
-        if st.button("✨ AI Explanation Import", key=f"ai_import_go_{qid}"):
+        if st.button("✨ Import AI Explanation", key=f"ai_import_go_{qid}"):
             with st.spinner("Generating explanation..." if mode == "generate" else "Improving explanation..."):
-                st.session_state[f"ai_import_result_{qid}"] = suggest_ai_explanation(q, mode)
-
-        ai_result = st.session_state.get(f"ai_import_result_{qid}")
-        if ai_result:
-            if "error" in ai_result:
-                st.warning(ai_result["error"])
+                result = suggest_ai_explanation(q, mode)
+            if "error" in result:
+                st.session_state[f"ai_import_error_{qid}"] = result["error"]
+                st.session_state.pop(f"ai_import_meta_{qid}", None)
             else:
-                label = "AI-generated explanation" if mode == "generate" else "AI-suggested revision"
-                st.info(f"**{label}:**\n\n{ai_result['revised_explanation']}")
-                st.caption(f"Model: {ai_result['model_version']}")
-                if ai_result["issues_found"]:
-                    st.warning("⚠️ Flagged for human review: " + "; ".join(ai_result["issues_found"]))
-                ai_col1, ai_col2 = st.columns(2)
-                with ai_col1:
-                    if st.button("Use this", key=f"ai_import_use_{qid}", use_container_width=True):
-                        st.session_state[f"explfix_{qid}"] = ai_result["revised_explanation"]
-                        # Stashed separately from ai_import_result_{qid} (cleared
-                        # below) so the model tag survives until the next Save
-                        # click, even across the rerun "Use this" triggers.
-                        st.session_state[f"ai_import_model_{qid}"] = ai_result["model_version"]
-                        del st.session_state[f"ai_import_result_{qid}"]
-                        st.rerun()
-                with ai_col2:
-                    if st.button("Discard", key=f"ai_import_discard_{qid}", use_container_width=True):
-                        del st.session_state[f"ai_import_result_{qid}"]
-                        st.rerun()
+                # Saved right away, no review step in between (by request).
+                # Also written into explfix_{qid} -- the text area's own
+                # key, further down this function -- which works here
+                # because this assignment happens *before* that widget is
+                # instantiated in this same run; Streamlit only forbids
+                # setting a widget's session_state key *after* that widget
+                # has already been created in the current script pass.
+                save_result = apply_explanation_edit(
+                    qid, result["revised_explanation"], user, source_file_by_id,
+                    ai_model=result["model_version"],
+                )
+                st.session_state[f"explfix_{qid}"] = result["revised_explanation"]
+                st.session_state[f"ai_import_meta_{qid}"] = {
+                    "label": "AI-generated explanation" if mode == "generate" else "AI-suggested revision",
+                    "model_version": result["model_version"],
+                    "issues_found": result["issues_found"],
+                    "save_result": save_result,
+                }
+                st.session_state.pop(f"ai_import_error_{qid}", None)
+            st.rerun()
+
+        if st.session_state.get(f"ai_import_error_{qid}"):
+            st.warning(st.session_state[f"ai_import_error_{qid}"])
+
+        meta = st.session_state.get(f"ai_import_meta_{qid}")
+        if meta:
+            save_result = meta["save_result"]
+            if "error" in save_result:
+                st.error(f"{meta['label']} couldn't be saved: {save_result['error']}")
+            elif not save_result["changed"]:
+                st.caption(f"{meta['label']} matched the existing text — nothing changed.")
+            elif save_result["github_ok"]:
+                st.success(f"{meta['label']} auto-saved and synced to GitHub — model: {meta['model_version']}.")
+            else:
+                st.warning(
+                    f"{meta['label']} saved locally, but the GitHub sync failed: "
+                    f"{save_result['github_msg']}. This won't survive a redeploy until it syncs."
+                )
+            if meta["issues_found"]:
+                st.warning("⚠️ Flagged for human review: " + "; ".join(meta["issues_found"]))
 
         new_explanation = st.text_area(
             "Explanation", value=q.get("explanation", ""), height=150,
             key=f"explfix_{qid}",
         )
         if st.button("Save explanation", key=f"explfix_save_{qid}"):
-            # Popped (not just read) so this tag only ever attaches to the
-            # very next save after a "Use this" -- a later, unrelated save on
-            # this same question won't inherit a stale AI-assisted label.
-            ai_model = st.session_state.pop(f"ai_import_model_{qid}", None)
-            save_result = apply_explanation_edit(qid, new_explanation, user, source_file_by_id, ai_model=ai_model)
+            save_result = apply_explanation_edit(qid, new_explanation, user, source_file_by_id)
             if "error" in save_result:
                 st.error(save_result["error"])
             elif not save_result["changed"]:
                 st.info("No changes detected.")
-            elif save_result["github_ok"]:
-                st.success("Saved and synced to GitHub.")
-                st.rerun()
             else:
-                st.warning(
-                    f"Saved locally, but the GitHub sync failed: {save_result['github_msg']}. "
-                    "This won't survive a redeploy until it syncs — try again in a moment."
-                )
+                # A manual save always supersedes whatever an earlier AI
+                # auto-save left on this question, so its info/success
+                # caption above is cleared here rather than lingering with
+                # a now-outdated model tag.
+                st.session_state.pop(f"ai_import_meta_{qid}", None)
+                if save_result["github_ok"]:
+                    st.success("Saved and synced to GitHub.")
+                else:
+                    st.warning(
+                        f"Saved locally, but the GitHub sync failed: {save_result['github_msg']}. "
+                        "This won't survive a redeploy until it syncs — try again in a moment."
+                    )
                 st.rerun()
 
 
@@ -4210,6 +4267,85 @@ def render_community_notes(question_id, user):
 # ---------- Report tab ----------
 
 def render_report(questions, user, source_file_by_id):
+    # Admin-only audit view of every question whose CURRENT explanation
+    # came from an Import AI Explanation auto-save (see
+    # ai_saved_explanations()) -- placed before the early-returns below
+    # since this has nothing to do with the viewing admin's own practice
+    # history, and shouldn't disappear just because they haven't attempted
+    # anything yet. Read-only by design: no revert action here, just
+    # visibility -- catching a bad one means manually fixing it (or
+    # re-running Import AI Explanation) from the question itself.
+    #
+    # Prev/dropdown/Next nav, one question at a time, mirrors the Question
+    # Bank tab's own browser (qb_nav_idx et al.) -- same reasoning applies
+    # here: a full read-through (stem, options, explanation) needs room a
+    # stacked pile of expanders doesn't give without a lot of scrolling.
+    # Uses its own ai_saves_-prefixed session-state keys throughout so it
+    # can't collide with the Question Bank tab's identical pattern.
+    if _is_admin(user):
+        ai_saved = sorted(ai_saved_explanations(load_edit_log()), key=lambda e: e.get("timestamp", ""), reverse=True)
+        with st.expander(f"🤖 Auto AI Explanation Saves ({len(ai_saved)})"):
+            if not ai_saved:
+                st.caption("No AI-saved explanations are currently live in the bank.")
+            else:
+                q_by_id = {qq["question_id"]: qq for qq in questions}
+
+                # Reset the nav position whenever the underlying set of
+                # auto-saved question ids changes (a new one just got
+                # saved, or one dropped off the list via a manual edit) --
+                # same signature-comparison pattern as qb_nav_idx, so the
+                # pointer doesn't silently end up pointing at the wrong
+                # entry after the list shifts under it.
+                entry_ids = tuple(e["question_id"] for e in ai_saved)
+                if st.session_state.get("ai_saves_signature") != entry_ids:
+                    st.session_state.ai_saves_nav_idx = 0
+                    st.session_state.ai_saves_signature = entry_ids
+
+                nav_idx = min(st.session_state.get("ai_saves_nav_idx", 0), len(ai_saved) - 1)
+                st.markdown(
+                    f"<p style='text-align:center;'><b>Question {nav_idx + 1} of {len(ai_saved)}</b></p>",
+                    unsafe_allow_html=True,
+                )
+
+                col_prev, col_pick, col_next = st.columns([1, 5, 1])
+                with col_prev:
+                    if st.button("◀ Prev", disabled=(nav_idx == 0), use_container_width=True, key="ai_saves_prev"):
+                        st.session_state.ai_saves_nav_idx = nav_idx - 1
+                        st.rerun()
+                with col_pick:
+                    def _ai_saves_pick_label(i, _entries=ai_saved):
+                        return f"{_entries[i]['question_id']} — {_entries[i].get('timestamp', '')}"
+                    # Written directly into the picker's own session_state key
+                    # before it's instantiated this run, same reason as the
+                    # Question Bank tab's qb_picker: st.selectbox only honors
+                    # index= the FIRST time a given key is created, so this is
+                    # what actually keeps the dropdown in sync after a Prev/
+                    # Next click rather than freezing on the original choice.
+                    if st.session_state.get("ai_saves_picker_synced") != nav_idx:
+                        st.session_state["ai_saves_picker"] = nav_idx
+                        st.session_state["ai_saves_picker_synced"] = nav_idx
+                    picked = st.selectbox(
+                        "Jump to", range(len(ai_saved)), format_func=_ai_saves_pick_label,
+                        key="ai_saves_picker", label_visibility="collapsed",
+                    )
+                    if picked != nav_idx:
+                        st.session_state.ai_saves_nav_idx = picked
+                        st.session_state.ai_saves_picker_synced = picked
+                        st.rerun()
+                with col_next:
+                    if st.button("Next ▶", disabled=(nav_idx == len(ai_saved) - 1), use_container_width=True, key="ai_saves_next"):
+                        st.session_state.ai_saves_nav_idx = nav_idx + 1
+                        st.rerun()
+
+                entry = ai_saved[nav_idx]
+                qid = entry["question_id"]
+                qq = q_by_id.get(qid)
+                if qq is None:
+                    st.warning(f"{qid} is no longer in the bank (last touched {entry.get('timestamp', '')}).")
+                else:
+                    st.caption(f"{qq['exam']} / {qq['theme']}  ·  {entry.get('source', '')}  ·  {entry.get('timestamp', '')}")
+                    render_full_question(qq, key_prefix="ai_saves")
+
     responses = [r for r in load_responses() if r.get("user") == user]
     if not responses:
         st.info("No practice sessions recorded yet — attempt some questions first.")
@@ -4600,7 +4736,7 @@ def format_question_for_ai_copy(q):
         "differently-phrased exam question, and the one or two details that "
         "actually distinguish them.",
         "- Write any formula or fraction in plain, readable text (e.g., "
-        "\"1/3rd of the pension amount, capped at ₹15,000\") rather than "
+        "\"one-third of Rajya Sabha members retire every two years\") rather than "
         "LaTeX or other special math notation -- same reliability reason as "
         "the bullet-point instruction above: rendered math notation can "
         "also fail to survive a copy out of a chat interface intact.",
