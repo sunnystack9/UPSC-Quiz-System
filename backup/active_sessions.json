@@ -33,5 +33,33 @@
     "started_at": "2026-09-06T16:32:23.609589",
     "revealed": true,
     "selected_letter": "B"
+  },
+  "Dev Maan": {
+    "question_ids": [
+      "UPSC_ANC_069",
+      "UPSC_ANC_046",
+      "UPSC_ANC_019",
+      "UPSC_ANC_088",
+      "UPSC_ANC_089",
+      "UPSC_ANC_005",
+      "UPSC_ANC_026",
+      "UPSC_ANC_008",
+      "UPSC_ANC_057",
+      "UPSC_ANC_004"
+    ],
+    "current_idx": 0,
+    "session_results": [
+      {
+        "theme": "Ancient History",
+        "correct": true,
+        "skipped": false,
+        "exam": "UPSC",
+        "paper": "1"
+      }
+    ],
+    "session_id": "2026-09-06T16:38:23.778776",
+    "started_at": "2026-09-06T16:38:23.781525",
+    "revealed": true,
+    "selected_letter": "A"
   }
 }
