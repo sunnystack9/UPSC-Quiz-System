@@ -844,7 +844,17 @@ def _is_admin(user):
         admin = st.secrets.get("admin_user")
     except Exception:
         admin = None
-    return bool(admin) and user == admin
+    if not admin:
+        return False
+    if isinstance(admin, str):
+        # A single name, or several given as one comma-separated string --
+        # supported so adding more admins doesn't require switching the
+        # secret to TOML-array syntax.
+        admins = [a.strip() for a in admin.split(",") if a.strip()]
+    else:
+        # A TOML array of names (admin_user = ["Sunny", "Friend"]).
+        admins = [str(a).strip() for a in admin if str(a).strip()]
+    return user in admins
 
 
 # How many times _github_commit_file() retries a genuine write conflict
@@ -3219,13 +3229,14 @@ def render_practice(questions, user):
     years = sorted(set(q["year"] for q in practice_questions))
     themes = sorted(set(q["theme"] for q in practice_questions))
 
-    # Sky blue tags for the Exams/Years multiselect pills, by request
+    # Sky blue tags for the Exams/Subject multiselect pills, by request
     # (previously yellow) -- same bg/border/text "density" formula as every
     # other tint elsewhere in the app (very light bg, a few shades darker
     # border, a readable darker text), using Tailwind's sky-50/300/700 the
-    # same way the yellow version used yellow-50/300/700. Theme's
-    # multiselect below is deliberately NOT given a key/styled here, since
-    # only Exams/Years were asked for.
+    # same way the yellow version used yellow-50/300/700. The Years filter
+    # was removed and Subject now sits in that column instead, so it picks
+    # up the same "themes_filter" key/styling the Years multiselect used to
+    # have here, rather than leaving it unstyled.
     #
     # DevTools inspection (thanks again, Sunny) showed the first version of
     # this rule targeted the wrong markup entirely: this deployed
@@ -3243,23 +3254,23 @@ def render_practice(questions, user):
         """
         <style>
         [class*="st-key-exams_filter"] [data-baseweb="tag"],
-        [class*="st-key-years_filter"] [data-baseweb="tag"],
+        [class*="st-key-themes_filter"] [data-baseweb="tag"],
         [class*="st-key-exams_filter"] [data-tag],
-        [class*="st-key-years_filter"] [data-tag] {
+        [class*="st-key-themes_filter"] [data-tag] {
             background-color: #f0f9ff !important;
             color: #0369a1 !important;
             border-color: #7dd3fc !important;
         }
         [class*="st-key-exams_filter"] [data-baseweb="tag"] span,
-        [class*="st-key-years_filter"] [data-baseweb="tag"] span,
+        [class*="st-key-themes_filter"] [data-baseweb="tag"] span,
         [class*="st-key-exams_filter"] [data-tag] span,
-        [class*="st-key-years_filter"] [data-tag] span {
+        [class*="st-key-themes_filter"] [data-tag] span {
             color: #0369a1 !important;
         }
         [class*="st-key-exams_filter"] [data-baseweb="tag"] svg,
-        [class*="st-key-years_filter"] [data-baseweb="tag"] svg,
+        [class*="st-key-themes_filter"] [data-baseweb="tag"] svg,
         [class*="st-key-exams_filter"] [data-tag] svg,
-        [class*="st-key-years_filter"] [data-tag] svg {
+        [class*="st-key-themes_filter"] [data-tag] svg {
             fill: #0369a1 !important;
         }
         </style>
@@ -3271,10 +3282,13 @@ def render_practice(questions, user):
         with st.container(key="exams_filter"):
             selected_exams = st.multiselect("Exams", exams, default=exams)
     with col2:
-        with st.container(key="years_filter"):
-            selected_years = st.multiselect("Years", years, default=years)
+        with st.container(key="themes_filter"):
+            selected_themes = st.multiselect("Subject (leave empty for all subjects)", themes, default=[])
 
-    selected_themes = st.multiselect("Subject (leave empty for all subjects)", themes, default=[])
+    # Years filter removed by request -- every year is always included now,
+    # so downstream filtering (which still keys off selected_years) simply
+    # never excludes anything on year.
+    selected_years = years
 
     num_questions = st.slider("Number of questions this session", 10, 50, 10, step=10)
 
