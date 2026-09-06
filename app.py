@@ -810,6 +810,13 @@ def get_current_user():
         clean = name.strip()
         if choice == "Create new profile..." and set_pin and new_pin:
             save_user_pin(clean, new_pin.strip())
+        # Re-read every *.json file in data/ fresh on each login, rather than
+        # trusting whatever this running process happened to cache. Data
+        # files get added/edited directly on GitHub outside the app (e.g. a
+        # new PYQ batch), and @st.cache_data has no way to notice that on
+        # its own short of a full app reboot -- login is a natural, low-
+        # frequency checkpoint to force that refresh without needing one.
+        load_questions.clear()
         st.session_state.current_user = clean
         st.query_params["user"] = clean
         st.rerun()
