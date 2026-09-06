@@ -1,7 +1,7 @@
 {
   "Dev Maan::UPSC_ANC_009": {
-    "stage": 0,
-    "next_due": "2026-09-06T16:05:43.788587"
+    "stage": 1,
+    "next_due": "2026-09-06T20:05:24.520935"
   },
   "Dev Maan::UPSC_ANC_064": {
     "stage": 0,
@@ -12,16 +12,16 @@
     "next_due": "2026-09-06T16:07:08.702765"
   },
   "Dev Maan::UPSC_ANC_072": {
-    "stage": 0,
-    "next_due": "2026-09-06T16:07:37.658882"
+    "stage": 1,
+    "next_due": "2026-09-06T20:05:36.841288"
   },
   "Dev Maan::UPSC_ANC_020": {
     "stage": 0,
     "next_due": "2026-09-06T16:08:05.968095"
   },
   "Dev Maan::UPSC_ANC_044": {
-    "stage": 0,
-    "next_due": "2026-09-06T16:09:51.559858"
+    "stage": 1,
+    "next_due": "2026-09-06T19:52:36.952625"
   },
   "Dev Maan::UPSC_ANC_077": {
     "stage": 0,
@@ -32,11 +32,43 @@
     "next_due": "2026-09-06T16:13:04.157932"
   },
   "Dev Maan::UPSC_ANC_035": {
-    "stage": 0,
-    "next_due": "2026-09-06T16:14:16.591404"
+    "stage": 1,
+    "next_due": "2026-09-06T20:09:11.287785"
   },
   "Dev Maan::UPSC_ANC_039": {
     "stage": 0,
     "next_due": "2026-09-06T16:15:09.674516"
+  },
+  "Dev Maan::UPSC_ANC_029": {
+    "stage": 0,
+    "next_due": "2026-09-06T16:18:15.749857"
+  },
+  "Dev Maan::UPSC_ANC_019": {
+    "stage": 0,
+    "next_due": "2026-09-06T16:28:56.294209"
+  },
+  "Dev Maan::UPSC_ANC_057": {
+    "stage": 0,
+    "next_due": "2026-09-06T16:30:03.379310"
+  },
+  "Sunny::UPSC_ANC_064": {
+    "stage": 0,
+    "next_due": "2026-09-06T16:33:00.888851"
+  },
+  "Dev Maan::UPSC_ANC_046": {
+    "stage": 0,
+    "next_due": "2026-09-06T16:33:48.145582"
+  },
+  "Sunny::UPSC_ANC_017": {
+    "stage": 0,
+    "next_due": "2026-09-06T16:34:13.559709"
+  },
+  "Dev Maan::UPSC_ANC_073": {
+    "stage": 0,
+    "next_due": "2026-09-06T16:35:20.187405"
+  },
+  "Dev Maan::UPSC_ANC_056": {
+    "stage": 0,
+    "next_due": "2026-09-06T16:36:04.066094"
   }
 }
