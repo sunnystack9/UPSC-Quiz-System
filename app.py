@@ -2933,14 +2933,14 @@ def _render_developer_mode(questions, conflicts=None, skipped_records=None):
                         final_score = overdue_hours + combined_bonus
                         with st.expander(f"{qid} — final priority {final_score:.1f}"):
                             st.write("Pool: Overdue")
-                            st.write(f"Theme: {q.get('theme', '—')}")
+                            st.write(f"Subject: {q.get('theme', '—')}")
                             st.write(f"Overdue by: {overdue_hours:.1f}h")
                             st.write(f"Wrong streak: {streak}  (+{streak_bonus:.0f}h-equiv)")
                             st.write(
                                 f"Personal question weakness: {diag_question_weakness.get(qid, 0.0) * 100:.0f}%  "
                                 f"(+{weakness_bonus:.0f}h-equiv)"
                             )
-                            st.write(f"Theme weakness: {diag_theme_weakness.get(q.get('theme'), 0.0) * 100:.0f}%")
+                            st.write(f"Subject weakness: {diag_theme_weakness.get(q.get('theme'), 0.0) * 100:.0f}%")
                             st.write(f"**Final priority score: {final_score:.1f}**")
                     if len(diag_overdue) > 15:
                         st.caption(f"...and {len(diag_overdue) - 15} more overdue question(s) not shown.")
@@ -3267,7 +3267,7 @@ def render_practice(questions, user):
         with st.container(key="years_filter"):
             selected_years = st.multiselect("Years", years, default=years)
 
-    selected_themes = st.multiselect("Theme (leave empty for all themes)", themes, default=[])
+    selected_themes = st.multiselect("Subject (leave empty for all subjects)", themes, default=[])
 
     num_questions = st.slider("Number of questions this session", 10, 50, 10, step=10)
 
@@ -3280,7 +3280,7 @@ def render_practice(questions, user):
         help="Reserves a share of the session for due re-reviews, scaled directly to your "
              "last quiz score (a 70% score reserves about 70%; defaults to 40% until you've "
              "completed one) and ranked toward specific questions you've personally gotten "
-             "wrong. Fills the rest with not-yet-attempted material (weighted toward themes "
+             "wrong. Fills the rest with not-yet-attempted material (weighted toward subjects "
              "you've done worse in), and lets either side backfill the other if it runs "
              "short. Turn off for plain random practice. (Bookmarking a question has no "
              "effect here -- star it and visit the Bookmarks tab to study it specifically.)",
@@ -3297,7 +3297,7 @@ def render_practice(questions, user):
     if adaptive and question_weakness:
         ranked_questions = sorted(question_weakness.items(), key=lambda x: -x[1])[:5]
         with st.expander("Individually weak questions (weakest first)"):
-            st.caption("Your own track record on these exact questions -- separate from theme.")
+            st.caption("Your own track record on these exact questions -- separate from subject.")
             for qid, score in ranked_questions:
                 qobj = questions_by_id_preview.get(qid)
                 stem = qobj["question"] if qobj else ""
@@ -4472,7 +4472,7 @@ def render_report(questions, user, source_file_by_id):
         ranked = sorted(weakness_scores.items(), key=lambda x: -x[1])
         with st.expander("Current adaptive priority (weakest first)"):
             st.caption(
-                "This is the theme-level signal 'Prioritize weak spots and due reviews' uses "
+                "This is the subject-level signal 'Prioritize weak spots and due reviews' uses "
                 "to weight which new (not-yet-attempted) questions come up first."
             )
             for theme, score in ranked:
@@ -4487,12 +4487,12 @@ def render_report(questions, user, source_file_by_id):
                 theme_stats[t]["correct"] += 1
 
         ranked = sorted(theme_stats.items(), key=lambda x: x[1]["correct"] / x[1]["total"])
-        with st.expander("Accuracy by theme (weakest first)"):
+        with st.expander("Accuracy by subject (weakest first)"):
             for theme, stats in ranked:
                 pct = 100 * stats["correct"] / stats["total"]
                 st.write(f"**{theme}** — {stats['correct']}/{stats['total']} ({pct:.0f}%)")
 
-    with st.expander("Questions attempted by theme"):
+    with st.expander("Questions attempted by subject"):
         for theme, count in sorted(theme_attempts.items(), key=lambda x: -x[1]):
             st.write(f"- {theme}: {count}")
 
@@ -4662,18 +4662,18 @@ def render_bookmarks(questions, user, source_file_by_id):
         if q:
             theme_counts[q["theme"]] += 1
 
-    theme_options = ["All themes"] + sorted(theme_counts)
-    theme_labels = {"All themes": f"All themes ({len(my_bookmarks)})"}
+    theme_options = ["All subjects"] + sorted(theme_counts)
+    theme_labels = {"All subjects": f"All subjects ({len(my_bookmarks)})"}
     theme_labels.update({t: f"{t} ({theme_counts[t]})" for t in theme_options[1:]})
 
     selected_theme = st.selectbox(
-        "Filter by theme",
+        "Filter by subject",
         theme_options,
         format_func=lambda t: theme_labels[t],
         key="bookmarks_theme_filter",
     )
 
-    if selected_theme == "All themes":
+    if selected_theme == "All subjects":
         filtered_ids = list(my_bookmarks.keys())
     else:
         filtered_ids = [
@@ -4704,7 +4704,7 @@ def render_bookmarks(questions, user, source_file_by_id):
     reveal_count = st.session_state.get("bookmarks_reveal_count", 5)
 
     visible_ids = sorted_ids[:reveal_count]
-    theme_note = f" in {selected_theme}" if selected_theme != "All themes" else ""
+    theme_note = f" in {selected_theme}" if selected_theme != "All subjects" else ""
     st.caption(f"Showing {len(visible_ids)} of {len(sorted_ids)} bookmarks{theme_note}.")
 
     for qid in visible_ids:
@@ -4893,7 +4893,7 @@ def render_question_bank(questions, user, source_file_by_id):
             # absorb the freed-up width instead of leaving a gap where it sat.
             fc1, fc2, fc3 = st.columns([1, 1.5, 2])
             f_years = fc1.multiselect("Year", years, key="qb_f_years")
-            f_themes = fc2.multiselect("Theme", themes, key="qb_f_themes")
+            f_themes = fc2.multiselect("Subject", themes, key="qb_f_themes")
             f_text = fc3.text_input("Search text (ID or question)", key="qb_f_text")
 
             # Disputed dropped -- Has community flag already surfaces the same
