@@ -1441,8 +1441,8 @@ def ai_saved_explanations(edit_log):
 # The suggestion is saved and committed immediately, with no manual review
 # step in between (by request) -- see render_explanation_editor() for the
 # save call. The only safety net is after the fact: every question whose
-# current explanation came from this feature shows up in the Session
-# Report tab's "Auto AI Explanation Saves" expander (see
+# current explanation came from this feature shows up in the Question
+# Bank tab's "Auto AI Explanation Saves" expander (see
 # ai_saved_explanations()), so a bad one can still be caught and manually
 # corrected later, just not un-done with a single click.
 
@@ -1474,14 +1474,30 @@ def _gemini_client():
     return genai.Client(api_key=api_key)
 
 
-def _build_ai_explanation_prompt(q, mode):
-    """mode is 'generate' (no explanation on file yet) or 'improve' (one
-    already exists) -- same underlying request either way, just different
-    framing and whether a CURRENT EXPLANATION line is included, so the two
-    modes share one prompt-builder instead of drifting apart as separate copies."""
+def _build_ai_explanation_prompt(q, mode, extra_instructions=None):
+    """mode is 'generate' (no explanation on file yet, or the admin chose to
+    regenerate from scratch) or 'improve' (revise the one already on file) --
+    same underlying request either way, just different framing and whether a
+    CURRENT EXPLANATION line is included, so the two modes share one
+    prompt-builder instead of drifting apart as separate copies.
+
+    extra_instructions is optional free text an admin can type in the editor
+    (see render_explanation_editor()) to steer this specific call -- e.g.
+    "focus on Article 356", "keep it to 2 bullets", "the answer key was just
+    corrected, base this on option C being right". It's appended as its own
+    clearly-labeled section rather than merged into the fixed instructions
+    above, and it still can't override the do-not-invent-facts / do-not-
+    change-the-answer guardrails, which stay non-negotiable regardless of
+    what the admin types here."""
     options_text = "\n".join(f"{o.get('label')}) {o.get('text', '')}" for o in q.get("options", []))
     header = "Write a new explanation" if mode == "generate" else "Improve the existing explanation"
     current_line = "" if mode == "generate" else f"CURRENT EXPLANATION: {q.get('explanation', '')}\n"
+    extra_instructions = (extra_instructions or "").strip()
+    extra_block = (
+        f"ADDITIONAL INSTRUCTIONS FROM THE REVIEWER (follow these, but they "
+        f"do not override the correctness rules below): {extra_instructions}\n\n"
+        if extra_instructions else ""
+    )
     return (
         f"{header} for this MCQ from a {q.get('exam')} General Studies exam "
         f"(Paper {q.get('paper')}, theme: {q.get('theme')}).\n\n"
@@ -1489,6 +1505,7 @@ def _build_ai_explanation_prompt(q, mode):
         f"OPTIONS:\n{options_text}\n"
         f"CORRECT ANSWER: {q.get('answer')}\n"
         f"{current_line}\n"
+        f"{extra_block}"
         "Do NOT change or contradict: the correct answer, dates, names, "
         "places, article/section numbers, statistics, or other factual "
         "details implied by the question. Do not invent facts, dates, "
@@ -1514,6 +1531,41 @@ def _build_ai_explanation_prompt(q, mode):
 _GEMINI_RETRY_ATTEMPTS = 3
 _GEMINI_RETRY_BACKOFF_SECONDS = (2, 4)  # waited before attempt 2 and attempt 3 respectively
 
+# Floor on the gap between the START of one Gemini call and the next,
+# enforced by _throttle_gemini_call() below -- separate from
+# _GEMINI_RETRY_BACKOFF_SECONDS above, which only spaces out RETRIES of the
+# SAME request. This spaces out DIFFERENT requests too, which matters once
+# more than one call can happen in a short span: a burst of single-question
+# "Import AI Explanation" clicks, and especially the Auto-fill-missing loop
+# (see render_ai_autofill_missing()), which can otherwise fire a dozen-plus
+# calls back to back and trip Gemini's per-minute rate limit almost
+# immediately, surfacing as the same 429 this is meant to avoid.
+_MIN_SECONDS_BETWEEN_GEMINI_CALLS = 4.0
+
+# Module-level (not st.session_state) because the thing being paced is
+# calls to Gemini's server, which doesn't care which browser tab or admin
+# triggered which call -- a per-session clock would let two concurrent
+# sessions each stay "locally" spaced out while still bursting the shared
+# per-minute limit between them. A single-element list, not a plain
+# module global, purely so _throttle_gemini_call() can update it without a
+# `global` statement.
+_last_gemini_call_ts = [0.0]
+
+
+def _throttle_gemini_call():
+    """Blocks just long enough to keep this call at least
+    _MIN_SECONDS_BETWEEN_GEMINI_CALLS after the START of the previous one.
+    Call this immediately before every actual client.models.generate_content()
+    attempt (including retries) in suggest_ai_explanation() below -- it's
+    the thing that keeps a run of several calls (a quick series of manual
+    clicks, or the Auto-fill-missing bulk loop) from bursting past Gemini's
+    per-minute rate limit and immediately tripping a 429."""
+    elapsed = time.monotonic() - _last_gemini_call_ts[0]
+    remaining = _MIN_SECONDS_BETWEEN_GEMINI_CALLS - elapsed
+    if remaining > 0:
+        time.sleep(remaining)
+    _last_gemini_call_ts[0] = time.monotonic()
+
 
 def _is_transient_gemini_error(e):
     """True for a busy-server condition worth retrying (Google's "503
@@ -1523,19 +1575,70 @@ def _is_transient_gemini_error(e):
     different google-genai SDK versions have surfaced this as different
     exception shapes, and a plain substring check is more resilient to that
     than depending on one exact class. Anything else (a bad API key, a
-    malformed request, a quota error) is NOT retried -- see the loop below --
-    since a retry wouldn't fix those and would only make the admin wait
-    longer to see the real error."""
+    malformed request, or a quota error -- see _is_quota_exhausted_error()
+    below, checked separately by the caller) is NOT retried -- since a
+    retry wouldn't fix those and would only make the admin wait longer to
+    see the real error."""
     msg = str(e).lower()
     return any(s in msg for s in ("503", "unavailable", "overloaded"))
 
 
-def suggest_ai_explanation(q, mode):
+def _is_quota_exhausted_error(e):
+    """True for Gemini's 429 RESOURCE_EXHAUSTED response -- a hard stop,
+    not a hiccup: on a free-tier API key this is a fixed per-day quota per
+    model (the raw error's quotaId reads something like
+    "GenerateRequestsPerDayPerProjectPerModel-FreeTier"), so retrying
+    immediately just burns time reproducing the exact same error. Checked
+    by substring for the same SDK-version-portability reason as
+    _is_transient_gemini_error(). Callers use this to (a) stop retrying
+    immediately rather than wasting the remaining attempts, and (b) in
+    render_ai_autofill_missing()'s bulk loop, stop the WHOLE batch rather
+    than ploughing through the rest of it producing the same failure for
+    every remaining question."""
+    msg = str(e).lower()
+    return "429" in msg or "resource_exhausted" in msg
+
+
+# Matches e.g. "'retryDelay': '32.208961072s'" -- Google's retryDelay is a
+# protobuf Duration rendered as a possibly-fractional number of seconds, not
+# always a plain integer, so the decimal part is optional-but-expected here
+# rather than assumed away.
+_RETRY_DELAY_RE = re.compile(r"retryDelay['\"]?\s*:\s*['\"]?(\d+(?:\.\d+)?)s")
+
+
+def _friendly_gemini_error(e):
+    """Turns a raw Gemini exception into the message shown to the admin.
+    For everything except a quota-exhausted 429, that's just the exception
+    text prefixed the same way it always was. For a 429, the raw
+    exception is a multi-line dump of the whole error payload (status,
+    quotaId, quotaValue, a retryDelay, links to Google's docs) -- useful
+    for debugging, useless as something to read in the middle of editing a
+    question, so this instead surfaces one short, actionable sentence,
+    with the server's own suggested wait time folded in when the response
+    included one (see _RETRY_DELAY_RE), rounded to a whole number of
+    seconds since sub-second precision isn't useful to a human reader."""
+    if _is_quota_exhausted_error(e):
+        delay = _RETRY_DELAY_RE.search(str(e))
+        wait_text = f" Please try again in about {round(float(delay.group(1)))} seconds." if delay else (
+            " Please try again later — on a free-tier API key this quota resets daily."
+        )
+        return "Gemini's request quota is exhausted for now." + wait_text
+    return f"Gemini request failed: {e}"
+
+
+def suggest_ai_explanation(q, mode, extra_instructions=None):
     """Calls Gemini Flash for a suggested explanation. Returns
     {"revised_explanation": ..., "issues_found": [...], "model_version": ...}
     on success, or {"error": "..."} on any failure (missing config, network,
     bad response) -- callers show the error as a plain warning rather than
     crashing the admin-only explanation editor over a third-party API hiccup.
+
+    extra_instructions is passed straight through to
+    _build_ai_explanation_prompt() -- see there for what it does.
+
+    Every actual attempt (including retries) is preceded by
+    _throttle_gemini_call(), so calls stay spaced out against Gemini's
+    per-minute rate limit -- see that function for why.
 
     Retries up to _GEMINI_RETRY_ATTEMPTS times, with a short backoff, but
     ONLY for a transient "server busy" condition (see
@@ -1543,7 +1646,19 @@ def suggest_ai_explanation(q, mode):
     write-conflict retry in _github_commit_file(): retry the specific,
     expected-to-clear-up failure automatically so the admin doesn't have to
     notice an error and manually re-click, but fail immediately on anything
-    else rather than making a real problem take three times as long to report.
+    else rather than making a real problem take three times as long to
+    report. A 429 quota-exhausted response (see _is_quota_exhausted_error())
+    is deliberately its own case, not folded into "anything else": it's
+    checked FIRST and stops retrying immediately even though it's also "not
+    transient" -- retrying it would just reproduce the identical error, so
+    there's no reason to wait through the rest of the attempts to find that out.
+
+    On failure the returned {"error": ...} message is built by
+    _friendly_gemini_error() -- a short, readable sentence for a quota
+    error, the raw exception text for anything else -- and
+    "quota_exhausted" is set to True specifically when that's why it failed,
+    which render_ai_autofill_missing()'s bulk loop uses to stop the whole
+    batch rather than grinding through the rest of it.
 
     model_version comes straight from the API response, not from the model=
     string we sent -- since that string is the "gemini-flash-latest" alias
@@ -1557,10 +1672,11 @@ def suggest_ai_explanation(q, mode):
     for attempt in range(_GEMINI_RETRY_ATTEMPTS):
         if attempt > 0:
             time.sleep(_GEMINI_RETRY_BACKOFF_SECONDS[attempt - 1])
+        _throttle_gemini_call()
         try:
             response = client.models.generate_content(
                 model="gemini-flash-latest",
-                contents=_build_ai_explanation_prompt(q, mode),
+                contents=_build_ai_explanation_prompt(q, mode, extra_instructions=extra_instructions),
                 config=genai_types.GenerateContentConfig(
                     response_mime_type="application/json",
                     response_schema=_AI_EXPLANATION_SCHEMA,
@@ -1574,9 +1690,9 @@ def suggest_ai_explanation(q, mode):
             }
         except Exception as e:
             last_error = e
-            if not _is_transient_gemini_error(e):
+            if _is_quota_exhausted_error(e) or not _is_transient_gemini_error(e):
                 break
-    return {"error": f"Gemini request failed: {last_error}"}
+    return {"error": _friendly_gemini_error(last_error), "quota_exhausted": _is_quota_exhausted_error(last_error)}
 
 
 def render_explanation_editor(q, user, source_file_by_id):
@@ -1588,15 +1704,25 @@ def render_explanation_editor(q, user, source_file_by_id):
 
     Includes the Import AI Explanation button (see suggest_ai_explanation()
     above) -- generates a fresh explanation when there isn't one yet, or a
-    suggested revision when there already is. It saves and commits the
-    result immediately, with no manual "Save" step and no way to undo it
-    from here (by request) -- the only place a bad auto-save can be caught
-    is the Session Report tab's "Auto AI Explanation Saves" expander (see
-    ai_saved_explanations()), which lists every question whose current
-    explanation still traces back to this feature, for manual correction
-    later. The separate text area + "Save explanation" button below are
-    for manual edits (typing a correction yourself, or further editing an
-    AI-saved one) and still require an explicit click, same as before.
+    suggested revision when there already is. Two optional controls sit
+    above the button: a "Regenerate from scratch" checkbox, for when the
+    existing explanation (AI-written or not) is bad enough that an
+    incremental "improve" pass on it isn't going to help -- checking it
+    forces the "generate" prompt/framing even though an explanation is
+    already on file, so the AI writes a fresh one without anchoring on the
+    old text; and an optional instructions box for steering this one call
+    (e.g. "focus on Article 356", "keep it to 2 bullets") -- see
+    _build_ai_explanation_prompt() for exactly how that text is used.
+
+    It saves and commits the result immediately, with no manual "Save" step
+    and no way to undo it from here (by request) -- the only place a bad
+    auto-save can be caught is the Question Bank tab's "Auto AI
+    Explanation Saves" expander (see ai_saved_explanations()), which lists
+    every question whose current explanation still traces back to this
+    feature, for manual correction later. The separate text area + "Save
+    explanation" button below are for manual edits (typing a correction
+    yourself, or further editing an AI-saved one) and still require an
+    explicit click, same as before.
 
     source_file_by_id is load_questions()'s mapping of question_id -> the
     /data filename that actually won the merge for this question -- passed
@@ -1609,10 +1735,31 @@ def render_explanation_editor(q, user, source_file_by_id):
             "as any answer-key correction — not just a quick rewrite."
         )
 
-        mode = "improve" if (q.get("explanation") or "").strip() else "generate"
-        if st.button("✨ Import AI Explanation", key=f"ai_import_go_{qid}"):
+        has_existing = bool((q.get("explanation") or "").strip())
+        regen_col, instr_col = st.columns([1, 2])
+        with regen_col:
+            force_regenerate = (
+                st.checkbox(
+                    "Regenerate from scratch",
+                    key=f"ai_import_regen_{qid}",
+                    help="Ignore the current explanation and have the AI write a new one, "
+                         "instead of revising the existing text.",
+                )
+                if has_existing else False
+            )
+        with instr_col:
+            extra_instructions = st.text_input(
+                "Additional instructions (optional)",
+                key=f"ai_import_instr_{qid}",
+                placeholder="e.g. focus on Article 356, keep it to 2 bullets",
+            )
+        mode = "generate" if (force_regenerate or not has_existing) else "improve"
+        button_label = "✨ Import AI Explanation" if mode == "generate" and not has_existing else (
+            "✨ Regenerate AI Explanation" if force_regenerate else "✨ Improve AI Explanation"
+        )
+        if st.button(button_label, key=f"ai_import_go_{qid}"):
             with st.spinner("Generating explanation..." if mode == "generate" else "Improving explanation..."):
-                result = suggest_ai_explanation(q, mode)
+                result = suggest_ai_explanation(q, mode, extra_instructions=extra_instructions)
             if "error" in result:
                 st.session_state[f"ai_import_error_{qid}"] = result["error"]
                 st.session_state.pop(f"ai_import_meta_{qid}", None)
@@ -1682,6 +1829,103 @@ def render_explanation_editor(q, user, source_file_by_id):
                         "This won't survive a redeploy until it syncs — try again in a moment."
                     )
                 st.rerun()
+
+
+# How many questions render_ai_autofill_missing() will process in one click.
+# Two independent reasons this is capped rather than working through an
+# unlimited backlog in a single run: each question costs at least
+# _MIN_SECONDS_BETWEEN_GEMINI_CALLS of wall-clock time (more with retries),
+# so an unbounded batch could block the page for a very long time on a
+# large backlog; and a free-tier API key's daily quota is small enough
+# (seen as low as 20 requests/day for a given model) that there's no point
+# queuing more than that in one go anyway. Click the button again -- same
+# run, picking up wherever the missing-explanation list stands then -- to
+# keep going past this cap.
+AI_AUTOFILL_MAX_PER_RUN = 10
+
+
+def render_ai_autofill_missing(questions, user, source_file_by_id):
+    """Admin-only bulk counterpart to the per-question Import AI
+    Explanation button above: instead of an admin opening every
+    missing-explanation question one at a time via the Question Bank tab's
+    "Has explanation: No" filter, this fills all of them in one place.
+    "Automatically activated" by request -- rather than a control an admin
+    has to remember exists, this expander only appears at all when there's
+    at least one valid-for-practice question with no explanation, and
+    quietly disappears again once the bank is fully covered, so its mere
+    presence already answers "is there anything left to fill."
+
+    Restricted to is_valid_for_practice() questions -- same reasoning as
+    the review-priority and session-building code elsewhere in this file:
+    a question with no confirmed answer key has nothing for the prompt's
+    "CORRECT ANSWER:" line to point at, so generating an explanation for
+    one would mean asking the AI to explain an answer nobody has actually
+    confirmed yet. Those still show up in the "Has explanation: No" filter
+    (which doesn't apply this restriction) for an admin to notice and fix
+    the answer key first.
+
+    Each question is generated AND saved (via apply_explanation_edit(), the
+    same call the single-question button makes) immediately, one at a
+    time, inside this one button click/script run -- not queued as a
+    background job, since Streamlit has no persistent worker to run one
+    in. suggest_ai_explanation()'s own _throttle_gemini_call() spaces the
+    underlying Gemini calls out, which combined with the
+    AI_AUTOFILL_MAX_PER_RUN cap above is what keeps a big backlog from
+    bursting past Gemini's per-minute rate limit and immediately
+    reproducing the wall-of-JSON 429 errors this was built to avoid. If a
+    call still comes back quota-exhausted (the daily cap itself, which no
+    amount of spacing can work around), the loop stops right there instead
+    of ploughing through the rest of the batch to accumulate the same
+    failure over and over -- whatever was filled before that point stays
+    saved, and the rest is picked up on a later click once the quota
+    resets."""
+    missing = [
+        q for q in questions
+        if is_valid_for_practice(q) and not (q.get("explanation") or "").strip()
+    ]
+    if not missing:
+        return
+    with st.expander(f"🪄 Auto-fill missing explanations ({len(missing)} question(s) have none)"):
+        st.caption(
+            "Generates and auto-saves an AI explanation for every question below that "
+            f"doesn't have one yet — {_MIN_SECONDS_BETWEEN_GEMINI_CALLS:.0f}s apart, to stay "
+            f"within Gemini's rate limit. Processes up to {AI_AUTOFILL_MAX_PER_RUN} per click; "
+            "click again to keep going."
+        )
+        batch_size = min(AI_AUTOFILL_MAX_PER_RUN, len(missing))
+        if st.button(f"🪄 Auto-fill next {batch_size} question(s)", key="ai_autofill_go"):
+            batch = missing[:batch_size]
+            progress = st.progress(0.0)
+            status = st.empty()
+            filled = 0
+            failures = []  # [(question_id, error_message), ...]
+            stopped_early = False
+            for i, q in enumerate(batch):
+                status.caption(f"{q['question_id']} — {i + 1} of {len(batch)}…")
+                result = suggest_ai_explanation(q, "generate")
+                if "error" in result:
+                    failures.append((q["question_id"], result["error"]))
+                    if result.get("quota_exhausted"):
+                        stopped_early = True
+                        progress.progress((i + 1) / len(batch))
+                        break
+                else:
+                    apply_explanation_edit(
+                        q["question_id"], result["revised_explanation"], user, source_file_by_id,
+                        ai_model=result["model_version"],
+                    )
+                    filled += 1
+                progress.progress((i + 1) / len(batch))
+            status.empty()
+            summary = f"Filled {filled} of {len(batch)} question(s)."
+            if stopped_early:
+                st.warning(summary + " Stopped early — " + failures[-1][1])
+            elif failures:
+                st.warning(summary + f" {len(failures)} failed — see below.")
+            else:
+                st.success(summary)
+            for qid, err in failures:
+                st.caption(f"⚠️ {qid}: {err}")
 
 
 def apply_answer_key_edit(question_id, new_answer_label, user, source_file_by_id):
@@ -4244,85 +4488,6 @@ def render_community_notes(question_id, user):
 # ---------- Report tab ----------
 
 def render_report(questions, user, source_file_by_id):
-    # Admin-only audit view of every question whose CURRENT explanation
-    # came from an Import AI Explanation auto-save (see
-    # ai_saved_explanations()) -- placed before the early-returns below
-    # since this has nothing to do with the viewing admin's own practice
-    # history, and shouldn't disappear just because they haven't attempted
-    # anything yet. Read-only by design: no revert action here, just
-    # visibility -- catching a bad one means manually fixing it (or
-    # re-running Import AI Explanation) from the question itself.
-    #
-    # Prev/dropdown/Next nav, one question at a time, mirrors the Question
-    # Bank tab's own browser (qb_nav_idx et al.) -- same reasoning applies
-    # here: a full read-through (stem, options, explanation) needs room a
-    # stacked pile of expanders doesn't give without a lot of scrolling.
-    # Uses its own ai_saves_-prefixed session-state keys throughout so it
-    # can't collide with the Question Bank tab's identical pattern.
-    if _is_admin(user):
-        ai_saved = sorted(ai_saved_explanations(load_edit_log()), key=lambda e: e.get("timestamp", ""), reverse=True)
-        with st.expander(f"🤖 Auto AI Explanation Saves ({len(ai_saved)})"):
-            if not ai_saved:
-                st.caption("No AI-saved explanations are currently live in the bank.")
-            else:
-                q_by_id = {qq["question_id"]: qq for qq in questions}
-
-                # Reset the nav position whenever the underlying set of
-                # auto-saved question ids changes (a new one just got
-                # saved, or one dropped off the list via a manual edit) --
-                # same signature-comparison pattern as qb_nav_idx, so the
-                # pointer doesn't silently end up pointing at the wrong
-                # entry after the list shifts under it.
-                entry_ids = tuple(e["question_id"] for e in ai_saved)
-                if st.session_state.get("ai_saves_signature") != entry_ids:
-                    st.session_state.ai_saves_nav_idx = 0
-                    st.session_state.ai_saves_signature = entry_ids
-
-                nav_idx = min(st.session_state.get("ai_saves_nav_idx", 0), len(ai_saved) - 1)
-                st.markdown(
-                    f"<p style='text-align:center;'><b>Question {nav_idx + 1} of {len(ai_saved)}</b></p>",
-                    unsafe_allow_html=True,
-                )
-
-                col_prev, col_pick, col_next = st.columns([1, 5, 1])
-                with col_prev:
-                    if st.button("◀ Prev", disabled=(nav_idx == 0), use_container_width=True, key="ai_saves_prev"):
-                        st.session_state.ai_saves_nav_idx = nav_idx - 1
-                        st.rerun()
-                with col_pick:
-                    def _ai_saves_pick_label(i, _entries=ai_saved):
-                        return f"{_entries[i]['question_id']} — {_entries[i].get('timestamp', '')}"
-                    # Written directly into the picker's own session_state key
-                    # before it's instantiated this run, same reason as the
-                    # Question Bank tab's qb_picker: st.selectbox only honors
-                    # index= the FIRST time a given key is created, so this is
-                    # what actually keeps the dropdown in sync after a Prev/
-                    # Next click rather than freezing on the original choice.
-                    if st.session_state.get("ai_saves_picker_synced") != nav_idx:
-                        st.session_state["ai_saves_picker"] = nav_idx
-                        st.session_state["ai_saves_picker_synced"] = nav_idx
-                    picked = st.selectbox(
-                        "Jump to", range(len(ai_saved)), format_func=_ai_saves_pick_label,
-                        key="ai_saves_picker", label_visibility="collapsed",
-                    )
-                    if picked != nav_idx:
-                        st.session_state.ai_saves_nav_idx = picked
-                        st.session_state.ai_saves_picker_synced = picked
-                        st.rerun()
-                with col_next:
-                    if st.button("Next ▶", disabled=(nav_idx == len(ai_saved) - 1), use_container_width=True, key="ai_saves_next"):
-                        st.session_state.ai_saves_nav_idx = nav_idx + 1
-                        st.rerun()
-
-                entry = ai_saved[nav_idx]
-                qid = entry["question_id"]
-                qq = q_by_id.get(qid)
-                if qq is None:
-                    st.warning(f"{qid} is no longer in the bank (last touched {entry.get('timestamp', '')}).")
-                else:
-                    st.caption(f"{qq['exam']} / {qq['theme']}  ·  {entry.get('source', '')}  ·  {entry.get('timestamp', '')}")
-                    render_full_question(qq, key_prefix="ai_saves")
-
     responses = [r for r in load_responses() if r.get("user") == user]
     if not responses:
         st.info("No practice sessions recorded yet — attempt some questions first.")
@@ -4926,6 +5091,94 @@ def render_question_bank(questions, user, source_file_by_id):
         # non-numeric paper id rather than crashing on int().
         roman = _ROMAN_ORDER_UPPER[int(paper) - 1] if str(paper).isdigit() and 0 < int(paper) <= len(_ROMAN_ORDER_UPPER) else paper
         return f"{exam} Paper {roman} (all years)"
+
+    # Admin-only audit view of every question whose CURRENT explanation
+    # came from an Import AI Explanation auto-save (see
+    # ai_saved_explanations()) -- placed above "Load a paper", at the top
+    # of this tab, so a bad auto-save is the first thing an admin sees
+    # (moved here from the Session Report tab by request). Read-only by
+    # design: no revert action here, just visibility -- catching a bad one
+    # means manually fixing it (or re-running Import AI Explanation) from
+    # the question itself.
+    #
+    # Prev/dropdown/Next nav, one question at a time, mirrors this same
+    # tab's own filtered-question browser further down (qb_nav_idx et al.)
+    # -- same reasoning applies here: a full read-through (stem, options,
+    # explanation) needs room a stacked pile of expanders doesn't give
+    # without a lot of scrolling. Uses its own ai_saves_-prefixed
+    # session-state keys throughout so it can't collide with that other
+    # browser's identical pattern.
+    if is_admin:
+        ai_saved = sorted(ai_saved_explanations(load_edit_log()), key=lambda e: e.get("timestamp", ""), reverse=True)
+        with st.expander(f"🤖 Auto AI Explanation Saves ({len(ai_saved)})"):
+            if not ai_saved:
+                st.caption("No AI-saved explanations are currently live in the bank.")
+            else:
+                q_by_id = {qq["question_id"]: qq for qq in questions}
+
+                # Reset the nav position whenever the underlying set of
+                # auto-saved question ids changes (a new one just got
+                # saved, or one dropped off the list via a manual edit) --
+                # same signature-comparison pattern as qb_nav_idx, so the
+                # pointer doesn't silently end up pointing at the wrong
+                # entry after the list shifts under it.
+                entry_ids = tuple(e["question_id"] for e in ai_saved)
+                if st.session_state.get("ai_saves_signature") != entry_ids:
+                    st.session_state.ai_saves_nav_idx = 0
+                    st.session_state.ai_saves_signature = entry_ids
+
+                nav_idx = min(st.session_state.get("ai_saves_nav_idx", 0), len(ai_saved) - 1)
+                st.markdown(
+                    f"<p style='text-align:center;'><b>Question {nav_idx + 1} of {len(ai_saved)}</b></p>",
+                    unsafe_allow_html=True,
+                )
+
+                col_prev, col_pick, col_next = st.columns([1, 5, 1])
+                with col_prev:
+                    if st.button("◀ Prev", disabled=(nav_idx == 0), use_container_width=True, key="ai_saves_prev"):
+                        st.session_state.ai_saves_nav_idx = nav_idx - 1
+                        st.rerun()
+                with col_pick:
+                    def _ai_saves_pick_label(i, _entries=ai_saved):
+                        return f"{_entries[i]['question_id']} — {_entries[i].get('timestamp', '')}"
+                    # Written directly into the picker's own session_state key
+                    # before it's instantiated this run, same reason as the
+                    # Question Bank tab's qb_picker: st.selectbox only honors
+                    # index= the FIRST time a given key is created, so this is
+                    # what actually keeps the dropdown in sync after a Prev/
+                    # Next click rather than freezing on the original choice.
+                    if st.session_state.get("ai_saves_picker_synced") != nav_idx:
+                        st.session_state["ai_saves_picker"] = nav_idx
+                        st.session_state["ai_saves_picker_synced"] = nav_idx
+                    picked = st.selectbox(
+                        "Jump to", range(len(ai_saved)), format_func=_ai_saves_pick_label,
+                        key="ai_saves_picker", label_visibility="collapsed",
+                    )
+                    if picked != nav_idx:
+                        st.session_state.ai_saves_nav_idx = picked
+                        st.session_state.ai_saves_picker_synced = picked
+                        st.rerun()
+                with col_next:
+                    if st.button("Next ▶", disabled=(nav_idx == len(ai_saved) - 1), use_container_width=True, key="ai_saves_next"):
+                        st.session_state.ai_saves_nav_idx = nav_idx + 1
+                        st.rerun()
+
+                entry = ai_saved[nav_idx]
+                qid = entry["question_id"]
+                qq = q_by_id.get(qid)
+                if qq is None:
+                    st.warning(f"{qid} is no longer in the bank (last touched {entry.get('timestamp', '')}).")
+                else:
+                    st.caption(f"{qq['exam']} / {qq['theme']}  ·  {entry.get('source', '')}  ·  {entry.get('timestamp', '')}")
+                    render_full_question(qq, key_prefix="ai_saves")
+
+        # Bulk counterpart to the single-question Import AI Explanation
+        # button (see render_ai_autofill_missing()) -- grouped with Auto AI
+        # Explanation Saves right above, since both are admin-only tools
+        # about the same feature, and both sit above "Load a paper" so
+        # they're the first things an admin sees on this tab. Self-hides
+        # when nothing is missing, so it's not dead space the rest of the time.
+        render_ai_autofill_missing(questions, user, source_file_by_id)
 
     with st.expander("📂 Load a paper", expanded=not st.session_state.get("qb_loaded", False)):
         choice = st.selectbox(
