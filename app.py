@@ -5029,19 +5029,16 @@ def render_question_bank(questions, user, source_file_by_id):
     is_admin = _is_admin(user)
     open_flags = get_open_flags(load_notes(), load_resolved())
 
-    exam_paper_options = sorted({(q["exam"], q["paper"]) for q in questions})
-
-    def _paper_label(exam, paper):
-        # "1" -> "I" via the same Roman-numeral table used elsewhere in this
-        # file, so the label reads "ITI Paper I" the way the rest of the app
-        # already talks about papers -- falls back to the raw value for any
-        # non-numeric paper id rather than crashing on int().
-        roman = _ROMAN_ORDER_UPPER[int(paper) - 1] if str(paper).isdigit() and 0 < int(paper) <= len(_ROMAN_ORDER_UPPER) else paper
-        return f"{exam} Paper {roman} (all years)"
+    # Sorted list of every theme in the bank, across all exams/papers/years --
+    # what "Load a Subject" below picks from. Replaced the old (exam, paper)
+    # picker by request: this tab is used to browse/manage questions by
+    # subject far more often than by exam, so subject is now the primary way
+    # in rather than a secondary filter applied after an exam+paper pick.
+    subject_options = sorted({q["theme"] for q in questions if q.get("theme")})
 
     # Admin-only audit view of every question whose CURRENT explanation
     # came from an Import AI Explanation auto-save (see
-    # ai_saved_explanations()) -- placed above "Load a paper", at the top
+    # ai_saved_explanations()) -- placed above "Load a Subject", at the top
     # of this tab, so a bad auto-save is the first thing an admin sees
     # (moved here from the Session Report tab by request). Read-only by
     # design: no revert action here, just visibility -- catching a bad one
@@ -5122,14 +5119,14 @@ def render_question_bank(questions, user, source_file_by_id):
         # Bulk counterpart to the single-question Import AI Explanation
         # button (see render_ai_autofill_missing()) -- grouped with Auto AI
         # Explanation Saves right above, since both are admin-only tools
-        # about the same feature, and both sit above "Load a paper" so
+        # about the same feature, and both sit above "Load a Subject" so
         # they're the first things an admin sees on this tab. Self-hides
         # when nothing is missing, so it's not dead space the rest of the time.
         render_ai_autofill_missing(questions, user, source_file_by_id)
 
-    with st.expander("📂 Load a paper", expanded=not st.session_state.get("qb_loaded", False)):
+    with st.expander("📂 Load a Subject", expanded=not st.session_state.get("qb_loaded", False)):
         choice = st.selectbox(
-            "File", exam_paper_options, format_func=lambda ep: _paper_label(*ep), key="qb_file_choice",
+            "Subject", subject_options, key="qb_subject_choice",
         )
         if st.button("🔄 Load / Reload", type="primary", use_container_width=True, key="qb_load_btn"):
             # Clears the cached load_questions() result so this always reflects
@@ -5138,28 +5135,29 @@ def render_question_bank(questions, user, source_file_by_id):
             # "Load / Reload from GitHub", since this app already keeps the
             # whole merged bank in memory rather than fetching one file at a time.
             load_questions.clear()
-            exam, paper = choice
-            pool = [q for q in questions if q["exam"] == exam and q["paper"] == paper]
+            # Scoped by subject (theme) alone, across every exam, paper, and
+            # year -- by request, this replaced the old exam+paper picker
+            # rather than sitting alongside it.
+            pool = [q for q in questions if q.get("theme") == choice]
             st.session_state.qb_pool = sorted(pool, key=lambda q: q["question_id"])
             st.session_state.qb_nav_idx = 0
             st.session_state.qb_loaded = True
-            # A fresh file needs fresh filters -- otherwise a Theme/Year pick
-            # left over from the previous paper could silently filter the
+            # A fresh subject needs fresh filters -- otherwise a Year pick
+            # left over from the previous subject could silently filter the
             # newly-loaded one down to zero with no obvious reason why.
-            for k in ("qb_f_years", "qb_f_themes", "qb_f_text",
+            for k in ("qb_f_years", "qb_f_text",
                       "qb_f_has_explanation", "qb_f_has_answer", "qb_f_has_flag"):
                 st.session_state.pop(k, None)
             st.rerun()
 
     if not st.session_state.get("qb_loaded"):
-        st.info("Pick a file above, then tap Load / Reload to start browsing.")
+        st.info("Pick a subject above, then tap Load / Reload to start browsing.")
         return
 
     pool = st.session_state.qb_pool
 
     with st.expander("🔍 Filters", expanded=False):
         years = sorted({q.get("year") for q in pool if q.get("year") is not None})
-        themes = sorted({q.get("theme") for q in pool if q.get("theme")})
 
         # Centers every filter's own label ("Year", "Theme", "Has
         # explanation", etc.) above its box, and the selected/placeholder
@@ -5223,12 +5221,14 @@ def render_question_bank(questions, user, source_file_by_id):
         )
         with st.container(key="qb_filters_box"):
             # Question type dropped -- every question in this bank is MCQ, so it
-            # was never a real distinction to filter on. Theme and Search text
-            # absorb the freed-up width instead of leaving a gap where it sat.
-            fc1, fc2, fc3 = st.columns([1, 1.5, 2])
+            # was never a real distinction to filter on. Subject/theme dropped
+            # too -- "Load a Subject" above now scopes the whole pool to one
+            # theme already, so a second Subject filter here could only ever
+            # show that same single option. Year and Search text absorb the
+            # freed-up width instead of leaving a gap where it sat.
+            fc1, fc2 = st.columns([1, 2])
             f_years = fc1.multiselect("Year", years, key="qb_f_years")
-            f_themes = fc2.multiselect("Subject", themes, key="qb_f_themes")
-            f_text = fc3.text_input("Search text (ID or question)", key="qb_f_text")
+            f_text = fc2.text_input("Search text (ID or question)", key="qb_f_text")
 
             # Disputed dropped -- Has community flag already surfaces the same
             # "needs a second look" questions (a dispute is raised via the same
@@ -5248,8 +5248,6 @@ def render_question_bank(questions, user, source_file_by_id):
     filtered = pool
     if f_years:
         filtered = [q for q in filtered if q.get("year") in f_years]
-    if f_themes:
-        filtered = [q for q in filtered if q.get("theme") in f_themes]
     if f_has_explanation != "Any":
         want = f_has_explanation == "Yes"
         filtered = [q for q in filtered if bool((q.get("explanation") or "").strip()) == want]
