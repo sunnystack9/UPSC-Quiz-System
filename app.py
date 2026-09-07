@@ -5,6 +5,7 @@ this tool is strictly for home practice.
 """
 
 import streamlit as st
+import html
 import json
 import random
 import re
@@ -495,6 +496,80 @@ def _suggest_match_list_split(question_text):
     return list_i_text, list_ii_text
 
 
+_LIST_ITEM_LINE_RE = re.compile(r'^([A-Za-z0-9]+)\.\s*(.*)$')
+
+
+def _split_list_items(text):
+    """Splits one of the admin-saved match_list_i/match_list_ii text blocks
+    (one "A. item text" per line, as produced by _suggest_match_list_split()
+    and as saved verbatim by render_typo_editor()) back into an ordered list
+    of (label, item_text) tuples, for _render_match_the_following_table()
+    below. Tolerant of stray blank lines or a line missing its "X. " label
+    (falls back to label "") since this is admin-edited free text, not a
+    guaranteed-well-formed format."""
+    items = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        m = _LIST_ITEM_LINE_RE.match(line)
+        items.append(m.groups() if m else ("", line))
+    return items
+
+
+def _render_match_the_following_table(list_i_text, list_ii_text, container_key):
+    """Renders List-I/List-II as one real HTML <table> instead of two
+    independently-flowing st.columns(): with columns, whichever list has
+    the longer entry at a given row wraps onto extra lines and every row
+    below it drifts out of alignment (e.g. List-I's "C"/"D" no longer
+    sitting level with List-II's "3"/"4"). A table's rows size to their
+    tallest cell, so the nth List-I entry and nth List-II entry always
+    land on the same horizontal line regardless of how much either wraps.
+
+    Paired positionally (row i = list_i item i beside list_ii item i), not
+    by matching label text -- List-I is conventionally lettered and
+    List-II numbered, so there's no shared label to match on; the row
+    position is what "Match the following" actually means here. A blank
+    cell is left if the two lists have different lengths, which shouldn't
+    normally happen for a well-formed question but shouldn't crash the
+    render either."""
+    list_i_items = _split_list_items(list_i_text)
+    list_ii_items = _split_list_items(list_ii_text)
+
+    def _cell(items, i):
+        if i >= len(items):
+            return ""
+        label, item_text = items[i]
+        prefix = f"{label}. " if label else ""
+        return html.escape(prefix + item_text)
+
+    row_count = max(len(list_i_items), len(list_ii_items))
+    body_rows = "".join(
+        f"<tr><td>{_cell(list_i_items, i)}</td><td>{_cell(list_ii_items, i)}</td></tr>"
+        for i in range(row_count)
+    )
+    st.markdown(
+        f"""<style>
+        [class*="st-key-{container_key}"] table {{
+            width: 100%; border-collapse: collapse; margin: 0.25rem 0 0.5rem;
+        }}
+        [class*="st-key-{container_key}"] th, [class*="st-key-{container_key}"] td {{
+            border: 1px solid rgba(128, 128, 128, 0.35);
+            padding: 0.4rem 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }}
+        </style>""",
+        unsafe_allow_html=True,
+    )
+    with st.container(key=container_key):
+        st.markdown(
+            f"<table><thead><tr><th>List-I</th><th>List-II</th></tr></thead>"
+            f"<tbody>{body_rows}</tbody></table>",
+            unsafe_allow_html=True,
+        )
+
+
 def render_justified(text, container_key, extra_style=""):
     """Renders question text with justified alignment.
 
@@ -542,7 +617,7 @@ def render_question_stem(q, container_key, extra_style=""):
     Question Bank read-through, in-session Prev/Next review), without each
     call site having to know or care about this question type.
 
-    The two-column List-I/List-II layout ONLY appears once an admin has
+    The List-I/List-II table layout ONLY appears once an admin has
     explicitly saved match_list_i AND match_list_ii on this question via
     render_typo_editor()'s "Match-the-following layout" panel -- never
     automatically just because q["question"]'s text happens to look like a
@@ -553,6 +628,11 @@ def render_question_stem(q, container_key, extra_style=""):
     way, with no review step. Gating on two explicitly-saved fields instead
     means the layout only ever applies to a question someone actually
     opened the panel for and confirmed.
+
+    Rendered as one real HTML <table> (_render_match_the_following_table())
+    rather than two independent st.columns(), so the nth List-I entry and
+    nth List-II entry always land on the same row even when one wraps onto
+    more lines than the other -- see that function's docstring.
 
     When those two fields ARE present, the preamble/trailer shown above
     and below the columns still comes from q["question"] itself, via
@@ -584,13 +664,9 @@ def render_question_stem(q, container_key, extra_style=""):
             extra_style=extra_style,
         )
 
-    col_list_i, col_list_ii = st.columns(2)
-    with col_list_i:
-        st.markdown("**List-I**")
-        st.markdown(list_i_text.replace("\n", "  \n"))
-    with col_list_ii:
-        st.markdown("**List-II**")
-        st.markdown(list_ii_text.replace("\n", "  \n"))
+    _render_match_the_following_table(
+        list_i_text, list_ii_text, container_key=f"{container_key}_matchtable"
+    )
 
     if trailer:
         st.markdown(trailer)
