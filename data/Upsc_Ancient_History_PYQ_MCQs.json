@@ -40,7 +40,7 @@
     "year": 1995,
     "theme": "Ancient History",
     "question_type": "Match the Following",
-    "question": "Match List I with List II\nand select the correct answer by using the codes given below the lists:\nList I (Eras)\nI. Vikrama era\nII. Saka era\nIII. Gupta era\nIV. Kali era\nList II (Reckoned from)\nA) 3102 B.C.\nB) 320 A.D.\nC) 78 A.D.\nD) 58 B.C.\nE) 248 A.D.",
+    "question": "Match List I with List II\nand select the correct answer by using the codes given below the lists:\nList I (Eras) & List II (Reckoned from)\n[[TABLE]]",
     "options": [
       {
         "label": "A",
@@ -65,7 +65,9 @@
     "answer_status": "needs_review",
     "verification_note": "Extracted from PDF: upsc-prelims-ancient-history.pdf, Q10",
     "shared_with": [],
-    "section_tags": []
+    "section_tags": [],
+    "match_list_i": "I. Vikrama era\nII. Saka era\nIII. Gupta era\nIV. Kali era",
+    "match_list_ii": "A) 3102 B.C.\nB) 320 A.D.\nC) 78 A.D.\nD) 58 B.C.\nE) 248 A.D."
   },
   {
     "question_id": "UPSC_ANC_090",
