@@ -1664,17 +1664,21 @@ def _is_transient_gemini_error(e):
 
 
 def _is_quota_exhausted_error(e):
-    """True for Gemini's 429 RESOURCE_EXHAUSTED response -- a hard stop,
-    not a hiccup: on a free-tier API key this is a fixed per-day quota per
-    model (the raw error's quotaId reads something like
-    "GenerateRequestsPerDayPerProjectPerModel-FreeTier"), so retrying
-    immediately just burns time reproducing the exact same error. Checked
-    by substring for the same SDK-version-portability reason as
-    _is_transient_gemini_error(). Callers use this to (a) stop retrying
-    immediately rather than wasting the remaining attempts, and (b) in
-    render_ai_autofill_missing()'s bulk loop, stop the WHOLE batch rather
-    than ploughing through the rest of it producing the same failure for
-    every remaining question."""
+    """True for Gemini's 429 RESOURCE_EXHAUSTED response. On a free-tier API
+    key this covers TWO different quotas that Google reports through the
+    identical error code -- a per-minute request-rate bucket (recovers in
+    well under a minute, per the server's own retryDelay) and a per-day cap
+    (doesn't recover until the next day) -- distinguishable only by how long
+    the response's own retryDelay says to wait, not by this check alone. See
+    suggest_ai_explanation()'s retry loop, which uses that retryDelay to
+    auto-wait-and-retry the short (per-minute) case rather than treating
+    every 429 as an unrecoverable-within-this-run hard stop. Checked by
+    substring for the same SDK-version-portability reason as
+    _is_transient_gemini_error(). Callers use this to (a) decide whether to
+    keep retrying, and (b) in render_ai_autofill_missing()'s bulk loop, stop
+    the WHOLE batch once suggest_ai_explanation() gives up on a question
+    rather than ploughing through the rest of it producing the same failure
+    for every remaining one."""
     msg = str(e).lower()
     return "429" in msg or "resource_exhausted" in msg
 
@@ -1699,6 +1703,31 @@ def _is_auth_gemini_error(e):
 # always a plain integer, so the decimal part is optional-but-expected here
 # rather than assumed away.
 _RETRY_DELAY_RE = re.compile(r"retryDelay['\"]?\s*:\s*['\"]?(\d+(?:\.\d+)?)s")
+
+
+def _quota_retry_delay_seconds(e):
+    """Extracts the number of seconds Gemini's own 429 response suggests
+    waiting before retrying, or None if the exception didn't include one
+    (an older SDK version, or a genuinely different error shape)."""
+    match = _RETRY_DELAY_RE.search(str(e))
+    return float(match.group(1)) if match else None
+
+
+# How many times suggest_ai_explanation() will wait out a quota-exhausted
+# (429) response and retry the SAME call, when Google's own retryDelay says
+# the wait is short -- see _GEMINI_QUOTA_AUTO_WAIT_MAX_SECONDS below and
+# _is_quota_exhausted_error()'s docstring. Kept small (not unbounded) so a
+# key that's genuinely hit its per-day cap -- which can also arrive with a
+# short-looking retryDelay, or repeat past this budget -- still gives up in
+# a bounded amount of time rather than this call looping indefinitely.
+_GEMINI_QUOTA_AUTO_WAIT_ATTEMPTS = 2
+
+# Only auto-wait-and-retry a 429 when the server's own retryDelay is at or
+# under this many seconds -- a short delay is the per-minute rate bucket
+# recovering, worth waiting out automatically; a longer or missing delay
+# reads as the per-day cap instead, where waiting inside this call would
+# just tie it up for no benefit.
+_GEMINI_QUOTA_AUTO_WAIT_MAX_SECONDS = 75
 
 # Appended to every _friendly_gemini_error() message -- true in every case,
 # since apply_explanation_edit() is only ever called from the SUCCESS path
@@ -1772,22 +1801,32 @@ def suggest_ai_explanation(q, mode):
     expected-to-clear-up failure automatically so the admin doesn't have to
     notice an error and manually re-click, but fail immediately on anything
     else rather than making a real problem take three times as long to
-    report. A 429 quota-exhausted response (see _is_quota_exhausted_error())
-    and an auth/permissions rejection (see _is_auth_gemini_error()) are both
-    checked FIRST and stop retrying immediately even though an auth error is
-    also technically "not transient" -- retrying either would just reproduce
-    the identical failure, so there's no reason to wait through the rest of
-    the attempts to find that out.
+    report. An auth/permissions rejection (see _is_auth_gemini_error()) is
+    checked first and stops retrying immediately, since retrying it would
+    just reproduce the identical failure.
+
+    A 429 quota-exhausted response (see _is_quota_exhausted_error()) is
+    handled separately from both of those, with its own short auto-wait
+    budget (_GEMINI_QUOTA_AUTO_WAIT_ATTEMPTS, capped at
+    _GEMINI_QUOTA_AUTO_WAIT_MAX_SECONDS) that doesn't consume the
+    transient-error attempt count above: Google returns this same error code
+    for both the per-minute rate bucket (recovers in well under a minute)
+    and the per-day cap (doesn't), and the response's own retryDelay is the
+    only way to tell which one this was. A short retryDelay gets waited out
+    and retried automatically; a long or missing one falls through to
+    failure immediately, on the assumption that's the day-level cap where
+    waiting inside this call would accomplish nothing.
 
     On failure the returned {"error": ...} message is built by
     _friendly_gemini_error() -- always a short, readable sentence, never the
     raw exception. Two extra flags ride along for callers that need to
     react programmatically rather than just display the message:
     "quota_exhausted" is True specifically for a 429; "stop_batch" is True
-    for either a 429 OR an auth rejection, since both mean every SUBSEQUENT
-    call in a run would fail identically -- render_ai_autofill_missing()'s
-    bulk loop checks "stop_batch" to abandon the rest of a run rather than
-    grinding through it reproducing the same failure question after question.
+    for either a 429 (after the auto-wait budget above is used up) OR an
+    auth rejection, since both mean every SUBSEQUENT call in a run would
+    fail identically -- render_ai_autofill_missing()'s bulk loop checks
+    "stop_batch" to abandon the rest of a run rather than grinding through
+    it reproducing the same failure question after question.
 
     model_version comes straight from the API response, not from the model=
     string we sent -- since that string is the "gemini-flash-latest" alias
@@ -1798,9 +1837,11 @@ def suggest_ai_explanation(q, mode):
     if client is None:
         return {"error": "Gemini isn't configured — check gemini_api_key in secrets and that google-genai is installed."}
     last_error = None
-    for attempt in range(_GEMINI_RETRY_ATTEMPTS):
-        if attempt > 0:
-            time.sleep(_GEMINI_RETRY_BACKOFF_SECONDS[attempt - 1])
+    quota_waits_used = 0
+    transient_attempt = 0
+    while True:
+        if transient_attempt > 0:
+            time.sleep(_GEMINI_RETRY_BACKOFF_SECONDS[transient_attempt - 1])
         _throttle_gemini_call()
         try:
             response = client.models.generate_content(
@@ -1819,7 +1860,21 @@ def suggest_ai_explanation(q, mode):
             }
         except Exception as e:
             last_error = e
-            if _is_quota_exhausted_error(e) or _is_auth_gemini_error(e) or not _is_transient_gemini_error(e):
+            if _is_quota_exhausted_error(e):
+                delay = _quota_retry_delay_seconds(e)
+                if (
+                    delay is not None
+                    and delay <= _GEMINI_QUOTA_AUTO_WAIT_MAX_SECONDS
+                    and quota_waits_used < _GEMINI_QUOTA_AUTO_WAIT_ATTEMPTS
+                ):
+                    quota_waits_used += 1
+                    time.sleep(delay + 2)  # small buffer past Google's own suggested wait
+                    continue
+                break
+            if _is_auth_gemini_error(e) or not _is_transient_gemini_error(e):
+                break
+            transient_attempt += 1
+            if transient_attempt >= _GEMINI_RETRY_ATTEMPTS:
                 break
     return {
         "error": _friendly_gemini_error(last_error),
