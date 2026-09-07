@@ -229,5 +229,13 @@
     "field": "List-II text",
     "old_value": "",
     "new_value": "1. 1000 BCE   \n2. 10,000 BP   \n3. 80,000 BP   \n4. 35,000 BP"
+  },
+  {
+    "timestamp": "2026-09-07T16:02:28.748701",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_117",
+    "field": "question stem",
+    "old_value": "Match List-I (period) with List-II (approximate date, as per the chapter's Timeline 1) and select the correct answer using the codes below:\n\n\nCodes: A B C D",
+    "new_value": "Match List-I (period) with List-II (approximate date, as per the chapter's Timeline 1) and select the correct answer using the codes below:\n\nCodes: A B C D"
   }
 ]
