@@ -1613,7 +1613,14 @@ _GEMINI_RETRY_BACKOFF_SECONDS = (2, 4)  # waited before attempt 2 and attempt 3 
 # (see render_ai_autofill_missing()), which can otherwise fire a dozen-plus
 # calls back to back and trip Gemini's per-minute rate limit almost
 # immediately, surfacing as the same 429 this is meant to avoid.
-_MIN_SECONDS_BETWEEN_GEMINI_CALLS = 4.0
+#
+# 7.0s keeps this under ~8.6 calls/minute, safely below the free tier's
+# published ~10 RPM ceiling for the flash models (with room for clock
+# jitter) -- 4.0s (~15/min) was actually ABOVE that ceiling, which was
+# the main reason batches were hitting 429s so quickly. This only helps
+# with the per-minute cap; a separate per-day cap still applies and just
+# has to wait out its own reset.
+_MIN_SECONDS_BETWEEN_GEMINI_CALLS = 7.0
 
 # Module-level (not st.session_state) because the thing being paced is
 # calls to Gemini's server, which doesn't care which browser tab or admin
