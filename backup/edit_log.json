@@ -1,11 +1,14 @@
 [
   {
-    "timestamp": "2026-09-07T20:12:11.175810",
+    "timestamp": "2026-09-07T22:12:05.520975",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_085",
+    "question_id": "UPSC_ANC_086",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Kosa refers to a treasury or repository of wealth (part of the Saptanga theory of statecraft described in Kautilya's Arthashastra), making it an administrative/economic term rather than a kinship term. • Kula, Vamsa, and Gotra all belong to the category of social and familial organization: • Option A (Kula): Refers to the family or household unit in ancient Indian social structures. • Option B (Vamsa): Refers to a lineage, genealogy, or dynasty traced through successive generations. • Option D (Gotra): Refers to an exogamous clan lineage traced back to a common mythical Vedic seer (rishi). • Often confused with: Kosa (treasury/wealth) vs. Kosha (sheaths of the Atman in Vedanta philosophy, such as Annamaya Kosha), though both are entirely distinct from the kinship terms Kula, Vamsa, and Gotra.",
-    "source": "Import AI Explanation (gemini-3.8-flash)"
+    "new_value": "- Fact/Key Detail: Among the given options, Susrutha is the renowned ancient Indian physician and 'Father of Surgery' associated with medicine. Although the original sage Sushruta lived much earlier (c. 6th century BCE), the extant recension of his foundational medical treatise, the Sushruta Samhita, was finalized and gained prominence during the Gupta period (4th-5th century CE). - Saumilla: Incorrect. He was an ancient Sanskrit dramatist mentioned alongside Bhasa and Kaviputra by Kalidasa in the prelude to the Malavikagnimitram. - Sudraka: Incorrect. He was a playwright/king who authored the famous classical Sanskrit play Mrichchhakatika (The Little Clay Cart), not a medical work. - Shaunaka: Incorrect. He was an ancient Vedic teacher, grammarian, and rishi credited with the Rigveda Pratishakhya and Brihaddevata during the Vedic period. - Often confused with: Charaka and Vagbhata. Charaka authored the Charaka Samhita focusing on internal medicine (Kayachikitsa, court of Kanishka/Kushana era), while Susrutha specialized in surgery (Shalya Tantra). Vagbhata (author of Ashtanga Hridaya) actually lived during the Gupta/post-Gupta period (c. 6th-7th century CE) and synthesised both traditions.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Chronological inaccuracy in question: Historically, Sushruta is dated to around 600 BCE (pre-Gupta era). However, UPSC accepted Susrutha because the Sushruta Samhita underwent significant redaction during the Gupta period, and he was the only medical scholar among the options."
+    ]
   }
 ]
