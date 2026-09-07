@@ -331,6 +331,18 @@ def format_question_stem(text):
             return True
         if not unambiguous:
             return False
+        # A leading "and" (e.g. "...with List-II (...) AND select the
+        # correct answer using the codes below:") means this is one
+        # continuous instruction sentence, not a trailing instruction
+        # glued onto the end of a list item with no separator at all (the
+        # actual case this whole function exists for, e.g. "...IV.
+        # Domestic company Choose the correct option:"). Splitting here
+        # would break a completely ordinary Match-the-following preamble
+        # into two paragraphs for no reason -- "and select/choose ..." is
+        # never itself the glued-on case.
+        last_word = re.search(r'(\w+)\s*$', before)
+        if last_word and last_word.group(1).lower() == "and":
+            return False
         # An unambiguous closer only skips the punctuation requirement when
         # it's actually acting as a short, final closer -- little or
         # nothing left to say once "choose/select the correct option" has
@@ -353,6 +365,18 @@ def format_question_stem(text):
         result = result[:pos].rstrip(" \n") + '\n\n' + result[pos:].lstrip(" \n")
     return result.lstrip("\n")
 
+
+# An admin can type this literally into "Question text" (in the Match-the-
+# following panel, see render_typo_editor()) at whatever exact point they
+# want the table to appear -- render_question_stem() then splits preamble/
+# trailer right there instead of guessing via _parse_match_the_following().
+# Streamlit's st.text_area has no way to report cursor position, so this is
+# the practical equivalent of "the table appears where I left the cursor":
+# the admin places a literal marker instead of an invisible cursor position,
+# which is honestly more reliable anyway since it's still there (and still
+# means the same thing) on every future edit, not just the one save where a
+# cursor happened to be in the right spot.
+MATCH_TABLE_MARKER = "[[TABLE]]"
 
 _LIST_I_RE = re.compile(r'list[\s-]*i\b', re.I)
 _LIST_II_RE = re.compile(r'list[\s-]*ii\b', re.I)
@@ -550,8 +574,18 @@ def _render_match_the_following_table(list_i_text, list_ii_text, container_key):
     )
     st.markdown(
         f"""<style>
+        /* Streamlit puts its usual ~1rem gap above AND below this block on
+        top of the table's own margin, which reads as an oversized gap
+        after the preamble and a cramped one before the first option --
+        same negative-margin-on-the-keyed-container trick used elsewhere
+        in this app (e.g. qb_meta_caption) to override Streamlit's default
+        inter-block spacing rather than fight it from inside the table. */
+        [class*="st-key-{container_key}"] {{
+            margin-top: -0.75rem !important;
+            margin-bottom: 0.75rem !important;
+        }}
         [class*="st-key-{container_key}"] table {{
-            width: 100%; border-collapse: collapse; margin: 0.25rem 0 0.5rem;
+            width: 100%; border-collapse: collapse; margin: 0;
         }}
         [class*="st-key-{container_key}"] th, [class*="st-key-{container_key}"] td {{
             border: 1px solid rgba(128, 128, 128, 0.35);
@@ -635,12 +669,16 @@ def render_question_stem(q, container_key, extra_style=""):
     more lines than the other -- see that function's docstring.
 
     When those two fields ARE present, the preamble/trailer shown above
-    and below the columns still comes from q["question"] itself, via
-    _parse_match_the_following() -- reused here purely to strip the
+    and below the columns still comes from q["question"] itself. If the
+    admin typed the MATCH_TABLE_MARKER literal into "Question text" (see
+    that constant's own docstring), the table is placed exactly there --
+    everything before it is the preamble, everything after is the
+    trailer, no guessing involved. Otherwise this falls back to
+    _parse_match_the_following(), reused here purely to strip the
     embedded List-I/List-II text back out of the stem so it doesn't
     render twice (once in the columns, once in the raw paragraph). If
-    that detection doesn't fire (e.g. the admin already trimmed the
-    lists out of "Question text" themselves, leaving no embedded
+    that detection doesn't fire either (e.g. the admin already trimmed
+    the lists out of "Question text" themselves, leaving no embedded
     List-I/II markers left to find), the whole of q["question"] is used
     as the preamble as-is -- still correct either way, since there's
     nothing left to strip once the admin has already cleaned it up.
@@ -654,8 +692,13 @@ def render_question_stem(q, container_key, extra_style=""):
         render_justified(format_question_stem(q["question"]), container_key=container_key, extra_style=extra_style)
         return
 
-    parsed = _parse_match_the_following(q["question"])
-    preamble, trailer = (parsed["preamble"], parsed["trailer"]) if parsed else (q["question"], "")
+    question_text = q["question"]
+    if MATCH_TABLE_MARKER in question_text:
+        preamble, trailer = question_text.split(MATCH_TABLE_MARKER, 1)
+        preamble, trailer = preamble.strip(), trailer.strip()
+    else:
+        parsed = _parse_match_the_following(question_text)
+        preamble, trailer = (parsed["preamble"], parsed["trailer"]) if parsed else (question_text, "")
 
     if preamble:
         render_justified(
@@ -1742,7 +1785,11 @@ def render_typo_editor(q, user, context, source_file_by_id):
                 "side-by-side layout only applies once both are saved here, never "
                 "automatically. Suggested text below is a best-effort split from the "
                 "question text above; review it before saving. Clear both boxes and "
-                "save to revert this question to the plain single-column layout."
+                "save to revert this question to the plain single-column layout. "
+                f"To control exactly where the table appears, type `{MATCH_TABLE_MARKER}` "
+                "into the Question text box above at that exact spot (usually right after "
+                "the intro sentence, before \"Codes: ...\") -- without it, placement is "
+                "guessed automatically."
             )
             suggested_i, suggested_ii = (
                 (q.get("match_list_i", ""), q.get("match_list_ii", "")) if already_configured
