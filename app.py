@@ -1171,7 +1171,7 @@ def load_questions():
 # quick read of the text) and shouldn't be one tap away on a phone screen.
 # This exists for the "that's obviously a typo" cases only.
 
-def log_edit(user, question_id, field, old_value, new_value, source=None):
+def log_edit(user, question_id, field, old_value, new_value, source=None, issues_found=None):
     """Every typo fix is recorded here regardless of whether the GitHub push
     succeeds — a silent, unlogged edit to the master question bank is exactly
     the kind of silent failure this project has otherwise been careful to
@@ -1181,7 +1181,16 @@ def log_edit(user, question_id, field, old_value, new_value, source=None):
     when the saved text comes from an Import AI Explanation auto-save (see
     its ai_model parameter) -- e.g. "Import AI Explanation
     (gemini-2.5-flash)". Omitted (not just blank) for every other edit type,
-    so old log entries and manual edits don't gain a stray null field."""
+    so old log entries and manual edits don't gain a stray null field.
+
+    issues_found is likewise optional and only ever set by
+    apply_explanation_edit() for an AI auto-save -- Gemini's own
+    self-reported list of factual details it wasn't confident about (see
+    suggest_ai_explanation()). Stored so the Question Bank tab's "Auto AI
+    Explanation Saves" audit view (see ai_saved_explanations()) can show
+    what the model itself flagged, not just that a save happened. Omitted
+    entirely (not stored as an empty list) when there's nothing to report,
+    same reasoning as source above."""
     with _locked_file(EDITS_FILE, []) as log:
         entry = {
             "timestamp": datetime.now().isoformat(),
@@ -1193,6 +1202,8 @@ def log_edit(user, question_id, field, old_value, new_value, source=None):
         }
         if source:
             entry["source"] = source
+        if issues_found:
+            entry["issues_found"] = issues_found
         log.append(entry)
 
 
@@ -1222,10 +1233,31 @@ def apply_typo_fix(question_id, new_question_text, new_option_texts, user, sourc
       {"error": "..."}                                   -- nothing was saved
       {"changed": []}                                     -- saved, but no
                                                                actual change
-      {"changed": [...], "github_ok": bool, "github_msg": str} -- saved locally;
-                                                               github_ok tells
-                                                               you whether the
-                                                               push also landed
+      {"changed": [...], "github_ok": bool, "github_msg": str,
+       "github_log_ok": bool, "github_log_msg": str}      -- saved locally;
+                                                               github_ok/msg
+                                                               describe the
+                                                               question-bank
+                                                               data file push,
+                                                               github_log_ok/msg
+                                                               describe the
+                                                               SEPARATE edit-log
+                                                               push below --
+                                                               tracked
+                                                               independently
+                                                               since they can
+                                                               genuinely
+                                                               disagree (one
+                                                               push can succeed
+                                                               while the other
+                                                               hits a transient
+                                                               GitHub error),
+                                                               and a caller
+                                                               that only checked
+                                                               the first used to
+                                                               silently miss a
+                                                               failed edit-log
+                                                               push.
 
     IMPORTANT: unlike responses/schedule/etc., /data files are NOT restored
     from GitHub on startup (they're expected to arrive via git deploy). If
@@ -1275,11 +1307,18 @@ def apply_typo_fix(question_id, new_question_text, new_option_texts, user, sourc
     # corrections.py (the local reconciliation script) reads this file from
     # GitHub, so a stale copy there would mean a local sync silently misses
     # this fix even though the actual data-file correction went through.
-    _github_commit_file(
+    # Tracked as its own github_log_ok/msg result rather than discarded --
+    # this push CAN fail independently of the data-file one above, and a
+    # caller that only checked github_ok used to have no way to notice.
+    github_log_ok, github_log_msg = _github_commit_file(
         EDITS_FILE, "backup/edit_log.json",
         f"Edit log — {question_id} ({', '.join(changed_fields)}) — {user}",
     )
-    return {"changed": changed_fields, "github_ok": github_ok, "github_msg": github_msg}
+    return {
+        "changed": changed_fields,
+        "github_ok": github_ok, "github_msg": github_msg,
+        "github_log_ok": github_log_ok, "github_log_msg": github_log_msg,
+    }
 
 
 def render_typo_editor(q, user, context, source_file_by_id):
@@ -1326,19 +1365,28 @@ def render_typo_editor(q, user, context, source_file_by_id):
                 st.error(result["error"])
             elif not result["changed"]:
                 st.info("No changes detected.")
-            elif result["github_ok"]:
-                st.success(f"Saved and synced to GitHub: {', '.join(result['changed'])}.")
-                st.rerun()
             else:
-                st.warning(
-                    f"Saved locally ({', '.join(result['changed'])}), but the GitHub "
-                    f"sync failed: {result['github_msg']}. This fix won't survive a "
-                    "redeploy until it syncs — try again in a moment."
-                )
+                # github_ok/msg cover the question-bank data file; github_log_ok/msg
+                # cover the separate edit-log push -- see apply_typo_fix() for why
+                # these are reported independently rather than only the first.
+                if result["github_ok"] and result["github_log_ok"]:
+                    st.success(f"Saved and synced to GitHub: {', '.join(result['changed'])}.")
+                elif not result["github_ok"]:
+                    st.warning(
+                        f"Saved locally ({', '.join(result['changed'])}), but the GitHub "
+                        f"sync failed: {result['github_msg']}. This fix won't survive a "
+                        "redeploy until it syncs — try again in a moment."
+                    )
+                else:
+                    st.warning(
+                        f"Saved and synced to GitHub: {', '.join(result['changed'])}. The "
+                        f"separate edit-log sync failed, though: {result['github_log_msg']}. "
+                        "The question itself is fine; the provenance record just hasn't synced yet."
+                    )
                 st.rerun()
 
 
-def apply_explanation_edit(question_id, new_explanation_text, user, source_file_by_id, ai_model=None):
+def apply_explanation_edit(question_id, new_explanation_text, user, source_file_by_id, ai_model=None, issues_found=None):
     """Admin-only: overwrites a question's explanation in the one /data file
     it lives in. Same read-modify-write / logging / cache-clear / best-effort
     GitHub push pattern as apply_typo_fix() -- see that docstring for the
@@ -1359,21 +1407,39 @@ def apply_explanation_edit(question_id, new_explanation_text, user, source_file_
     one out from this editor (edit it to a short placeholder instead, if
     that's ever actually needed).
 
-    ai_model is optional -- when render_explanation_editor() passes one
-    through (the resolved model_version from an accepted AI Explanation
-    Import suggestion), the log_edit() entry below records it as
-    the edit's source, so the permanent edit log shows which model touched a
-    given explanation even though the app itself always calls a "-latest"
-    alias rather than a pinned version.
+    ai_model and issues_found are both optional and both only ever passed by
+    render_explanation_editor() for an accepted AI Explanation Import
+    suggestion (see suggest_ai_explanation()) -- ai_model becomes the
+    log_edit() entry's source, so the permanent edit log shows which model
+    touched a given explanation even though the app itself always calls a
+    "-latest" alias rather than a pinned version; issues_found is Gemini's
+    own self-reported list of details it wasn't confident about, stored on
+    that same log entry for the audit view to surface later.
 
-    Returns the same dict shape as apply_typo_fix():
+    Returns the same {"changed"/"error"} shape as apply_typo_fix(), plus a
+    SECOND, independently-tracked GitHub result for the edit log itself:
       {"error": "..."}                                   -- nothing was saved
       {"changed": []}                                     -- saved, but no
                                                                actual change
-      {"changed": [...], "github_ok": bool, "github_msg": str} -- saved locally;
-                                                               github_ok tells
-                                                               you whether the
-                                                               push also landed
+      {"changed": [...], "github_ok": bool, "github_msg": str,
+       "github_log_ok": bool, "github_log_msg": str}      -- saved locally;
+                                                               github_ok/msg
+                                                               describe the
+                                                               question-bank
+                                                               data file push,
+                                                               github_log_ok/msg
+                                                               describe the
+                                                               separate edit-log
+                                                               push -- these can
+                                                               genuinely disagree
+                                                               (e.g. the data file
+                                                               syncs fine while the
+                                                               edit-log push hits a
+                                                               transient GitHub
+                                                               error), and callers
+                                                               should report both
+                                                               rather than only
+                                                               the first.
     """
     src_filename = source_file_by_id.get(question_id)
     if src_filename is None:
@@ -1390,7 +1456,8 @@ def apply_explanation_edit(question_id, new_explanation_text, user, source_file_
         cleaned = (new_explanation_text or "").strip()
         if cleaned and cleaned != old_explanation:
             source = f"Import AI Explanation ({ai_model})" if ai_model else None
-            log_edit(user, question_id, "explanation", old_explanation, cleaned, source=source)
+            log_edit(user, question_id, "explanation", old_explanation, cleaned,
+                      source=source, issues_found=issues_found)
             target["explanation"] = cleaned
             changed_fields.append("explanation")
 
@@ -1402,11 +1469,15 @@ def apply_explanation_edit(question_id, new_explanation_text, user, source_file_
         src_file, f"data/{src_file.name}",
         f"Explanation edit: {question_id} — {user}",
     )
-    _github_commit_file(
+    github_log_ok, github_log_msg = _github_commit_file(
         EDITS_FILE, "backup/edit_log.json",
         f"Edit log — {question_id} (explanation) — {user}",
     )
-    return {"changed": changed_fields, "github_ok": github_ok, "github_msg": github_msg}
+    return {
+        "changed": changed_fields,
+        "github_ok": github_ok, "github_msg": github_msg,
+        "github_log_ok": github_log_ok, "github_log_msg": github_log_msg,
+    }
 
 
 def ai_saved_explanations(edit_log):
@@ -1478,10 +1549,33 @@ def _build_ai_explanation_prompt(q, mode):
     """mode is 'generate' (no explanation on file yet) or 'improve' (one
     already exists) -- same underlying request either way, just different
     framing and whether a CURRENT EXPLANATION line is included, so the two
-    modes share one prompt-builder instead of drifting apart as separate copies."""
+    modes share one prompt-builder instead of drifting apart as separate copies.
+
+    In 'improve' mode only, an extra preserve_block is inserted right after
+    CURRENT EXPLANATION: without it, "improve" and "generate" asked for
+    exactly the same thing, so a revision pass had nothing telling it to
+    treat the existing text as a starting point worth keeping rather than
+    freely rewriting -- combined with the "keep it concise" bullet below,
+    that's a real risk of an "improve" quietly dropping a caveat, exception,
+    or date while trying to shorten it, given this all auto-saves with no
+    review step in between. Scoped to 'improve' only since there's nothing
+    yet to preserve in 'generate' mode.
+
+    The "why each wrong option is wrong" bullet applies to both modes --
+    it's requested every time, not just conditionally -- worded "briefly"
+    deliberately, so it doesn't balloon a 4-option question into several
+    extra paragraphs and undercut the separate "keep it concise" bullet."""
     options_text = "\n".join(f"{o.get('label')}) {o.get('text', '')}" for o in q.get("options", []))
     header = "Write a new explanation" if mode == "generate" else "Improve the existing explanation"
     current_line = "" if mode == "generate" else f"CURRENT EXPLANATION: {q.get('explanation', '')}\n"
+    preserve_block = (
+        "When revising, preserve useful factual content that's already correct. "
+        "Improve clarity, precision, organization, and exam usefulness, but do "
+        "not remove important exceptions, conditions, thresholds, dates, section "
+        "numbers, qualifications, or distinctions just to make it shorter, and "
+        "do not reword parts that are already clear and accurate.\n\n"
+        if mode == "improve" else ""
+    )
     return (
         f"{header} for this MCQ from a {q.get('exam')} General Studies exam "
         f"(Paper {q.get('paper')}, theme: {q.get('theme')}).\n\n"
@@ -1489,15 +1583,13 @@ def _build_ai_explanation_prompt(q, mode):
         f"OPTIONS:\n{options_text}\n"
         f"CORRECT ANSWER: {q.get('answer')}\n"
         f"{current_line}\n"
-        "Do NOT change or contradict: the correct answer, dates, names, "
-        "places, article/section numbers, statistics, or other factual "
-        "details implied by the question. Do not invent facts, dates, "
-        "article numbers, or figures not implied by the question itself. "
-        "If you are not confident a factual detail is correct, note it in "
-        "issues_found instead of stating it as fact.\n\n"
+        f"{preserve_block}"
         "Format revised_explanation as follows:\n"
         "- Cite the specific fact, date, article/provision, or data point "
         "that supports the answer.\n"
+        "- Briefly note why each incorrect option is wrong -- name the "
+        "specific fact or condition that makes it incorrect, not just "
+        "state that it's incorrect.\n"
         "- Structure it as short bullet points, not paragraphs or tables.\n"
         "- Add a short 'Often confused with' bullet if relevant, and the "
         "one or two details that actually distinguish them.\n"
@@ -1580,31 +1672,79 @@ def _is_quota_exhausted_error(e):
     return "429" in msg or "resource_exhausted" in msg
 
 
+def _is_auth_gemini_error(e):
+    """True for a rejected-credentials/permissions response -- an invalid,
+    expired, or access-restricted API key. Distinct from _gemini_client()
+    returning None (which catches the simpler case of no key configured at
+    all, before any API call is even attempted): this is for a key that IS
+    present but that Gemini itself refuses at call time. Not retried, same
+    as a quota error -- retrying with the same bad key just reproduces the
+    same rejection -- and given its own friendly message in
+    _friendly_gemini_error() rather than falling into the generic bucket,
+    since "check your API key" is a much more actionable thing to tell an
+    admin than a raw 401/403 payload."""
+    msg = str(e).lower()
+    return any(s in msg for s in ("401", "403", "permission_denied", "unauthenticated", "api key not valid", "api_key_invalid"))
+
+
 # Matches e.g. "'retryDelay': '32.208961072s'" -- Google's retryDelay is a
 # protobuf Duration rendered as a possibly-fractional number of seconds, not
 # always a plain integer, so the decimal part is optional-but-expected here
 # rather than assumed away.
 _RETRY_DELAY_RE = re.compile(r"retryDelay['\"]?\s*:\s*['\"]?(\d+(?:\.\d+)?)s")
 
+# Appended to every _friendly_gemini_error() message -- true in every case,
+# since apply_explanation_edit() is only ever called from the SUCCESS path
+# (see suggest_ai_explanation() and render_explanation_editor()/
+# render_ai_autofill_missing()): a failure here always means nothing was
+# written. Worth stating explicitly rather than assuming the admin infers
+# it, given there's no separate "did it actually save?" confirmation step.
+_GEMINI_ERROR_REASSURANCE = " Your existing explanation was not changed."
+
 
 def _friendly_gemini_error(e):
-    """Turns a raw Gemini exception into the message shown to the admin.
-    For everything except a quota-exhausted 429, that's just the exception
-    text prefixed the same way it always was. For a 429, the raw
-    exception is a multi-line dump of the whole error payload (status,
-    quotaId, quotaValue, a retryDelay, links to Google's docs) -- useful
-    for debugging, useless as something to read in the middle of editing a
-    question, so this instead surfaces one short, actionable sentence,
-    with the server's own suggested wait time folded in when the response
-    included one (see _RETRY_DELAY_RE), rounded to a whole number of
-    seconds since sub-second precision isn't useful to a human reader."""
+    """Turns a raw Gemini exception into the message shown to the admin --
+    always a short, readable sentence, never the raw multi-line SDK/HTTP
+    payload (status, quotaId, retryDelay, links to Google's docs, etc.)
+    that these exceptions stringify to, which is useful for a developer
+    debugging but not for an admin mid-edit.
+
+    Four cases, most to least specific:
+    - Quota-exhausted (429): the server's own suggested wait time is folded
+      in when the response included one (see _RETRY_DELAY_RE), rounded to a
+      whole number of seconds since sub-second precision isn't useful to a
+      human reader.
+    - Auth/permissions rejected (see _is_auth_gemini_error()): points the
+      admin at the API key specifically, since that's almost always the fix.
+    - Transient-but-exhausted (see _is_transient_gemini_error()): only
+      reached once suggest_ai_explanation()'s own retry loop has already
+      tried _GEMINI_RETRY_ATTEMPTS times and every one came back busy/
+      unavailable -- so this reports that retrying already happened and
+      didn't help, rather than re-suggesting a retry that already failed.
+    - Anything else (a malformed request, an unexpected SDK exception
+      shape, etc.): still concise rather than the full raw exception, but
+      keeps the exception type plus a short excerpt of its message so an
+      unfamiliar failure mode is still debuggable from what's shown."""
     if _is_quota_exhausted_error(e):
         delay = _RETRY_DELAY_RE.search(str(e))
         wait_text = f" Please try again in about {round(float(delay.group(1)))} seconds." if delay else (
             " Please try again later — on a free-tier API key this quota resets daily."
         )
-        return "Gemini's request quota is exhausted for now." + wait_text
-    return f"Gemini request failed: {e}"
+        return "Gemini's request quota is exhausted for now." + wait_text + _GEMINI_ERROR_REASSURANCE
+    if _is_auth_gemini_error(e):
+        return (
+            "Gemini rejected the request — the configured API key may be invalid, expired, "
+            "or lack access. Check gemini_api_key in secrets." + _GEMINI_ERROR_REASSURANCE
+        )
+    if _is_transient_gemini_error(e):
+        return (
+            "Gemini's servers are still busy or unavailable after several attempts."
+            + _GEMINI_ERROR_REASSURANCE
+        )
+    detail = " ".join(str(e).split())  # collapse newlines/repeated whitespace
+    if len(detail) > 160:
+        detail = detail[:160].rstrip() + "…"
+    return f"Gemini request failed ({type(e).__name__}): {detail}" + _GEMINI_ERROR_REASSURANCE
 
 
 def suggest_ai_explanation(q, mode):
@@ -1626,17 +1766,21 @@ def suggest_ai_explanation(q, mode):
     notice an error and manually re-click, but fail immediately on anything
     else rather than making a real problem take three times as long to
     report. A 429 quota-exhausted response (see _is_quota_exhausted_error())
-    is deliberately its own case, not folded into "anything else": it's
-    checked FIRST and stops retrying immediately even though it's also "not
-    transient" -- retrying it would just reproduce the identical error, so
-    there's no reason to wait through the rest of the attempts to find that out.
+    and an auth/permissions rejection (see _is_auth_gemini_error()) are both
+    checked FIRST and stop retrying immediately even though an auth error is
+    also technically "not transient" -- retrying either would just reproduce
+    the identical failure, so there's no reason to wait through the rest of
+    the attempts to find that out.
 
     On failure the returned {"error": ...} message is built by
-    _friendly_gemini_error() -- a short, readable sentence for a quota
-    error, the raw exception text for anything else -- and
-    "quota_exhausted" is set to True specifically when that's why it failed,
-    which render_ai_autofill_missing()'s bulk loop uses to stop the whole
-    batch rather than grinding through the rest of it.
+    _friendly_gemini_error() -- always a short, readable sentence, never the
+    raw exception. Two extra flags ride along for callers that need to
+    react programmatically rather than just display the message:
+    "quota_exhausted" is True specifically for a 429; "stop_batch" is True
+    for either a 429 OR an auth rejection, since both mean every SUBSEQUENT
+    call in a run would fail identically -- render_ai_autofill_missing()'s
+    bulk loop checks "stop_batch" to abandon the rest of a run rather than
+    grinding through it reproducing the same failure question after question.
 
     model_version comes straight from the API response, not from the model=
     string we sent -- since that string is the "gemini-flash-latest" alias
@@ -1668,9 +1812,13 @@ def suggest_ai_explanation(q, mode):
             }
         except Exception as e:
             last_error = e
-            if _is_quota_exhausted_error(e) or not _is_transient_gemini_error(e):
+            if _is_quota_exhausted_error(e) or _is_auth_gemini_error(e) or not _is_transient_gemini_error(e):
                 break
-    return {"error": _friendly_gemini_error(last_error), "quota_exhausted": _is_quota_exhausted_error(last_error)}
+    return {
+        "error": _friendly_gemini_error(last_error),
+        "quota_exhausted": _is_quota_exhausted_error(last_error),
+        "stop_batch": _is_quota_exhausted_error(last_error) or _is_auth_gemini_error(last_error),
+    }
 
 
 def render_explanation_editor(q, user, source_file_by_id):
@@ -1692,11 +1840,29 @@ def render_explanation_editor(q, user, source_file_by_id):
     for manual edits (typing a correction yourself, or further editing an
     AI-saved one) and still require an explicit click, same as before.
 
+    The button itself runs in two script-run phases rather than doing the
+    (multi-second, throttled) Gemini call inline on the same run as the
+    click: a click just flips an "in progress" flag in session_state and
+    reruns immediately, so the NEXT run paints the button disabled with an
+    "Importing..." label BEFORE the blocking API call starts, then that run
+    does the actual work. Doing the call inline on the click's own run
+    would mean the disabled state could only ever become visible AFTER the
+    call already finished, which defeats the point -- the risk being
+    guarded against is an impatient admin clicking again while a request
+    that can legitimately take several seconds (throttled to
+    _MIN_SECONDS_BETWEEN_GEMINI_CALLS apart, see suggest_ai_explanation())
+    is still in flight, firing a second Gemini call that a scarce free-tier
+    daily quota can ill afford. Wrapped in try/finally so the flag always
+    clears even if something in that second phase raises unexpectedly --
+    otherwise a crash mid-call would leave the button stuck disabled for
+    the rest of the session.
+
     source_file_by_id is load_questions()'s mapping of question_id -> the
     /data filename that actually won the merge for this question -- passed
     straight through to apply_explanation_edit() so a save always lands on
     the same copy that's on screen right now, same as render_typo_editor()."""
     qid = q["question_id"]
+    inflight_key = f"ai_import_inflight_{qid}"
     with st.expander("💬 Edit Explanation"):
         st.caption(
             "Explanation changes should be based on a primary source, same "
@@ -1704,32 +1870,46 @@ def render_explanation_editor(q, user, source_file_by_id):
         )
 
         mode = "improve" if (q.get("explanation") or "").strip() else "generate"
-        if st.button("✨ Import AI Explanation", key=f"ai_import_go_{qid}"):
-            with st.spinner("Generating explanation..." if mode == "generate" else "Improving explanation..."):
-                result = suggest_ai_explanation(q, mode)
-            if "error" in result:
-                st.session_state[f"ai_import_error_{qid}"] = result["error"]
-                st.session_state.pop(f"ai_import_meta_{qid}", None)
-            else:
-                # Saved right away, no review step in between (by request).
-                # Also written into explfix_{qid} -- the text area's own
-                # key, further down this function -- which works here
-                # because this assignment happens *before* that widget is
-                # instantiated in this same run; Streamlit only forbids
-                # setting a widget's session_state key *after* that widget
-                # has already been created in the current script pass.
-                save_result = apply_explanation_edit(
-                    qid, result["revised_explanation"], user, source_file_by_id,
-                    ai_model=result["model_version"],
-                )
-                st.session_state[f"explfix_{qid}"] = result["revised_explanation"]
-                st.session_state[f"ai_import_meta_{qid}"] = {
-                    "label": "AI-generated explanation" if mode == "generate" else "AI-suggested revision",
-                    "model_version": result["model_version"],
-                    "issues_found": result["issues_found"],
-                    "save_result": save_result,
-                }
-                st.session_state.pop(f"ai_import_error_{qid}", None)
+        in_progress = st.session_state.get(inflight_key, False)
+        button_label = "⏳ Importing…" if in_progress else "✨ Import AI Explanation"
+        if st.button(button_label, key=f"ai_import_go_{qid}", disabled=in_progress) and not in_progress:
+            # Phase 1: just flip the flag and rerun -- see the docstring
+            # above for why the actual call doesn't happen on this run.
+            st.session_state[inflight_key] = True
+            st.rerun()
+
+        if in_progress:
+            # Phase 2: this run started already painting the disabled
+            # button (the phase-1 rerun already did that), so it's now
+            # safe to make the actual blocking call.
+            try:
+                with st.spinner("Generating explanation..." if mode == "generate" else "Improving explanation..."):
+                    result = suggest_ai_explanation(q, mode)
+                if "error" in result:
+                    st.session_state[f"ai_import_error_{qid}"] = result["error"]
+                    st.session_state.pop(f"ai_import_meta_{qid}", None)
+                else:
+                    # Saved right away, no review step in between (by request).
+                    # Also written into explfix_{qid} -- the text area's own
+                    # key, further down this function -- which works here
+                    # because this assignment happens *before* that widget is
+                    # instantiated in this same run; Streamlit only forbids
+                    # setting a widget's session_state key *after* that widget
+                    # has already been created in the current script pass.
+                    save_result = apply_explanation_edit(
+                        qid, result["revised_explanation"], user, source_file_by_id,
+                        ai_model=result["model_version"], issues_found=result["issues_found"],
+                    )
+                    st.session_state[f"explfix_{qid}"] = result["revised_explanation"]
+                    st.session_state[f"ai_import_meta_{qid}"] = {
+                        "label": "AI-generated explanation" if mode == "generate" else "AI-suggested revision",
+                        "model_version": result["model_version"],
+                        "issues_found": result["issues_found"],
+                        "save_result": save_result,
+                    }
+                    st.session_state.pop(f"ai_import_error_{qid}", None)
+            finally:
+                st.session_state[inflight_key] = False
             st.rerun()
 
         if st.session_state.get(f"ai_import_error_{qid}"):
@@ -1742,13 +1922,31 @@ def render_explanation_editor(q, user, source_file_by_id):
                 st.error(f"{meta['label']} couldn't be saved: {save_result['error']}")
             elif not save_result["changed"]:
                 st.caption(f"{meta['label']} matched the existing text — nothing changed.")
-            elif save_result["github_ok"]:
-                st.success(f"{meta['label']} auto-saved and synced to GitHub — model: {meta['model_version']}.")
             else:
-                st.warning(
-                    f"{meta['label']} saved locally, but the GitHub sync failed: "
-                    f"{save_result['github_msg']}. This won't survive a redeploy until it syncs."
-                )
+                # github_ok/msg cover the question-bank data file; github_log_ok/msg
+                # cover the separate edit-log push -- these can genuinely disagree
+                # (see apply_explanation_edit()), so both are reported rather than
+                # only the first, with the more informative/worse-case one shown
+                # when they differ.
+                if save_result["github_ok"] and save_result["github_log_ok"]:
+                    st.success(f"{meta['label']} auto-saved and synced to GitHub — model: {meta['model_version']}.")
+                elif not save_result["github_ok"] and not save_result["github_log_ok"]:
+                    st.warning(
+                        f"{meta['label']} saved locally, but the GitHub sync failed: "
+                        f"{save_result['github_msg']}. This won't survive a redeploy until it syncs."
+                    )
+                elif not save_result["github_ok"]:
+                    st.warning(
+                        f"{meta['label']} saved locally, but the question-bank GitHub sync failed: "
+                        f"{save_result['github_msg']}. This won't survive a redeploy until it syncs "
+                        "(the edit-log entry did sync)."
+                    )
+                else:
+                    st.warning(
+                        f"{meta['label']} auto-saved and synced to GitHub — model: {meta['model_version']}. "
+                        f"The separate edit-log sync failed, though: {save_result['github_log_msg']}. "
+                        "The question itself is fine; the provenance record just hasn't synced yet."
+                    )
             if meta["issues_found"]:
                 st.warning("⚠️ Flagged for human review: " + "; ".join(meta["issues_found"]))
 
@@ -1768,12 +1966,17 @@ def render_explanation_editor(q, user, source_file_by_id):
                 # caption above is cleared here rather than lingering with
                 # a now-outdated model tag.
                 st.session_state.pop(f"ai_import_meta_{qid}", None)
-                if save_result["github_ok"]:
+                if save_result["github_ok"] and save_result["github_log_ok"]:
                     st.success("Saved and synced to GitHub.")
-                else:
+                elif not save_result["github_ok"]:
                     st.warning(
                         f"Saved locally, but the GitHub sync failed: {save_result['github_msg']}. "
                         "This won't survive a redeploy until it syncs — try again in a moment."
+                    )
+                else:
+                    st.warning(
+                        f"Saved and synced to GitHub, but the separate edit-log sync failed: "
+                        f"{save_result['github_log_msg']}. The question itself is fine."
                     )
                 st.rerun()
 
@@ -1820,12 +2023,14 @@ def render_ai_autofill_missing(questions, user, source_file_by_id):
     AI_AUTOFILL_MAX_PER_RUN cap above is what keeps a big backlog from
     bursting past Gemini's per-minute rate limit and immediately
     reproducing the wall-of-JSON 429 errors this was built to avoid. If a
-    call still comes back quota-exhausted (the daily cap itself, which no
-    amount of spacing can work around), the loop stops right there instead
-    of ploughing through the rest of the batch to accumulate the same
-    failure over and over -- whatever was filled before that point stays
-    saved, and the rest is picked up on a later click once the quota
-    resets."""
+    call comes back with suggest_ai_explanation()'s "stop_batch" flag set --
+    quota-exhausted (the daily cap itself, which no amount of spacing can
+    work around) or an auth/permissions rejection (a bad API key fails the
+    exact same way on every remaining question too) -- the loop stops right
+    there instead of ploughing through the rest of the batch to accumulate
+    the same failure over and over -- whatever was filled before that point
+    stays saved, and the rest is picked up on a later click once whatever
+    was wrong is fixed."""
     missing = [
         q for q in questions
         if is_valid_for_practice(q) and not (q.get("explanation") or "").strip()
@@ -1852,14 +2057,14 @@ def render_ai_autofill_missing(questions, user, source_file_by_id):
                 result = suggest_ai_explanation(q, "generate")
                 if "error" in result:
                     failures.append((q["question_id"], result["error"]))
-                    if result.get("quota_exhausted"):
+                    if result.get("stop_batch"):
                         stopped_early = True
                         progress.progress((i + 1) / len(batch))
                         break
                 else:
                     apply_explanation_edit(
                         q["question_id"], result["revised_explanation"], user, source_file_by_id,
-                        ai_model=result["model_version"],
+                        ai_model=result["model_version"], issues_found=result["issues_found"],
                     )
                     filled += 1
                 progress.progress((i + 1) / len(batch))
@@ -1896,14 +2101,15 @@ def apply_answer_key_edit(question_id, new_answer_label, user, source_file_by_id
     as choices, but it's re-checked here too since an apply_* function
     shouldn't trust a stale or tampered-with caller.
 
-    Returns the same dict shape as apply_typo_fix()/apply_explanation_edit():
+    Returns the same dict shape as apply_typo_fix()/apply_explanation_edit(),
+    including their independently-tracked second GitHub result for the edit
+    log push (see apply_typo_fix()'s docstring for why that's tracked
+    separately rather than discarded):
       {"error": "..."}                                   -- nothing was saved
       {"changed": []}                                     -- saved, but no
                                                                actual change
-      {"changed": [...], "github_ok": bool, "github_msg": str} -- saved locally;
-                                                               github_ok tells
-                                                               you whether the
-                                                               push also landed
+      {"changed": [...], "github_ok": bool, "github_msg": str,
+       "github_log_ok": bool, "github_log_msg": str}      -- saved locally
     """
     src_filename = source_file_by_id.get(question_id)
     if src_filename is None:
@@ -1934,11 +2140,15 @@ def apply_answer_key_edit(question_id, new_answer_label, user, source_file_by_id
         src_file, f"data/{src_file.name}",
         f"Answer key correction: {question_id} — {user}",
     )
-    _github_commit_file(
+    github_log_ok, github_log_msg = _github_commit_file(
         EDITS_FILE, "backup/edit_log.json",
         f"Edit log — {question_id} (answer key) — {user}",
     )
-    return {"changed": changed_fields, "github_ok": github_ok, "github_msg": github_msg}
+    return {
+        "changed": changed_fields,
+        "github_ok": github_ok, "github_msg": github_msg,
+        "github_log_ok": github_log_ok, "github_log_msg": github_log_msg,
+    }
 
 
 def render_answer_key_editor(q, user, context, source_file_by_id):
@@ -1990,14 +2200,23 @@ def render_answer_key_editor(q, user, context, source_file_by_id):
                 st.error(result["error"])
             elif not result["changed"]:
                 st.info("No change — that's already the recorded answer.")
-            elif result["github_ok"]:
-                st.success("Saved and synced to GitHub.")
-                st.rerun()
             else:
-                st.warning(
-                    f"Saved locally, but the GitHub sync failed: {result['github_msg']}. "
-                    "This won't survive a redeploy until it syncs — try again in a moment."
-                )
+                # github_ok/msg cover the question-bank data file; github_log_ok/msg
+                # cover the separate edit-log push -- see apply_typo_fix() for why
+                # these are reported independently rather than only the first.
+                if result["github_ok"] and result["github_log_ok"]:
+                    st.success("Saved and synced to GitHub.")
+                elif not result["github_ok"]:
+                    st.warning(
+                        f"Saved locally, but the GitHub sync failed: {result['github_msg']}. "
+                        "This won't survive a redeploy until it syncs — try again in a moment."
+                    )
+                else:
+                    st.warning(
+                        f"Saved and synced to GitHub, but the separate edit-log sync failed: "
+                        f"{result['github_log_msg']}. The question itself is fine; the "
+                        "provenance record just hasn't synced yet."
+                    )
                 st.rerun()
 
 
@@ -5114,6 +5333,19 @@ def render_question_bank(questions, user, source_file_by_id):
                     st.warning(f"{qid} is no longer in the bank (last touched {entry.get('timestamp', '')}).")
                 else:
                     st.caption(f"{qq['exam']} / {qq['theme']}  ·  {entry.get('source', '')}  ·  {entry.get('timestamp', '')}")
+                    # Gemini's own self-reported list of details it wasn't
+                    # confident about (see suggest_ai_explanation() /
+                    # log_edit()'s issues_found param) -- durable, so still
+                    # worth showing here even long after the save, unlike a
+                    # GitHub sync outcome (deliberately not tracked
+                    # per-entry: whether a push succeeded AT SAVE TIME goes
+                    # stale the moment anything resyncs the file, so an old
+                    # entry claiming "sync failed" could easily be wrong by
+                    # the time someone's looking at it here; the save-time
+                    # success/failure message in the Edit Explanation
+                    # expander itself is the accurate, live place for that).
+                    if entry.get("issues_found"):
+                        st.warning("⚠️ Flagged by Gemini: " + "; ".join(entry["issues_found"]))
                     render_full_question(qq, key_prefix="ai_saves")
 
         # Bulk counterpart to the single-question Import AI Explanation
