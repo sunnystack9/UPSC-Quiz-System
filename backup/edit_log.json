@@ -1,14 +1,11 @@
 [
   {
-    "timestamp": "2026-09-07T18:11:49.985984",
+    "timestamp": "2026-09-07T20:12:11.175810",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_084",
+    "question_id": "UPSC_ANC_085",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Sindhu (Indus): It is the most frequently mentioned river in the Rigveda, playing a central role in the geographic and economic life of the early Vedic people (the Saptasindhu region).\n- Sutudri (Option B): Refers to the modern Sutlej; it is mentioned only a few times (notably alongside Vipas in Rigveda 3.33) rather than prominently throughout the text.\n- Sarasvati (Option C): Revered as the holiest and most sacred river—lauded as 'Naditama' (best of rivers) and 'Devitama' (best of goddesses)—but it is not the most frequently named river by volume of citations.\n- Ganga (Option D): Mentioned only once in the Rigveda (in the Nadistuti Sukta, RV 10.75.5), indicating that the early Vedic civilization had not yet fully shifted into the Gangetic plains.\n- Often confused with: Sarasvati. Remember: Sindhu is the most mentioned river, while Sarasvati is the most sacred/holy river.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Commonly confused because Sarasvati is called 'Naditama' (best of rivers), leading aspirants to mistakenly assume it is also the most frequently mentioned river."
-    ]
+    "new_value": "• Kosa refers to a treasury or repository of wealth (part of the Saptanga theory of statecraft described in Kautilya's Arthashastra), making it an administrative/economic term rather than a kinship term. • Kula, Vamsa, and Gotra all belong to the category of social and familial organization: • Option A (Kula): Refers to the family or household unit in ancient Indian social structures. • Option B (Vamsa): Refers to a lineage, genealogy, or dynasty traced through successive generations. • Option D (Gotra): Refers to an exogamous clan lineage traced back to a common mythical Vedic seer (rishi). • Often confused with: Kosa (treasury/wealth) vs. Kosha (sheaths of the Atman in Vedanta philosophy, such as Annamaya Kosha), though both are entirely distinct from the kinship terms Kula, Vamsa, and Gotra.",
+    "source": "Import AI Explanation (gemini-3.8-flash)"
   }
 ]
