@@ -1474,30 +1474,14 @@ def _gemini_client():
     return genai.Client(api_key=api_key)
 
 
-def _build_ai_explanation_prompt(q, mode, extra_instructions=None):
-    """mode is 'generate' (no explanation on file yet, or the admin chose to
-    regenerate from scratch) or 'improve' (revise the one already on file) --
-    same underlying request either way, just different framing and whether a
-    CURRENT EXPLANATION line is included, so the two modes share one
-    prompt-builder instead of drifting apart as separate copies.
-
-    extra_instructions is optional free text an admin can type in the editor
-    (see render_explanation_editor()) to steer this specific call -- e.g.
-    "focus on Article 356", "keep it to 2 bullets", "the answer key was just
-    corrected, base this on option C being right". It's appended as its own
-    clearly-labeled section rather than merged into the fixed instructions
-    above, and it still can't override the do-not-invent-facts / do-not-
-    change-the-answer guardrails, which stay non-negotiable regardless of
-    what the admin types here."""
+def _build_ai_explanation_prompt(q, mode):
+    """mode is 'generate' (no explanation on file yet) or 'improve' (one
+    already exists) -- same underlying request either way, just different
+    framing and whether a CURRENT EXPLANATION line is included, so the two
+    modes share one prompt-builder instead of drifting apart as separate copies."""
     options_text = "\n".join(f"{o.get('label')}) {o.get('text', '')}" for o in q.get("options", []))
     header = "Write a new explanation" if mode == "generate" else "Improve the existing explanation"
     current_line = "" if mode == "generate" else f"CURRENT EXPLANATION: {q.get('explanation', '')}\n"
-    extra_instructions = (extra_instructions or "").strip()
-    extra_block = (
-        f"ADDITIONAL INSTRUCTIONS FROM THE REVIEWER (follow these, but they "
-        f"do not override the correctness rules below): {extra_instructions}\n\n"
-        if extra_instructions else ""
-    )
     return (
         f"{header} for this MCQ from a {q.get('exam')} General Studies exam "
         f"(Paper {q.get('paper')}, theme: {q.get('theme')}).\n\n"
@@ -1505,7 +1489,6 @@ def _build_ai_explanation_prompt(q, mode, extra_instructions=None):
         f"OPTIONS:\n{options_text}\n"
         f"CORRECT ANSWER: {q.get('answer')}\n"
         f"{current_line}\n"
-        f"{extra_block}"
         "Do NOT change or contradict: the correct answer, dates, names, "
         "places, article/section numbers, statistics, or other factual "
         "details implied by the question. Do not invent facts, dates, "
@@ -1516,10 +1499,8 @@ def _build_ai_explanation_prompt(q, mode, extra_instructions=None):
         "- Cite the specific fact, date, article/provision, or data point "
         "that supports the answer.\n"
         "- Structure it as short bullet points, not paragraphs or tables.\n"
-        "- Add a short 'Often confused with' bullet if relevant -- related "
-        "or similarly-worded facts/provisions a student might mix this up "
-        "with on a differently-phrased question, and the one or two "
-        "details that actually distinguish them.\n"
+        "- Add a short 'Often confused with' bullet if relevant, and the "
+        "one or two details that actually distinguish them.\n"
         "- Write any formula or fraction in plain, readable text (e.g., "
         "\"one-third of Rajya Sabha members retire every two years\") "
         "rather than LaTeX or other special math notation.\n"
@@ -1626,15 +1607,12 @@ def _friendly_gemini_error(e):
     return f"Gemini request failed: {e}"
 
 
-def suggest_ai_explanation(q, mode, extra_instructions=None):
+def suggest_ai_explanation(q, mode):
     """Calls Gemini Flash for a suggested explanation. Returns
     {"revised_explanation": ..., "issues_found": [...], "model_version": ...}
     on success, or {"error": "..."} on any failure (missing config, network,
     bad response) -- callers show the error as a plain warning rather than
     crashing the admin-only explanation editor over a third-party API hiccup.
-
-    extra_instructions is passed straight through to
-    _build_ai_explanation_prompt() -- see there for what it does.
 
     Every actual attempt (including retries) is preceded by
     _throttle_gemini_call(), so calls stay spaced out against Gemini's
@@ -1676,7 +1654,7 @@ def suggest_ai_explanation(q, mode, extra_instructions=None):
         try:
             response = client.models.generate_content(
                 model="gemini-flash-latest",
-                contents=_build_ai_explanation_prompt(q, mode, extra_instructions=extra_instructions),
+                contents=_build_ai_explanation_prompt(q, mode),
                 config=genai_types.GenerateContentConfig(
                     response_mime_type="application/json",
                     response_schema=_AI_EXPLANATION_SCHEMA,
@@ -1704,25 +1682,15 @@ def render_explanation_editor(q, user, source_file_by_id):
 
     Includes the Import AI Explanation button (see suggest_ai_explanation()
     above) -- generates a fresh explanation when there isn't one yet, or a
-    suggested revision when there already is. Two optional controls sit
-    above the button: a "Regenerate from scratch" checkbox, for when the
-    existing explanation (AI-written or not) is bad enough that an
-    incremental "improve" pass on it isn't going to help -- checking it
-    forces the "generate" prompt/framing even though an explanation is
-    already on file, so the AI writes a fresh one without anchoring on the
-    old text; and an optional instructions box for steering this one call
-    (e.g. "focus on Article 356", "keep it to 2 bullets") -- see
-    _build_ai_explanation_prompt() for exactly how that text is used.
-
-    It saves and commits the result immediately, with no manual "Save" step
-    and no way to undo it from here (by request) -- the only place a bad
-    auto-save can be caught is the Question Bank tab's "Auto AI
-    Explanation Saves" expander (see ai_saved_explanations()), which lists
-    every question whose current explanation still traces back to this
-    feature, for manual correction later. The separate text area + "Save
-    explanation" button below are for manual edits (typing a correction
-    yourself, or further editing an AI-saved one) and still require an
-    explicit click, same as before.
+    suggested revision when there already is. It saves and commits the
+    result immediately, with no manual "Save" step and no way to undo it
+    from here (by request) -- the only place a bad auto-save can be caught
+    is the Question Bank tab's "Auto AI Explanation Saves" expander (see
+    ai_saved_explanations()), which lists every question whose current
+    explanation still traces back to this feature, for manual correction
+    later. The separate text area + "Save explanation" button below are
+    for manual edits (typing a correction yourself, or further editing an
+    AI-saved one) and still require an explicit click, same as before.
 
     source_file_by_id is load_questions()'s mapping of question_id -> the
     /data filename that actually won the merge for this question -- passed
@@ -1735,31 +1703,10 @@ def render_explanation_editor(q, user, source_file_by_id):
             "as any answer-key correction — not just a quick rewrite."
         )
 
-        has_existing = bool((q.get("explanation") or "").strip())
-        regen_col, instr_col = st.columns([1, 2])
-        with regen_col:
-            force_regenerate = (
-                st.checkbox(
-                    "Regenerate from scratch",
-                    key=f"ai_import_regen_{qid}",
-                    help="Ignore the current explanation and have the AI write a new one, "
-                         "instead of revising the existing text.",
-                )
-                if has_existing else False
-            )
-        with instr_col:
-            extra_instructions = st.text_input(
-                "Additional instructions (optional)",
-                key=f"ai_import_instr_{qid}",
-                placeholder="e.g. focus on Article 356, keep it to 2 bullets",
-            )
-        mode = "generate" if (force_regenerate or not has_existing) else "improve"
-        button_label = "✨ Import AI Explanation" if mode == "generate" and not has_existing else (
-            "✨ Regenerate AI Explanation" if force_regenerate else "✨ Improve AI Explanation"
-        )
-        if st.button(button_label, key=f"ai_import_go_{qid}"):
+        mode = "improve" if (q.get("explanation") or "").strip() else "generate"
+        if st.button("✨ Import AI Explanation", key=f"ai_import_go_{qid}"):
             with st.spinner("Generating explanation..." if mode == "generate" else "Improving explanation..."):
-                result = suggest_ai_explanation(q, mode, extra_instructions=extra_instructions)
+                result = suggest_ai_explanation(q, mode)
             if "error" in result:
                 st.session_state[f"ai_import_error_{qid}"] = result["error"]
                 st.session_state.pop(f"ai_import_meta_{qid}", None)
@@ -4853,6 +4800,13 @@ def format_question_for_ai_copy(q):
     requested, since asking for it hasn't proven reliable enough in
     practice to be worth the risk.
 
+    The reasoning two paragraphs above is why bullets-not-tables and
+    plain-text math are requested at all -- that hasn't changed. What HAS
+    changed (by request, for length) is that the outgoing prompt text below
+    no longer spells the reasoning out inline to the AI tool; it just
+    states the requirement ("not paragraphs or tables", "rather than LaTeX
+    or other special math notation") and leaves it at that.
+
     Deliberately does NOT include the question's current explanation --
     this should be a clean input every time: question, options, correct
     answer, then whatever AI tool it's pasted into writes a fresh
@@ -4869,19 +4823,12 @@ def format_question_for_ai_copy(q):
         "Studies exam practice question. Requirements:",
         "- Cite the specific fact, date, article/provision, or data point that "
         "supports the answer.",
-        "- Structure it as short bullet points, not paragraphs or tables -- "
-        "tables and other multi-column formatting often lose their structure "
-        "when copied out of a chat interface; plain bullets survive far more "
-        "reliably.",
-        "- Add a short 'Often confused with' bullet list if relevant -- related "
-        "or similarly-worded provisions a student might mix this up with on a "
-        "differently-phrased exam question, and the one or two details that "
-        "actually distinguish them.",
+        "- Structure it as short bullet points, not paragraphs or tables.",
+        "- Add a short 'Often confused with' bullet list if relevant, and the "
+        "one or two details that actually distinguish them.",
         "- Write any formula or fraction in plain, readable text (e.g., "
         "\"one-third of Rajya Sabha members retire every two years\") rather than "
-        "LaTeX or other special math notation -- same reliability reason as "
-        "the bullet-point instruction above: rendered math notation can "
-        "also fail to survive a copy out of a chat interface intact.",
+        "LaTeX or other special math notation.",
         "- Keep it concise and exam-focused.",
         "",
         f"Question ({q.get('exam', '')} {q.get('paper', '')} {q.get('year', '')}"
