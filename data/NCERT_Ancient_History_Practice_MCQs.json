@@ -3962,7 +3962,7 @@
     "year": 0,
     "theme": "Ancient History",
     "question_type": "Match the Following",
-    "question": "Match List-I (period) with List-II (approximate date, as per the chapter's Timeline 1) and select the correct answer using the codes below:\nList-I: A. Middle Palaeolithic   B. Upper Palaeolithic   C. Neolithic   D. Early iron, megalithic burials\nList-II: 1. 1000 BCE   2. 10,000 BP   3. 80,000 BP   4. 35,000 BP\nCodes: A B C D",
+    "question": "Match List-I (period) with List-II (approximate date, as per the chapter's Timeline 1) and select the correct answer using the codes below:\n\n\nCodes: A B C D",
     "options": [
       {
         "label": "A",
@@ -3987,7 +3987,9 @@
     "answer_status": "needs_review",
     "verification_note": "Generated from PW Ancient History (Only NCERT) source PDF — Batch 3 — Chapter 2: The Indus Valley Civilisation (Part 2 of 2), Chapter: The Indus Valley Civilisation, Q25",
     "shared_with": [],
-    "section_tags": []
+    "section_tags": [],
+    "match_list_i": "A. Middle Palaeolithic   \nB. Upper Palaeolithic   \nC. Neolithic   \nD. Early iron, megalithic burials",
+    "match_list_ii": "1. 1000 BCE   \n2. 10,000 BP   \n3. 80,000 BP   \n4. 35,000 BP"
   },
   {
     "question_id": "NCERT_ANC_118",
