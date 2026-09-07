@@ -3,10 +3,12 @@ name: Auto-fill missing explanations
 # Background counterpart to the "Auto-fill missing explanations" button in
 # the Streamlit app's Question Bank tab: runs scripts/autofill_explanations.py
 # on a schedule so the backlog clears itself even when nobody has the app
-# open in a browser. Every 3 hours is plenty -- Gemini's free-tier quota is
-# the real bottleneck (10 requests/minute, a separate daily cap), not how
-# often this workflow fires, so running much more often than the backlog
-# actually needs just burns Actions minutes for no extra throughput.
+# open in a browser. Hourly balances catching a quota reset reasonably
+# promptly against not burning Actions minutes for nothing -- Gemini's
+# free-tier quota (a per-minute bucket, and a separate daily cap) is the
+# real bottleneck, not how often this workflow fires, so a run that lands
+# while the daily cap is still exhausted just logs "0 filled" and exits;
+# it isn't harmful, just a no-op until the quota actually resets.
 #
 # One-time setup:
 #   1. Add a repository secret named GEMINI_API_KEY with the same Gemini
@@ -24,7 +26,7 @@ name: Auto-fill missing explanations
 
 on:
   schedule:
-    - cron: "0 */3 * * *"   # every 3 hours, on the hour (UTC)
+    - cron: "0 * * * *"   # every hour, on the hour (UTC)
   workflow_dispatch:
     inputs:
       max_per_run:
