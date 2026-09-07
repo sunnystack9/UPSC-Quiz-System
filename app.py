@@ -1637,6 +1637,33 @@ def apply_typo_fix(question_id, new_question_text, new_option_texts, user, sourc
     }
 
 
+# apply_typo_fix() above writes straight to disk and clears load_questions()'s
+# cache, which is normally all that's needed for the very next rerun to see
+# the change -- but on at least one real deployment, questions kept showing
+# their pre-edit text/layout indefinitely after a confirmed-successful save
+# (proven correct on disk and on GitHub, and confirmed via a harmless re-save
+# reporting "No changes detected"), while load_questions() kept serving the
+# old snapshot no matter how many reruns followed. Root cause not pinned
+# down (something about how st.cache_data invalidation is behaving on that
+# particular deployment) -- rather than depend on that working, these two
+# helpers give the Question Bank tab its own independent, same-session
+# safety net: the fields a save just wrote are stashed in st.session_state
+# and layered back onto `q` every time it's read, so THIS browser session
+# always shows what it just saved, regardless of whether load_questions()'s
+# cache has actually caught up yet. apply_typo_fix() itself is untouched and
+# remains the real, durable write -- this is purely a display-side patch on
+# top of it.
+def _record_local_question_edit(question_id, **fields):
+    overrides = st.session_state.setdefault("_qbank_local_edits", {})
+    overrides.setdefault(question_id, {}).update(fields)
+
+
+def _apply_local_question_edits(q):
+    overrides = st.session_state.get("_qbank_local_edits", {})
+    pending = overrides.get(q.get("question_id"))
+    return {**q, **pending} if pending else q
+
+
 def render_typo_editor(q, user, context, source_file_by_id):
     """Admin-only inline editor for fixing typos in a question's stem or
     option wording. Placed wherever a question already surfaces in the Needs
@@ -1743,6 +1770,26 @@ def render_typo_editor(q, user, context, source_file_by_id):
                 q["question_id"], new_question, new_options, user, source_file_by_id,
                 match_list_i=match_list_i, match_list_ii=match_list_ii,
             )
+            if "error" not in result:
+                # Recorded as a local override regardless of whether
+                # "changed" is empty -- "no changes" means the submitted
+                # values already match what's on disk, which covers the
+                # exact case of re-saving after an EARLIER attempt whose
+                # write succeeded but whose display never refreshed (see
+                # _record_local_question_edit()'s docstring above this
+                # function); a genuine no-op re-save is harmless to record
+                # again. Either way, this is what's now actually on disk.
+                _record_local_question_edit(
+                    q["question_id"],
+                    question=new_question.strip() or q["question"],
+                    options=[
+                        {**opt, "text": (new_options.get(opt["label"]) or opt.get("text", "")).strip() or opt.get("text", "")}
+                        for opt in q.get("options", [])
+                    ],
+                    **({"match_list_i": match_list_i.strip()} if match_list_i is not None else {}),
+                    **({"match_list_ii": match_list_ii.strip()} if match_list_ii is not None else {}),
+                )
+
             if "error" in result:
                 st.error(result["error"])
             elif not result["changed"]:
@@ -6007,7 +6054,11 @@ def render_question_bank(questions, user, source_file_by_id):
             st.session_state.qb_nav_idx = nav_idx + 1
             st.rerun()
 
-    q = filtered[nav_idx]
+    # Layers this session's own just-saved typo-fix edits (if any) back onto
+    # q -- see _apply_local_question_edits()'s docstring, right above
+    # render_typo_editor() -- so a save shows up here immediately even if
+    # load_questions()'s cache hasn't refreshed yet for whatever reason.
+    q = _apply_local_question_edits(filtered[nav_idx])
     qid = q["question_id"]
     meta_bits = [
         f"{q['exam']} Paper {q['paper']}", q.get("theme"), q.get("subtopic"),
