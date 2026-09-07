@@ -197,5 +197,13 @@
     "field": "List-II text",
     "old_value": "",
     "new_value": "List-II: \n1. 1990   \n2. 1921   \n3. 1960   \n4. 1955"
+  },
+  {
+    "timestamp": "2026-09-07T15:59:31.825438",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_103",
+    "field": "question stem",
+    "old_value": "Match List-I (site/region) with List-II (year excavations or explorations began there, per the chapter's Timeline 2) and select the correct answer using the codes below:\nList-I: A. Harappa (M.S. Vats)   B. Lothal (S.R. Rao)   C. Kalibangan (B.B. Lal and B.K. Thapar)   D. Dholavira (R.S. Bisht)\nList-II: 1. 1990   2. 1921   3. 1960   4. 1955\nCodes: A B C D",
+    "new_value": "Match List-I (site/region) with List-II (year excavations or explorations began there, per the chapter's Timeline 2) and select the correct answer using the codes below:\n\nCodes: A B C D"
   }
 ]
