@@ -1,0 +1,57 @@
+name: Auto-fill missing explanations
+
+# Background counterpart to the "Auto-fill missing explanations" button in
+# the Streamlit app's Question Bank tab: runs scripts/autofill_explanations.py
+# on a schedule so the backlog clears itself even when nobody has the app
+# open in a browser. Every 3 hours is plenty -- Gemini's free-tier quota is
+# the real bottleneck (10 requests/minute, a separate daily cap), not how
+# often this workflow fires, so running much more often than the backlog
+# actually needs just burns Actions minutes for no extra throughput.
+#
+# One-time setup:
+#   1. Add a repository secret named GEMINI_API_KEY with the same Gemini
+#      API key already in the Streamlit app's secrets.toml
+#      (st.secrets["gemini_api_key"]).
+#      Settings -> Secrets and variables -> Actions -> New repository secret.
+#   2. Nothing else to configure -- GITHUB_TOKEN and GITHUB_REPOSITORY are
+#      provided automatically by Actions; the "permissions: contents: write"
+#      below is what lets that token push to data/*.json and
+#      backup/edit_log.json via the same GitHub Contents API app.py itself
+#      already uses (no git commit/push step needed here).
+#
+# You can also run it on demand from the Actions tab (Run workflow) instead
+# of waiting for the schedule.
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"   # every 3 hours, on the hour (UTC)
+  workflow_dispatch:
+    inputs:
+      max_per_run:
+        description: "Max explanations to fill this run"
+        required: false
+        default: "30"
+
+permissions:
+  contents: write
+
+jobs:
+  autofill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests google-genai
+
+      - name: Fill missing explanations
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AUTOFILL_MAX_PER_RUN: ${{ github.event.inputs.max_per_run || '30' }}
+          AUTOFILL_USER: "auto (GitHub Actions)"
+        run: python scripts/autofill_explanations.py
