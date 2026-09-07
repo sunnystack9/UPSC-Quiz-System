@@ -205,5 +205,29 @@
     "field": "question stem",
     "old_value": "Match List-I (site/region) with List-II (year excavations or explorations began there, per the chapter's Timeline 2) and select the correct answer using the codes below:\nList-I: A. Harappa (M.S. Vats)   B. Lothal (S.R. Rao)   C. Kalibangan (B.B. Lal and B.K. Thapar)   D. Dholavira (R.S. Bisht)\nList-II: 1. 1990   2. 1921   3. 1960   4. 1955\nCodes: A B C D",
     "new_value": "Match List-I (site/region) with List-II (year excavations or explorations began there, per the chapter's Timeline 2) and select the correct answer using the codes below:\n\nCodes: A B C D"
+  },
+  {
+    "timestamp": "2026-09-07T16:01:55.730558",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_117",
+    "field": "question stem",
+    "old_value": "Match List-I (period) with List-II (approximate date, as per the chapter's Timeline 1) and select the correct answer using the codes below:\nList-I: A. Middle Palaeolithic   B. Upper Palaeolithic   C. Neolithic   D. Early iron, megalithic burials\nList-II: 1. 1000 BCE   2. 10,000 BP   3. 80,000 BP   4. 35,000 BP\nCodes: A B C D",
+    "new_value": "Match List-I (period) with List-II (approximate date, as per the chapter's Timeline 1) and select the correct answer using the codes below:\n\n\nCodes: A B C D"
+  },
+  {
+    "timestamp": "2026-09-07T16:01:55.754673",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_117",
+    "field": "List-I text",
+    "old_value": "",
+    "new_value": "A. Middle Palaeolithic   \nB. Upper Palaeolithic   \nC. Neolithic   \nD. Early iron, megalithic burials"
+  },
+  {
+    "timestamp": "2026-09-07T16:01:55.778570",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_117",
+    "field": "List-II text",
+    "old_value": "",
+    "new_value": "1. 1000 BCE   \n2. 10,000 BP   \n3. 80,000 BP   \n4. 35,000 BP"
   }
 ]
