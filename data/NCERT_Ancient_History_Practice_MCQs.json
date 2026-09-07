@@ -3484,7 +3484,7 @@
     "year": 0,
     "theme": "Ancient History",
     "question_type": "Match the Following",
-    "question": "Match List-I (site/region) with List-II (year excavations or explorations began there, per the chapter's Timeline 2) and select the correct answer using the codes below:\nList-I: A. Harappa (M.S. Vats)   B. Lothal (S.R. Rao)   C. Kalibangan (B.B. Lal and B.K. Thapar)   D. Dholavira (R.S. Bisht)\nList-II: 1. 1990   2. 1921   3. 1960   4. 1955\nCodes: A B C D",
+    "question": "Match List-I (site/region) with List-II (year excavations or explorations began there, per the chapter's Timeline 2) and select the correct answer using the codes below:\n\nCodes: A B C D",
     "options": [
       {
         "label": "A",
