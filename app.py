@@ -353,148 +353,6 @@ def format_question_stem(text):
     return result.lstrip("\n")
 
 
-_LIST_I_RE = re.compile(r'list[\s-]*i\b', re.I)
-_LIST_II_RE = re.compile(r'list[\s-]*ii\b', re.I)
-# Splits a trailing "Codes: A B C D" (or "Code: ...") instruction off the
-# last List-II item's text, same idea as format_question_stem()'s own
-# trailing-instruction splitter, just for the specific closer this
-# question type always ends with.
-_CODES_RE = re.compile(r'\bcodes?\s*:?\s*', re.I)
-
-
-def _best_consecutive_alpha_run(text):
-    """Longest run of consecutive A./B./C.. matches in text -- same
-    algorithm format_question_stem() uses for its own alpha-sequence
-    detection, just returning the actual regex Match objects (so callers
-    can read each item's label and text) instead of only their
-    positions. Empty list if no run of 2+ exists."""
-    matches = list(_PATTERN_ALPHA.finditer(text))
-    run, best_run, prev_letter = [], [], None
-    for m in matches:
-        letter = m.group(1)
-        if prev_letter is not None and ord(letter) == ord(prev_letter) + 1:
-            run.append(m)
-        else:
-            run = [m]
-        if len(run) > len(best_run):
-            best_run = run
-        prev_letter = letter
-    return best_run
-
-
-def _best_consecutive_num_run(text):
-    """Longest run of consecutive 1./2./3.. matches in text, starting at
-    1 -- same algorithm format_question_stem() uses for its own numeric-
-    sequence detection, just returning the actual regex Match objects.
-    Empty list if no run of 2+ exists."""
-    matches = list(_PATTERN_NUM.finditer(text))
-    run, best_run, prev_num = [], [], None
-    for m in matches:
-        num = int(m.group(1))
-        if prev_num is not None and num == prev_num + 1:
-            run.append(m)
-        else:
-            run = [m] if num == 1 else []
-        if len(run) > len(best_run):
-            best_run = run
-        prev_num = num
-    return best_run
-
-
-def _parse_match_the_following(text):
-    """Detects a 'Match List-I with List-II' question and splits it into
-    its structural parts -- preamble, each labelled List-I entry, each
-    labelled List-II entry, and a trailing "Codes: ..." line -- so
-    render_question_stem() can lay the two lists out as side-by-side
-    columns instead of one long stacked column that makes a reader
-    scroll back and forth to line up "List-I item C" with "List-II item
-    3". Returns None (never raises) for anything that isn't this exact
-    shape, so callers can safely fall back to the normal single-column
-    rendering -- a false negative here just means "not columned", never
-    a crash or a mis-rendered question.
-
-    Gated on TWO things at once, not just "a List-I mention exists
-    somewhere": a genuine consecutive A./B./C.. run (reusing
-    format_question_stem()'s own run-detection, not a separate parser
-    that could drift out of sync with it) followed later by a genuine
-    consecutive 1./2./3.. run. Plain statement-based questions routinely
-    have a numbered list on their own with no List-I/List-II structure
-    at all -- requiring both runs AND the literal "List-I"/"List-II"
-    markers immediately before each one is what keeps this from
-    mis-firing on those.
-
-    The marker search specifically wants the LAST "List-I"/"List-II"
-    occurrence immediately before each run, not the first occurrence in
-    the whole text -- because the question's own preamble sentence
-    ("Match List-I (Site) with List-II (...) and select...") mentions
-    both phrases once already, before the real "List-I:" / "List-II:"
-    section headers that actually introduce each list."""
-    alpha_run = _best_consecutive_alpha_run(text)
-    num_run = _best_consecutive_num_run(text)
-    if len(alpha_run) < 2 or len(num_run) < 2:
-        return None
-    if alpha_run[0].start() >= num_run[0].start():
-        return None
-
-    list_i_markers = [m for m in _LIST_I_RE.finditer(text) if m.end() <= alpha_run[0].start()]
-    if not list_i_markers:
-        return None
-    list_ii_markers = [
-        m for m in _LIST_II_RE.finditer(text)
-        if m.start() >= list_i_markers[-1].end() and m.end() <= num_run[0].start()
-    ]
-    if not list_ii_markers:
-        return None
-
-    list_i_marker = list_i_markers[-1]
-    list_ii_marker = list_ii_markers[-1]
-
-    preamble = text[:list_i_marker.start()].rstrip()
-
-    list_i_items = []
-    for i, m in enumerate(alpha_run):
-        end = alpha_run[i + 1].start() if i + 1 < len(alpha_run) else list_ii_marker.start()
-        list_i_items.append((m.group(1), text[m.end():end].strip(" \n.")))
-
-    list_ii_items = []
-    for i, m in enumerate(num_run):
-        end = num_run[i + 1].start() if i + 1 < len(num_run) else len(text)
-        list_ii_items.append((m.group(1), text[m.end():end].strip(" \n.")))
-
-    last_label, last_text = list_ii_items[-1]
-    codes_match = _CODES_RE.search(last_text)
-    trailer = ""
-    if codes_match:
-        trailer = last_text[codes_match.start():].strip()
-        last_text = last_text[:codes_match.start()].rstrip(" \n.,;:")
-        list_ii_items[-1] = (last_label, last_text)
-
-    return {"preamble": preamble, "list_i": list_i_items, "list_ii": list_ii_items, "trailer": trailer}
-
-
-def _suggest_match_list_split(question_text):
-    """Best-effort starting point for render_typo_editor()'s Match-the-
-    following panel: runs the same detection _parse_match_the_following()
-    uses, then formats its List-I/List-II items back into plain
-    "A. ...\\nB. ..." text an admin can review and edit before saving --
-    rather than a blank box every time, even though this app never trusts
-    the detection enough to render columns from it automatically (see
-    render_question_stem()'s docstring for why that's now a manual,
-    explicit save rather than an automatic one).
-
-    Returns ("", "") -- both boxes start empty -- when the question text
-    doesn't match the expected shape, e.g. it's already been trimmed down
-    to just a preamble/trailer because the admin previously moved its
-    lists into match_list_i/match_list_ii, or it never had that structure
-    embedded in the text at all."""
-    parsed = _parse_match_the_following(question_text)
-    if parsed is None:
-        return "", ""
-    list_i_text = "\n".join(f"{label}. {item_text}" for label, item_text in parsed["list_i"])
-    list_ii_text = "\n".join(f"{label}. {item_text}" for label, item_text in parsed["list_ii"])
-    return list_i_text, list_ii_text
-
-
 def render_justified(text, container_key, extra_style=""):
     """Renders question text with justified alignment.
 
@@ -532,68 +390,6 @@ def render_justified(text, container_key, extra_style=""):
     display_text = re.sub(r'(?<!\n)\n(?!\n)', '  \n', text)
     with st.container(key=container_key):
         st.markdown(display_text)
-
-
-def render_question_stem(q, container_key, extra_style=""):
-    """Renders a question's stem -- the single entry point every call site
-    should use instead of calling render_justified(format_question_stem(...))
-    directly, so the Match-the-following column layout below applies
-    consistently everywhere a stem can appear (live quiz, Bookmarks/
-    Question Bank read-through, in-session Prev/Next review), without each
-    call site having to know or care about this question type.
-
-    The two-column List-I/List-II layout ONLY appears once an admin has
-    explicitly saved match_list_i AND match_list_ii on this question via
-    render_typo_editor()'s "Match-the-following layout" panel -- never
-    automatically just because q["question"]'s text happens to look like a
-    match-question. That's deliberate: an earlier version of this function
-    auto-detected and columned any question matching that text shape at
-    render time, but that meant the layout could change out from under an
-    admin's expectations for ANY question in the bank phrased a certain
-    way, with no review step. Gating on two explicitly-saved fields instead
-    means the layout only ever applies to a question someone actually
-    opened the panel for and confirmed.
-
-    When those two fields ARE present, the preamble/trailer shown above
-    and below the columns still comes from q["question"] itself, via
-    _parse_match_the_following() -- reused here purely to strip the
-    embedded List-I/List-II text back out of the stem so it doesn't
-    render twice (once in the columns, once in the raw paragraph). If
-    that detection doesn't fire (e.g. the admin already trimmed the
-    lists out of "Question text" themselves, leaving no embedded
-    List-I/II markers left to find), the whole of q["question"] is used
-    as the preamble as-is -- still correct either way, since there's
-    nothing left to strip once the admin has already cleaned it up.
-
-    Every other question (no saved match_list_i/ii) falls through
-    unchanged to the exact single-column rendering this app has always
-    used."""
-    list_i_text = (q.get("match_list_i") or "").strip()
-    list_ii_text = (q.get("match_list_ii") or "").strip()
-    if not (list_i_text and list_ii_text):
-        render_justified(format_question_stem(q["question"]), container_key=container_key, extra_style=extra_style)
-        return
-
-    parsed = _parse_match_the_following(q["question"])
-    preamble, trailer = (parsed["preamble"], parsed["trailer"]) if parsed else (q["question"], "")
-
-    if preamble:
-        render_justified(
-            format_question_stem(preamble),
-            container_key=f"{container_key}_preamble",
-            extra_style=extra_style,
-        )
-
-    col_list_i, col_list_ii = st.columns(2)
-    with col_list_i:
-        st.markdown("**List-I**")
-        st.markdown(list_i_text.replace("\n", "  \n"))
-    with col_list_ii:
-        st.markdown("**List-II**")
-        st.markdown(list_ii_text.replace("\n", "  \n"))
-
-    if trailer:
-        st.markdown(trailer)
 
 
 def inject_option_justify_css():
@@ -1415,35 +1211,12 @@ def load_edit_log():
     return _locked_read(EDITS_FILE, [])
 
 
-def apply_typo_fix(question_id, new_question_text, new_option_texts, user, source_file_by_id,
-                    match_list_i=None, match_list_ii=None):
+def apply_typo_fix(question_id, new_question_text, new_option_texts, user, source_file_by_id):
     """Writes only the fields that actually changed to the one /data file
     question_id lives in, logs each change, clears the load_questions() cache
     so the fix shows up immediately, then best-effort pushes that single file
     to GitHub (data/<filename>, not backup/<filename> -- this updates the
     actual source-of-truth question bank, not a state-file backup copy).
-
-    match_list_i and match_list_ii are optional and only ever passed by
-    render_typo_editor()'s "Match-the-following layout" panel (see there for
-    the admin-facing side of this) -- the admin-curated List-I/List-II text
-    that render_question_stem() lays out as two side-by-side columns
-    INSTEAD of the plain single-column stem, but only once both fields are
-    actually saved here. This is deliberately manual, not auto-detected at
-    render time: an admin opens the panel, reviews/edits a suggested split,
-    and saves it -- so the column layout only ever appears for a question
-    someone has actually looked at, never automatically for anything in the
-    bank that merely happens to match a text pattern.
-
-    Both default to None (Python's None, not an empty string) specifically
-    so a save from the ordinary "Fix a typo" flow -- where the admin never
-    opened the Match-the-following panel at all -- leaves whatever's already
-    stored on this question untouched, rather than blanking out a
-    previously-saved List-I/II split just because this particular save
-    didn't mention it. An actual empty string IS treated as a real value
-    (clears the field, reverting that question to the plain single-column
-    layout) -- the distinction only matters for None vs "", never for ""
-    vs a real string, both of which always get compared and written like
-    any other field below.
 
     source_file_by_id (from load_questions()) identifies which file to write
     to -- specifically, whichever copy actually won the merge and is being
@@ -1521,19 +1294,6 @@ def apply_typo_fix(question_id, new_question_text, new_option_texts, user, sourc
                 opt["text"] = new_text
                 changed_fields.append(f"option {label}")
 
-        if match_list_i is not None:
-            old_list_i = target.get("match_list_i", "")
-            if match_list_i.strip() != old_list_i:
-                log_edit(user, question_id, "List-I text", old_list_i, match_list_i.strip())
-                target["match_list_i"] = match_list_i.strip()
-                changed_fields.append("List-I text")
-        if match_list_ii is not None:
-            old_list_ii = target.get("match_list_ii", "")
-            if match_list_ii.strip() != old_list_ii:
-                log_edit(user, question_id, "List-II text", old_list_ii, match_list_ii.strip())
-                target["match_list_ii"] = match_list_ii.strip()
-                changed_fields.append("List-II text")
-
     if not changed_fields:
         return {"changed": []}
 
@@ -1591,46 +1351,6 @@ def render_typo_editor(q, user, context, source_file_by_id):
             "Question text", value=q["question"], height=150,
             key=f"typofix_q_{context}_{q['question_id']}",
         )
-
-        # Match-the-following layout: opt-in and manual, on purpose -- see
-        # render_question_stem()'s docstring. The panel only appears once
-        # this button's been clicked, and the two lists it saves only take
-        # effect once "Save typo fix" below is actually pressed; merely
-        # opening the panel changes nothing.
-        already_configured = bool((q.get("match_list_i") or "").strip() and (q.get("match_list_ii") or "").strip())
-        showlists_key = f"typofix_showlists_{context}_{q['question_id']}"
-        if showlists_key not in st.session_state:
-            st.session_state[showlists_key] = already_configured
-        button_label = (
-            "🔀 Edit Match-the-following lists" if already_configured
-            else "🔀 Add Match-the-following layout"
-        )
-        if st.button(button_label, key=f"typofix_showlists_btn_{context}_{q['question_id']}"):
-            st.session_state[showlists_key] = not st.session_state[showlists_key]
-            st.rerun()
-
-        match_list_i = match_list_ii = None
-        if st.session_state[showlists_key]:
-            st.caption(
-                "Paste or edit each list below, then press \"Save typo fix\" -- the "
-                "side-by-side layout only applies once both are saved here, never "
-                "automatically. Suggested text below is a best-effort split from the "
-                "question text above; review it before saving. Clear both boxes and "
-                "save to revert this question to the plain single-column layout."
-            )
-            suggested_i, suggested_ii = (
-                (q.get("match_list_i", ""), q.get("match_list_ii", "")) if already_configured
-                else _suggest_match_list_split(q["question"])
-            )
-            match_list_i = st.text_area(
-                "List-I", value=suggested_i, height=120,
-                key=f"typofix_listi_{context}_{q['question_id']}",
-            )
-            match_list_ii = st.text_area(
-                "List-II", value=suggested_ii, height=120,
-                key=f"typofix_listii_{context}_{q['question_id']}",
-            )
-
         new_options = {}
         for opt in q.get("options", []):
             if not opt.get("text"):
@@ -1640,10 +1360,7 @@ def render_typo_editor(q, user, context, source_file_by_id):
                 key=f"typofix_opt_{context}_{q['question_id']}_{opt['label']}",
             )
         if st.button("Save typo fix", key=f"typofix_save_{context}_{q['question_id']}"):
-            result = apply_typo_fix(
-                q["question_id"], new_question, new_options, user, source_file_by_id,
-                match_list_i=match_list_i, match_list_ii=match_list_ii,
-            )
+            result = apply_typo_fix(q["question_id"], new_question, new_options, user, source_file_by_id)
             if "error" in result:
                 st.error(result["error"])
             elif not result["changed"]:
@@ -4278,8 +3995,8 @@ def render_full_question(q, key_prefix, note=None, include_answer_in_copy=False,
     pass False -- by request, that tab is a fast review/triage surface, not
     a study one, and the explanation was just adding scroll length there."""
     inject_option_justify_css()
-    render_question_stem(
-        q,
+    render_justified(
+        format_question_stem(q["question"]),
         container_key=f"{key_prefix}_stem_{q['question_id']}",
     )
     if note:
@@ -4352,8 +4069,8 @@ def render_reviewed_question(q, user, show_caption=True):
             match = r  # a later entry would win if one ever somehow existed
     if show_caption:
         st.caption("📖 Reviewing a question you've already answered in this session — it can't be resubmitted here.")
-    render_question_stem(
-        q,
+    render_justified(
+        format_question_stem(q["question"]),
         container_key=f"reviewstem_{q['question_id']}",
     )
 
@@ -4664,7 +4381,7 @@ def render_question(practice_questions, user):
     q = qs[idx]
     st.progress((idx + 1) / len(qs))
     st.markdown(f"**Question {idx + 1} of {len(qs)}**  ·  _{q['theme']}_  ·  {q['exam']} {q['year']}")
-    render_question_stem(q, container_key=f"stem_box_{q.get('question_id', 'current')}")
+    render_justified(format_question_stem(q["question"]), container_key=f"stem_box_{q.get('question_id', 'current')}")
 
     # Justify the answer options, revealed-state feedback, and explanation text
     # the same way the question stem is justified above. This targets
