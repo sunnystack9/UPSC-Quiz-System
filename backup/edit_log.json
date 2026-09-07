@@ -253,5 +253,29 @@
     "field": "question stem",
     "old_value": "Match List-I (Site) with List-II (feature associated with it in the chapter) and select the correct answer using the codes below:\n\nCodes: A B C D",
     "new_value": "Match List-I (Site) with List-II (feature associated with it in the chapter) and select the correct answer using the codes below:\n[[TABLE]]\nCodes: A B C D"
+  },
+  {
+    "timestamp": "2026-09-07T17:08:14.523560",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_089",
+    "field": "question stem",
+    "old_value": "Match List I with List II\nand select the correct answer by using the codes given below the lists:\nList I (Eras)\nI. Vikrama era\nII. Saka era\nIII. Gupta era\nIV. Kali era\nList II (Reckoned from)\nA) 3102 B.C.\nB) 320 A.D.\nC) 78 A.D.\nD) 58 B.C.\nE) 248 A.D.",
+    "new_value": "Match List I with List II\nand select the correct answer by using the codes given below the lists:\nList I (Eras) & List II (Reckoned from)\n[[TABLE]]"
+  },
+  {
+    "timestamp": "2026-09-07T17:08:14.549564",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_089",
+    "field": "List-I text",
+    "old_value": "",
+    "new_value": "I. Vikrama era\nII. Saka era\nIII. Gupta era\nIV. Kali era"
+  },
+  {
+    "timestamp": "2026-09-07T17:08:14.574666",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_089",
+    "field": "List-II text",
+    "old_value": "",
+    "new_value": "A) 3102 B.C.\nB) 320 A.D.\nC) 78 A.D.\nD) 58 B.C.\nE) 248 A.D."
   }
 ]
