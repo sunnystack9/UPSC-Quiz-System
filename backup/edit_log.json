@@ -133,5 +133,21 @@
     "field": "List-II text",
     "old_value": "",
     "new_value": "1. South Rajasthan and north Gujarat\n2. Rajasthan\n3. Shortughai, Afghanistan\n4. Bharuch, Gujarat"
+  },
+  {
+    "timestamp": "2026-09-07T15:25:51.497230",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_071",
+    "field": "List-I text",
+    "old_value": "",
+    "new_value": "A. Dilmun\nB. Magan\nC. Meluhha"
+  },
+  {
+    "timestamp": "2026-09-07T15:25:51.524524",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_071",
+    "field": "List-II text",
+    "old_value": "",
+    "new_value": "1. Possibly the Harappan region, described as a ‘land of seafarers’\n2. Island of Bahrain\n3. Perhaps a name for Oman"
   }
 ]
