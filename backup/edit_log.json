@@ -1,14 +1,15 @@
 [
   {
-    "timestamp": "2026-09-08T03:10:06.263853",
+    "timestamp": "2026-09-08T05:10:06.720267",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_087",
+    "question_id": "UPSC_ANC_079",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Visakhadatta (I - B) was a renowned Sanskrit playwright/dramatist who authored famous plays like 'Mudrarakshasa' and 'Devichandraguptam'.\n- Varahamihira (II - C) was a prominent 6th-century astronomer and polymath known for works such as 'Panchasiddhantika' and 'Brihat Samhita'.\n- Charaka (III - A) was a principal contributor to Ayurveda and author of the foundational medical treatise 'Charaka Samhita'.\n- Brahmagupta (IV - D) was a major 7th-century mathematician who wrote 'Brahmasphutasiddhanta', introducing rules for arithmetic involving zero and negative numbers.\n- Option A incorrectly pairs Visakhadatta with Medicine and Charaka with Mathematics.\n- Option B incorrectly matches Visakhadatta with Medicine, Varahamihira with Drama, and Charaka with Astronomy.\n- Option D incorrectly assigns Visakhadatta to Astronomy, Varahamihira to Drama, and Brahmagupta to Drama.\n- Often confused with: Varahamihira and Brahmagupta both contributed to astronomy and mathematics; however, Varahamihira is primarily distinguished by his astronomical compendium 'Panchasiddhantika', while Brahmagupta is most celebrated for formalizing mathematical rules for zero and negative quantities.",
+    "new_value": "- Core fact: The Maski Minor Rock Edict (discovered in 1915 in Raichur, Karnataka) was the first inscription to explicitly mention the emperor by his personal name, reading 'Devanampriya Asoka'. Personal name 'Asoka' also appears only in three other Minor Rock Edicts: Gujarra (Madhya Pradesh), Nittur, and Udegolam (both in Karnataka).\n- Option A is incorrect: The Kalsi Rock Edict (Uttarakhand) contains Major Rock Edicts I-XIV and refers to the monarch exclusively by the epithet 'Devanampiya Piyadasi'.\n- Option B is incorrect: The Rummindei Minor Pillar Edict (Nepal) commemorates Asoka's pilgrimage to Buddha's birthplace and records tax remissions (reducing 'bhaga' to one-eighth), identifying him as 'Devanampiya Piyadasi'.\n- Option C is incorrect: The Special Kalinga Edicts (at Dhauli and Jaugada, Odisha) address judicial officers and subjects ('All men are my children') using royal titles like 'Devanampiya', not his personal name.\n- Often confused with: The Bhabru (Bairat) Edict, where Asoka explicitly addresses the Buddhist Sangha and calls himself 'Piyadasi laja Magadhe' (King of Magadha), not 'Asoka'.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Varahamihira and Brahmagupta both contributed to both Astronomy and Mathematics, creating potential ambiguity if not resolved through cross-matching with Visakhadatta (Drama) and Charaka (Medicine)."
+      "Original explanations typically fail to specify which other edicts contain the name Asoka (Gujarra, Nittur, and Udegolam).",
+      "Explanations often lack details on what the incorrect edicts actually contain and what royal epithets ('Devanampiya Piyadasi') they use instead."
     ]
   }
 ]
