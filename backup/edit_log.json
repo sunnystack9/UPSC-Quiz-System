@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-07T22:12:05.520975",
+    "timestamp": "2026-09-08T03:10:06.263853",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_086",
+    "question_id": "UPSC_ANC_087",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Fact/Key Detail: Among the given options, Susrutha is the renowned ancient Indian physician and 'Father of Surgery' associated with medicine. Although the original sage Sushruta lived much earlier (c. 6th century BCE), the extant recension of his foundational medical treatise, the Sushruta Samhita, was finalized and gained prominence during the Gupta period (4th-5th century CE). - Saumilla: Incorrect. He was an ancient Sanskrit dramatist mentioned alongside Bhasa and Kaviputra by Kalidasa in the prelude to the Malavikagnimitram. - Sudraka: Incorrect. He was a playwright/king who authored the famous classical Sanskrit play Mrichchhakatika (The Little Clay Cart), not a medical work. - Shaunaka: Incorrect. He was an ancient Vedic teacher, grammarian, and rishi credited with the Rigveda Pratishakhya and Brihaddevata during the Vedic period. - Often confused with: Charaka and Vagbhata. Charaka authored the Charaka Samhita focusing on internal medicine (Kayachikitsa, court of Kanishka/Kushana era), while Susrutha specialized in surgery (Shalya Tantra). Vagbhata (author of Ashtanga Hridaya) actually lived during the Gupta/post-Gupta period (c. 6th-7th century CE) and synthesised both traditions.",
+    "new_value": "- Visakhadatta (I - B) was a renowned Sanskrit playwright/dramatist who authored famous plays like 'Mudrarakshasa' and 'Devichandraguptam'.\n- Varahamihira (II - C) was a prominent 6th-century astronomer and polymath known for works such as 'Panchasiddhantika' and 'Brihat Samhita'.\n- Charaka (III - A) was a principal contributor to Ayurveda and author of the foundational medical treatise 'Charaka Samhita'.\n- Brahmagupta (IV - D) was a major 7th-century mathematician who wrote 'Brahmasphutasiddhanta', introducing rules for arithmetic involving zero and negative numbers.\n- Option A incorrectly pairs Visakhadatta with Medicine and Charaka with Mathematics.\n- Option B incorrectly matches Visakhadatta with Medicine, Varahamihira with Drama, and Charaka with Astronomy.\n- Option D incorrectly assigns Visakhadatta to Astronomy, Varahamihira to Drama, and Brahmagupta to Drama.\n- Often confused with: Varahamihira and Brahmagupta both contributed to astronomy and mathematics; however, Varahamihira is primarily distinguished by his astronomical compendium 'Panchasiddhantika', while Brahmagupta is most celebrated for formalizing mathematical rules for zero and negative quantities.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Chronological inaccuracy in question: Historically, Sushruta is dated to around 600 BCE (pre-Gupta era). However, UPSC accepted Susrutha because the Sushruta Samhita underwent significant redaction during the Gupta period, and he was the only medical scholar among the options."
+      "Varahamihira and Brahmagupta both contributed to both Astronomy and Mathematics, creating potential ambiguity if not resolved through cross-matching with Visakhadatta (Drama) and Charaka (Medicine)."
     ]
   }
 ]
