@@ -504,7 +504,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "",
+    "explanation": "- Conversion rule: The Saka era begins in 78 CE, while the Vikrama Samvat begins in 57/58 BCE. Converting a Saka year to the Common Era (CE) requires adding 78 (465 + 78 = 543 CE), and converting CE to Vikrama Samvat requires adding 58 (543 + 58 = 601 Vikrama Samvat). Alternatively, add 136 years directly to the Saka year (465 + 136 = 601).\n- Why Option A is correct: Applying the formula gives 601, making 601 the accurate equivalent year in Vikrama Samvat.\n- Why Option B is wrong: 300 is obtained by subtracting 165 from 465, which corresponds to an arbitrary miscalculation rather than any calendar era offset.\n- Why Option C is wrong: 330 incorrectly subtracts 135 years from 465 instead of adding it, wrongly treating the Saka era as older than the Vikrama era.\n- Why Option D is wrong: 407 incorrectly subtracts the 58-year Vikrama offset from 465 instead of accounting for the combined 135/136-year span between both eras.\n- Often confused with: The Gupta era (starts 319-320 CE). A common pitfall is confusing whether to add or subtract the base dates: Vikrama Samvat starts before Saka (58 BCE vs. 78 CE), meaning a Vikrama year number is always larger than the corresponding Saka year number by 135-136 years.",
     "explanation_status": "unsourced",
     "answer_status": "needs_review",
     "verification_note": "Extracted from PDF: upsc-prelims-ancient-history.pdf, Q102",
