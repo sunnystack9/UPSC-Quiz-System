@@ -1,14 +1,15 @@
 [
   {
-    "timestamp": "2026-09-08T17:10:43.755305",
+    "timestamp": "2026-09-08T18:12:38.992070",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_080",
+    "question_id": "UPSC_ANC_081",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Map-based identification of the Mahajanapadas:\n  - A (Matsya): Located in eastern Rajasthan (around modern Jaipur, Alwar, and Bharatpur) with its capital at Viratnagar.\n  - B (Avanti): Located in the Malwa region of central-western Madhya Pradesh with Ujjayini and Mahishmati as its key centers.\n  - C (Vatsa): Situated along the Yamuna around modern Prayagraj/Kaushambi in southern Uttar Pradesh.\n  - D (Anga): Located east of Magadha around modern Bhagalpur and Munger in eastern Bihar, bordering Bengal, with its capital at Champa.\n- Why Option A is incorrect: Identifies B as Chedi (located in Bundelkhand, east of Avanti) and C as Kosala (located north of the Ganga in the Awadh region/Ayodhya, rather than Kaushambi).\n- Why Option B is incorrect: Identifies A as Surasena (centered around Mathura in Uttar Pradesh, east of Matsya) and D as Magadha (centered around modern Patna/Gaya, west of Anga).\n- Why Option D is incorrect: Combines the misidentifications of Surasena, Chedi, Kosala, and Magadha instead of the actual mapped territories.\n- Often confused with:\n  - Magadha vs. Anga: Magadha was directly south of the Ganga in central Bihar (Patna/Gaya/Rajgir), while Anga lay further downstream to the extreme east (Bhagalpur/Champa).\n  - Matsya vs. Surasena: Matsya lay west in Rajasthan (Jaipur area), whereas Surasena was adjacent to its east along the Yamuna (Mathura area).",
+    "new_value": "- Specific Fact: Chandragupta II introduced silver coinage in the Gupta Empire after defeating the Western Kshatrapas (Sakas), and these silver coins were called rupaka (modeled on the Saka drachms).\n- Why Option B is wrong: Karshapana refers to ancient punch-marked coins made of silver, copper, or lead used primarily during the Mahajanapada and Mauryan eras, not Gupta-specific silver currency.\n- Why Option C is wrong: Dinara was the term used for Gupta gold coins, an appellation derived from the Roman coin 'denarius'.\n- Why Option D is wrong: Pana was the standard currency unit and silver punch-marked coin of the Mauryan Empire, frequently cited in Kautilya's Arthashastra.\n- Often confused with: Dinara; remember that Dinara refers specifically to Gupta gold coins, whereas Rupaka refers to Gupta silver coins.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "The question relies on a visual map not included in the raw text prompt, but standard UPSC geographic coordinates for these four ancient regions firmly fix A, B, C, and D."
+      "A common trap is confusing Gupta gold coins (dinaras) with their silver counterparts (rupakas).",
+      "Candidates often mix up Mauryan-era punch-marked denominations (karshapana, pana) with Gupta-era standardized cast/die-struck currency."
     ]
   }
 ]
