@@ -1,15 +1,15 @@
 [
   {
-    "timestamp": "2026-09-08T05:10:06.720267",
+    "timestamp": "2026-09-08T07:13:23.345480",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_079",
+    "question_id": "UPSC_ANC_082",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Core fact: The Maski Minor Rock Edict (discovered in 1915 in Raichur, Karnataka) was the first inscription to explicitly mention the emperor by his personal name, reading 'Devanampriya Asoka'. Personal name 'Asoka' also appears only in three other Minor Rock Edicts: Gujarra (Madhya Pradesh), Nittur, and Udegolam (both in Karnataka).\n- Option A is incorrect: The Kalsi Rock Edict (Uttarakhand) contains Major Rock Edicts I-XIV and refers to the monarch exclusively by the epithet 'Devanampiya Piyadasi'.\n- Option B is incorrect: The Rummindei Minor Pillar Edict (Nepal) commemorates Asoka's pilgrimage to Buddha's birthplace and records tax remissions (reducing 'bhaga' to one-eighth), identifying him as 'Devanampiya Piyadasi'.\n- Option C is incorrect: The Special Kalinga Edicts (at Dhauli and Jaugada, Odisha) address judicial officers and subjects ('All men are my children') using royal titles like 'Devanampiya', not his personal name.\n- Often confused with: The Bhabru (Bairat) Edict, where Asoka explicitly addresses the Buddhist Sangha and calls himself 'Piyadasi laja Magadhe' (King of Magadha), not 'Asoka'.",
+    "new_value": "- Correct Answer: (D) Manigrama (or Manigramam) was a prominent merchant guild/corporation in ancient and early medieval South India (dating from at least the 8th to 14th centuries CE, prominent under the Pallavas and Cholas) that conducted inland and coastal trade.\n- Why Option A is incorrect: Chaturvedimangalam refers to a tax-free village granted specifically to learned Brahmins well-versed in the four Vedas (Chaturvedis), primarily under Chola and Pallava rule.\n- Why Option B is incorrect: Parishad (or Parisa) was an advisory council of state ministers or an assembly of learned Vedic scholars mentioned in ancient texts and Ashokan edicts, not a trading corporation.\n- Why Option C is incorrect: Ashtadiggajas refers to the collective group of eight legendary Telugu court poets patronized by King Krishnadevaraya of the Vijayanagara Empire in the early 16th century.\n- Often confused with: Nanadesi and Ayyavole 500. While all were South Indian merchant guilds, Manigrama initially focused on local/regional trade networks before expanding, whereas Ayyavole 500 (Five Hundred Lords of Aihole) operated as a vast transnational guild spanning across South and Southeast Asia.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Original explanations typically fail to specify which other edicts contain the name Asoka (Gujarra, Nittur, and Udegolam).",
-      "Explanations often lack details on what the incorrect edicts actually contain and what royal epithets ('Devanampiya Piyadasi') they use instead."
+      "Standard explanations often fail to specify the exact functional distinction of Chaturvedimangalam as a Brahmin land-grant village rather than a civic body.",
+      "Explanations frequently omit the time period and regional context of Ashtadiggajas (Vijayanagara period, 16th century CE) compared to ancient trade guilds."
     ]
   }
 ]
