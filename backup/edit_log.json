@@ -1,15 +1,15 @@
 [
   {
-    "timestamp": "2026-09-08T18:12:38.992070",
+    "timestamp": "2026-09-09T01:11:04.435188",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_081",
+    "question_id": "UPSC_ANC_074",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Specific Fact: Chandragupta II introduced silver coinage in the Gupta Empire after defeating the Western Kshatrapas (Sakas), and these silver coins were called rupaka (modeled on the Saka drachms).\n- Why Option B is wrong: Karshapana refers to ancient punch-marked coins made of silver, copper, or lead used primarily during the Mahajanapada and Mauryan eras, not Gupta-specific silver currency.\n- Why Option C is wrong: Dinara was the term used for Gupta gold coins, an appellation derived from the Roman coin 'denarius'.\n- Why Option D is wrong: Pana was the standard currency unit and silver punch-marked coin of the Mauryan Empire, frequently cited in Kautilya's Arthashastra.\n- Often confused with: Dinara; remember that Dinara refers specifically to Gupta gold coins, whereas Rupaka refers to Gupta silver coins.",
+    "new_value": "- Major Rock Edict XII explicitly emphasizes tolerance and concord ('samavaya eva sadhuh') among diverse sects, declaring that honoring others' sects elevates one's own, proving Ashoka prioritized social harmony over rigid religious devotion (Assertion A is true).\n- Major Rock Edicts VII and XI demonstrate that Ashoka's 'Dhamma' was a universal ethical code emphasizing moral equity, tolerance, and kindness rather than the state-enforced propagation of theological Buddhist dogma or rituals (Reason R is true).\n- Because Ashoka framed his policy around universal ethical equity rather than sectarian religious devotion, his edicts naturally elevated social harmony as the supreme communal goal; thus, R is the direct causal explanation of A (making Option A correct).\n- Option B is incorrect because R does not merely state an isolated true fact; it provides the fundamental conceptual rationale for why his edicts prioritized social cohesion over religious dogma.\n- Options C and D are incorrect because neither assertion nor reason contains a factual or historical error.\n- Often confused with: Ashoka's personal religious beliefs vs. his state policy of Dhamma. While personally a devout upasaka (Buddhist lay follower) who patronized the Third Buddhist Council at Pataliputra (c. 250 BCE), his official edicts deliberately promoted universal social ethics, not Buddhist theology.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "A common trap is confusing Gupta gold coins (dinaras) with their silver counterparts (rupakas).",
-      "Candidates often mix up Mauryan-era punch-marked denominations (karshapana, pana) with Gupta-era standardized cast/die-struck currency."
+      "Standard explanations often fail to cite specific edicts such as Major Rock Edict XII (religious tolerance and concord) and Major Rock Edict VII.",
+      "Explanations frequently blur the distinction between Ashoka's personal Buddhist faith and his secular, ethical administrative policy of Dhamma."
     ]
   }
 ]
