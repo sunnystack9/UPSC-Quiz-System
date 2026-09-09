@@ -1,15 +1,15 @@
 [
   {
-    "timestamp": "2026-09-09T02:11:08.217604",
+    "timestamp": "2026-09-09T04:10:14.513400",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_075",
+    "question_id": "UPSC_ANC_076",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Core Fact: The Sohagaura Copper-plate inscription (found in Gorakhpur district, Uttar Pradesh) is written in Prakrit in the Brahmi script and belongs to the Mauryan period (3rd century BCE). It records a royal order regarding the establishment of two royal granaries (Kosthagara) to store grains and distribute them during times of distress or drought, making it the earliest known relief/grain preservation record in India. - Why Option B is wrong: The Rummindei (Lumbini) Pillar Edict of Ashoka marks the birthplace of Gautama Buddha and records Ashoka's tax concessions (exempting the village from 'bali' and reducing 'bhaga' to one-eighth), not grain preservation for famines. - Why Option C is wrong: The Prayaga-Prasasti (Allahabad Pillar Inscription), composed by Harishena, describes the conquests, military campaigns, and genealogy of the Gupta emperor Samudragupta. - Why Option D is wrong: The Mehrauli Iron Pillar Inscription in Delhi celebrates the military achievements and conquests of a king named 'Chandra' (identified as Chandragupta II of the Gupta Dynasty) and his devotion to Vishnu. - Often confused with: The Mahasthangarh Inscription (found in Bogra, Bangladesh), which is another contemporary Mauryan record dealing with state famine relief measures and grain distribution; however, Sohagaura specifically features the depiction and explicit order for the construction of two granaries (tri-garbha).",
+    "new_value": "• Specific Fact: The standard historical map depicted in this classic UPSC question shows an all-India empire extending from modern Afghanistan/Kandahar in the northwest to Odisha (Kalinga) in the east and Karnataka in the south, excluding only the extreme southern tip (Tamilakam/Kerala)—the precise extent of the Mauryan Empire under Ashoka (c. 268–232 BCE) verified by his rock and pillar edicts.\n• Why Option A is incorrect: Kanishka's Kushana empire centered on modern-day Afghanistan, Pakistan, Gandhara, and North India extending up to Mathura and parts of Varanasi/Pataliputra, but never penetrated the Deccan, central India, or southern India.\n• Why Option B is incorrect: While Samudragupta conducted a southern campaign (Dakshinapatha expedition), he only extracted tribute from southern rulers (policy of Grahana-Moksha-Anugraha) and did not directly annex or administer peninsular India as part of the core Gupta imperial map.\n• Why Option D is incorrect: On the eve of Harsha’s accession (606 CE), the Kingdom of Thanesar was confined strictly to a small territory around eastern Punjab and Haryana, far smaller than the pan-Indian empire shown.\n• Often confused with: The Gupta Empire under Chandragupta II or Samudragupta, but the Mauryan map distinctly includes the southern Deccan plateau (Karnataka/Andhra region) where major Ashokan rock edicts (e.g., Maski, Brahmagiri) are located.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Prior generic explanations often fail to distinguish between the two Mauryan famine relief records (Sohagaura and Mahasthangarh).",
-      "Explanations frequently omit the specific administrative terms like 'Kosthagara' (granary) which often appear in UPSC Prelims."
+      "The original question relies entirely on a visual map graphic that was missing from the text prompt.",
+      "Previous standard explanations often fail to specify the southern and northwestern geographic markers (such as the exclusion of Tamilakam and inclusion of Kandahar/Karnataka) that distinguish Ashoka's empire from the Kushana or Gupta realms."
     ]
   }
 ]
