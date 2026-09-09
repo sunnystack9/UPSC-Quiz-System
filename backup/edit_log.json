@@ -1,11 +1,14 @@
 [
   {
-    "timestamp": "2026-09-09T19:11:14.880055",
+    "timestamp": "2026-09-09T23:10:06.790836",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_077",
+    "question_id": "UPSC_ANC_078",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Core fact: Major Rock Edicts II and XIII are the only Asokan edicts that specifically list the southern kingdoms outside the Mauryan border (the Sangam kingdoms): the Cholas, Pandyas, Satiyaputa, Keralaputa, and Tambapanni (Sri Lanka).\n- Major Rock Edict II describes medical treatment facilities set up for men and animals in these neighbouring southern regions.\n- Major Rock Edict XIII details the conquest of Dhamma extending to southern borders (Cholas, Pandyas, down to Tamraparni) alongside the five contemporary Hellenistic kings.\n- Why Option A is incorrect: Rock Edict I deals with the prohibition of animal sacrifice and festive gatherings; Rock Edict X condemns personal desire for fame and glory, promoting Dhamma instead.\n- Why Option B is incorrect: Rock Edict XI discusses the gift of Dhamma (Dhamma-dana) as the highest form of charity, containing no political or geographical references to southern kingdoms.\n- Why Option D is incorrect: While Rock Edict II mentions the Sangam kingdoms, Rock Edict XIV serves merely as an epilogue explaining the purpose, distribution, and repetition of the edicts throughout the empire.\n- Often confused with: Pillar Edicts versus Major Rock Edicts; Pillar Edicts summarize Ashoka's domestic Dhamma administration, whereas foreign frontiers and south Indian kingdoms are listed exclusively in Major Rock Edicts II and XIII.",
-    "source": "Import AI Explanation (gemini-3.8-flash)"
+    "new_value": "- Chronological sequence:\n  - Urban culture (IV): Harappan Civilization flourished during the Bronze Age around 2600–1900 BCE, representing the first urbanization in India.\n  - Iron plough (III): Iron technology and implements, including the iron ploughshare, came into widespread agricultural use during the Later Vedic period (c. 1000–600 BCE).\n  - Punch-marked silver coins (II): First metallic currency appeared during the Mahajanapada period in the 6th–5th centuries BCE (second urbanization).\n  - Gold coins (I): First issued regularly by the Indo-Greeks around the 2nd century BCE and issued in large quantities by the Kushanas in the 1st century CE.\n- Option analysis:\n  - Option A (III, IV, I, II) is incorrect because it places the iron plough before Harappan urban culture and inverts the coinage chronology.\n  - Option B (III, IV, II, I) is incorrect because iron plough technology developed long after Harappan Bronze Age urban culture.\n  - Option C (IV, III, I, II) is incorrect because gold coins were introduced centuries after punch-marked silver coins.\n- Often confused with: The introduction of regular gold coins is often confused between the Indo-Greeks (who first introduced them in India) and the Gupta rulers (who issued the largest number of gold coins/Dinars); however, both appeared long after 6th-century BCE punch-marked silver coins.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "No factual errors found in the question or key; revised primarily to establish rigorous historical dates and clarify the distinction between the introduction of punch-marked silver coinage versus gold coinage."
+    ]
   }
 ]
