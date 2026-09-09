@@ -1,15 +1,11 @@
 [
   {
-    "timestamp": "2026-09-09T04:10:14.513400",
+    "timestamp": "2026-09-09T19:11:14.880055",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_076",
+    "question_id": "UPSC_ANC_077",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Specific Fact: The standard historical map depicted in this classic UPSC question shows an all-India empire extending from modern Afghanistan/Kandahar in the northwest to Odisha (Kalinga) in the east and Karnataka in the south, excluding only the extreme southern tip (Tamilakam/Kerala)—the precise extent of the Mauryan Empire under Ashoka (c. 268–232 BCE) verified by his rock and pillar edicts.\n• Why Option A is incorrect: Kanishka's Kushana empire centered on modern-day Afghanistan, Pakistan, Gandhara, and North India extending up to Mathura and parts of Varanasi/Pataliputra, but never penetrated the Deccan, central India, or southern India.\n• Why Option B is incorrect: While Samudragupta conducted a southern campaign (Dakshinapatha expedition), he only extracted tribute from southern rulers (policy of Grahana-Moksha-Anugraha) and did not directly annex or administer peninsular India as part of the core Gupta imperial map.\n• Why Option D is incorrect: On the eve of Harsha’s accession (606 CE), the Kingdom of Thanesar was confined strictly to a small territory around eastern Punjab and Haryana, far smaller than the pan-Indian empire shown.\n• Often confused with: The Gupta Empire under Chandragupta II or Samudragupta, but the Mauryan map distinctly includes the southern Deccan plateau (Karnataka/Andhra region) where major Ashokan rock edicts (e.g., Maski, Brahmagiri) are located.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "The original question relies entirely on a visual map graphic that was missing from the text prompt.",
-      "Previous standard explanations often fail to specify the southern and northwestern geographic markers (such as the exclusion of Tamilakam and inclusion of Kandahar/Karnataka) that distinguish Ashoka's empire from the Kushana or Gupta realms."
-    ]
+    "new_value": "- Core fact: Major Rock Edicts II and XIII are the only Asokan edicts that specifically list the southern kingdoms outside the Mauryan border (the Sangam kingdoms): the Cholas, Pandyas, Satiyaputa, Keralaputa, and Tambapanni (Sri Lanka).\n- Major Rock Edict II describes medical treatment facilities set up for men and animals in these neighbouring southern regions.\n- Major Rock Edict XIII details the conquest of Dhamma extending to southern borders (Cholas, Pandyas, down to Tamraparni) alongside the five contemporary Hellenistic kings.\n- Why Option A is incorrect: Rock Edict I deals with the prohibition of animal sacrifice and festive gatherings; Rock Edict X condemns personal desire for fame and glory, promoting Dhamma instead.\n- Why Option B is incorrect: Rock Edict XI discusses the gift of Dhamma (Dhamma-dana) as the highest form of charity, containing no political or geographical references to southern kingdoms.\n- Why Option D is incorrect: While Rock Edict II mentions the Sangam kingdoms, Rock Edict XIV serves merely as an epilogue explaining the purpose, distribution, and repetition of the edicts throughout the empire.\n- Often confused with: Pillar Edicts versus Major Rock Edicts; Pillar Edicts summarize Ashoka's domestic Dhamma administration, whereas foreign frontiers and south Indian kingdoms are listed exclusively in Major Rock Edicts II and XIII.",
+    "source": "Import AI Explanation (gemini-3.8-flash)"
   }
 ]
