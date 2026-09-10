@@ -1,15 +1,14 @@
 [
   {
-    "timestamp": "2026-09-10T02:12:09.569210",
+    "timestamp": "2026-09-10T04:10:11.302222",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_067",
+    "question_id": "UPSC_ANC_068",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Specific Fact/Geographical Basis: Unlike the vast, contiguous alluvial plains of the Indo-Gangetic basin that could sustain massive centralized empires (like the Mauryas or Guptas), Peninsular India is geographically fragmented into small river valleys (e.g., Kaveri, Krishna, Vaigai) separated by plateaus, forests, and rocky terrain. This lack of vast, continuous fertile tracts limited large-scale agrarian surplus extraction, fostering localized, river-basin-centric kingdoms (e.g., Cheras, Cholas, Pandyas, Pallavas).\n- Why Option A is incorrect: South India was rich in iron and other mineral deposits; the southern Megalithic cultures (circa 1000 BCE onwards) are well-documented for abundant iron weapons, tools, and metallurgy.\n- Why Option B is incorrect: Social divisions (varna and jati structures) were prevalent throughout the subcontinent, including North India, and did not uniquely prevent empire-building in the South.\n- Why Option D is incorrect: Manpower was not scarce; river deltas like the Kaveri supported dense populations that fueled powerful armies and influential merchant guilds (such as the Ayyavole and Manigramam).\n- Often confused with: The imperial expansions of the Cholas, Chalukyas, or Rashtrakutas. However, these states relied on tributary, segmentary, or loose nadu/mandalam networks rather than the deeply centralized, continuous territorial bureaucracy characteristic of large northern plain empires.",
+    "new_value": "• Core Fact: Linguistically, 'Aryan' derives from the Sanskrit root 'ārya' (noble/free) and is defined in historical linguistics (pioneered by Max Müller in the 19th century) strictly as a linguistic group speaking Indo-European languages, not a biological or biological-racial category.\n• Why Option A is incorrect: Modern historical and genetic consensus rejects 'Aryan' as an ethnic or genetic group; speakers of Indo-Aryan languages were genetically diverse populations rather than a monolithic ethnicity.\n• Why Option B is incorrect: While early pastoralist tribes speaking Indo-European languages were pastoral semi-nomads, the defining attribute of the term 'Aryan' itself is their common linguistic affiliation, not their nomadic mode of subsistence.\n• Why Option D is incorrect: The concept of an 'Aryan superior race' was a 19th–20th-century pseudoscientific myth propagated by European racial theorists (such as Arthur de Gobineau and later the Nazi regime) without scientific or historical validity.\n• Often confused with: 'Racial group' — Max Müller explicitly clarified in 1888 that 'Aryan' applies strictly to language and that an 'Aryan race' makes as much sense as a 'brachycephalic dictionary'.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Prior explanations often fail to contrast peninsular topography directly with the Indo-Gangetic plain, which is the core geographical rationale behind state-formation models in ancient Indian history.",
-      "Option A is frequently misidentified by students because iron is heavily associated with Magadha's rise, leading to the false assumption that southern India lacked iron reserves."
+      "Common student misconception conflating linguistic categorization with racial or ethnic groupings due to 20th-century political misuse."
     ]
   }
 ]
