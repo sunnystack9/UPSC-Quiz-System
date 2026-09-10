@@ -1,27 +1,14 @@
 [
   {
-    "timestamp": "2026-09-10T04:10:11.302222",
+    "timestamp": "2026-09-10T07:17:38.464681",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_068",
+    "question_id": "UPSC_ANC_062",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Core Fact: Linguistically, 'Aryan' derives from the Sanskrit root 'ārya' (noble/free) and is defined in historical linguistics (pioneered by Max Müller in the 19th century) strictly as a linguistic group speaking Indo-European languages, not a biological or biological-racial category.\n• Why Option A is incorrect: Modern historical and genetic consensus rejects 'Aryan' as an ethnic or genetic group; speakers of Indo-Aryan languages were genetically diverse populations rather than a monolithic ethnicity.\n• Why Option B is incorrect: While early pastoralist tribes speaking Indo-European languages were pastoral semi-nomads, the defining attribute of the term 'Aryan' itself is their common linguistic affiliation, not their nomadic mode of subsistence.\n• Why Option D is incorrect: The concept of an 'Aryan superior race' was a 19th–20th-century pseudoscientific myth propagated by European racial theorists (such as Arthur de Gobineau and later the Nazi regime) without scientific or historical validity.\n• Often confused with: 'Racial group' — Max Müller explicitly clarified in 1888 that 'Aryan' applies strictly to language and that an 'Aryan race' makes as much sense as a 'brachycephalic dictionary'.",
+    "new_value": "- Specific Fact: The Greeks (beginning with Alexander and later continued by the Indo-Greeks in the 2nd century BCE) first introduced military governorship in India by appointing military commanders known as 'strategos' to govern territories.\n- Why Option B is wrong: The Shakas utilized the Satrap (Kshatrapa) system of provincial administration derived from the Achaemenid model, which came after the Greek military governorship system.\n- Why Option C is wrong: The Parthians (Pahlavas) ruled after the Indo-Greeks and also utilized satrapies and subordinated military chiefs, but they were not the first to introduce it.\n- Why Option D is wrong: The Mughals ruled medieval India (16th to 18th centuries CE) and established the Subahdari and Mansabdari systems, centuries after the ancient period.\n- Often confused with: The Shaka 'Kshatrapa' (Satrap) system. The key distinction is that while Shaka Kshatrapas functioned largely as hereditary provincial governors with civil-cum-military power, the Indo-Greek 'strategos' was strictly a military governor appointed explicitly for garrison command and frontier control.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Common student misconception conflating linguistic categorization with racial or ethnic groupings due to 20th-century political misuse."
-    ]
-  },
-  {
-    "timestamp": "2026-09-10T04:11:06.493292",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_069",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Core Fact: Tamralipti (modern Tamluk, West Bengal) was the principal sea and riverine port in eastern India during the Gupta Empire, directly connected via the Ganga to imperial centers like Pataliputra and handling trade with Sri Lanka, China, and Southeast Asia. The 5th-century Chinese pilgrim Faxian embarked on his return voyage from this port.\n- Why Option B (Broach) is incorrect: Broach (ancient Barygaza in Gujarat) was the chief port of western India during the Satavahana, Western Kshatrapa, and earlier Indo-Roman trade eras; though active, it did not serve as the primary conduit for the Gangetic Gupta heartland.\n- Why Option C (Kalyan) is incorrect: Kalyan (near modern Mumbai) was an ancient western Deccan port predominantly patronized by the Satavahanas for trade across the western coast, not the North Indian Gupta riverine network.\n- Why Option D (Cambray) is incorrect: Cambray (Khambhat, Gujarat) rose to prominence much later during the early medieval and medieval periods under the Chaulukyas and the Gujarat Sultanate.\n- Often confused with: Broach (Bharuch). Broach commanded the western Arabian Sea maritime routes to the Mediterranean and Persian Gulf, whereas Tamralipti dominated the Bay of Bengal routes to Southeast Asia and served as the direct maritime outlet of the North Indian plains.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Original explanations often omit the specific historical testimony (such as Faxian's accounts) confirming Tamralipti's direct role under the Guptas.",
-      "Explanations frequently fail to distinguish between western coast ports (Broach, Kalyan) and eastern riverine ports connected directly to the Gupta core territory."
+      "Commonly confused between the Indo-Greek 'strategos' (military governor) and the Indo-Scythian/Shaka 'Kshatrapa' (provincial satrap) system."
     ]
   }
 ]
