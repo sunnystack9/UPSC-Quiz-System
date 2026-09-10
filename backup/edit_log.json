@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-10T07:17:38.464681",
+    "timestamp": "2026-09-10T16:11:02.232503",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_062",
+    "question_id": "UPSC_ANC_070",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Specific Fact: The Greeks (beginning with Alexander and later continued by the Indo-Greeks in the 2nd century BCE) first introduced military governorship in India by appointing military commanders known as 'strategos' to govern territories.\n- Why Option B is wrong: The Shakas utilized the Satrap (Kshatrapa) system of provincial administration derived from the Achaemenid model, which came after the Greek military governorship system.\n- Why Option C is wrong: The Parthians (Pahlavas) ruled after the Indo-Greeks and also utilized satrapies and subordinated military chiefs, but they were not the first to introduce it.\n- Why Option D is wrong: The Mughals ruled medieval India (16th to 18th centuries CE) and established the Subahdari and Mansabdari systems, centuries after the ancient period.\n- Often confused with: The Shaka 'Kshatrapa' (Satrap) system. The key distinction is that while Shaka Kshatrapas functioned largely as hereditary provincial governors with civil-cum-military power, the Indo-Greek 'strategos' was strictly a military governor appointed explicitly for garrison command and frontier control.",
+    "new_value": "- Specific Reference: According to R.S. Sharma's 'Ancient India' (NCERT), the collapse of the Roman Empire and the disruption of overland routes by the Hunas drastically curtailed India's lucrative western commerce, leading Indian merchants from the 6th century AD to rely heavily on maritime trade with Southeast Asia (historically referred to as Suvarnabhumi or Suvarnadvipa).\n- Why Option A is incorrect: Indian trade with East Africa (such as the Kingdom of Aksum) was tied to the Roman Red Sea trade network, which shrank simultaneously with the decline of Roman purchasing power.\n- Why Option B is incorrect: The collapse of the Western Roman Empire ushered in the early Middle Ages in Western Europe, characterized by de-urbanization, feudal demonetization, and an absence of demand for Indian luxury goods.\n- Why Option D is incorrect: Overland routes through the Middle East were politically unstable and heavily taxed due to recurring Byzantine-Sasanian wars, making expansion in that direction far less lucrative than maritime routes to the east.\n- Often confused with: Middle Eastern trade (Option D), because Arab and Persian merchants later dominated the Indian Ocean network from the 8th century AD onward; however, during the 4th to 7th centuries AD, it was Southeast Asia that absorbed Indian mercantile expansion, leading to deep cultural and religious interactions.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Commonly confused between the Indo-Greek 'strategos' (military governor) and the Indo-Scythian/Shaka 'Kshatrapa' (provincial satrap) system."
+      "Historical inaccuracy in the question stem: The Hunnic invasions of Europe occurred in the 4th and 5th centuries AD (culminating in the fall of the Western Roman Empire in 476 AD), not the 3rd century AD."
     ]
   }
 ]
