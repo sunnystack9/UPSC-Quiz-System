@@ -1,14 +1,15 @@
 [
   {
-    "timestamp": "2026-09-10T16:11:02.232503",
+    "timestamp": "2026-09-11T00:14:47.701597",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_070",
+    "question_id": "UPSC_ANC_071",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Specific Reference: According to R.S. Sharma's 'Ancient India' (NCERT), the collapse of the Roman Empire and the disruption of overland routes by the Hunas drastically curtailed India's lucrative western commerce, leading Indian merchants from the 6th century AD to rely heavily on maritime trade with Southeast Asia (historically referred to as Suvarnabhumi or Suvarnadvipa).\n- Why Option A is incorrect: Indian trade with East Africa (such as the Kingdom of Aksum) was tied to the Roman Red Sea trade network, which shrank simultaneously with the decline of Roman purchasing power.\n- Why Option B is incorrect: The collapse of the Western Roman Empire ushered in the early Middle Ages in Western Europe, characterized by de-urbanization, feudal demonetization, and an absence of demand for Indian luxury goods.\n- Why Option D is incorrect: Overland routes through the Middle East were politically unstable and heavily taxed due to recurring Byzantine-Sasanian wars, making expansion in that direction far less lucrative than maritime routes to the east.\n- Often confused with: Middle Eastern trade (Option D), because Arab and Persian merchants later dominated the Indian Ocean network from the 8th century AD onward; however, during the 4th to 7th centuries AD, it was Southeast Asia that absorbed Indian mercantile expansion, leading to deep cultural and religious interactions.",
+    "new_value": "- Chronological order of their visits:\n  * Megasthenes (III): Greek ambassador of Seleucus I Nicator to the Mauryan court of Chandragupta Maurya around 302–298 BCE.\n  * Fa-Hien (I): Chinese Buddhist monk who visited northern India during the Gupta reign of Chandragupta II around 399–412 CE.\n  * Hieun-Tsang (IV): Chinese pilgrim who traveled across India during the reign of King Harshavardhana around 629–645 CE.\n  * I-Tsing (II): Chinese traveler who studied at Nalanda and visited India around 671–695 CE, shortly after Xuanzang.\n- Why other options are incorrect:\n  * Option A places I-Tsing (late 7th century CE) before Hieun-Tsang (mid-7th century CE).\n  * Option C and Option D incorrectly place Fa-Hien (5th century CE) before Megasthenes (4th century BCE).\n- Often confused with: The order of Chinese Buddhist travelers—remember the mnemonic 'F-H-I' (Fa-Hien in 5th c., Hieun-Tsang in mid-7th c., I-Tsing in late 7th c.) to easily distinguish their relative chronology.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Historical inaccuracy in the question stem: The Hunnic invasions of Europe occurred in the 4th and 5th centuries AD (culminating in the fall of the Western Roman Empire in 476 AD), not the 3rd century AD."
+      "Aspirants frequently confuse the sequence of Hieun-Tsang and I-Tsing because both visited in the 7th century CE.",
+      "Transliterations of names vary across sources (e.g., Faxian, Xuanzang, Yijing), which can occasionally cause confusion."
     ]
   }
 ]
