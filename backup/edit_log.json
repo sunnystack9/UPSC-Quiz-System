@@ -1,15 +1,15 @@
 [
   {
-    "timestamp": "2026-09-11T02:11:06.074225",
+    "timestamp": "2026-09-11T04:10:59.289231",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_073",
+    "question_id": "UPSC_ANC_063",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Correct Answer A (Bactria): In the early second century BC (around 190–180 BC), Demetrius I, ruler of the Greco-Bactrian kingdom centered in northern Afghanistan (the fertile Oxus river basin), pushed south across the Hindu Kush into the northwestern Indian subcontinent, establishing the Indo-Greek realm. • Why B is incorrect: Scythia refers to the domain of the nomadic Indo-Scythians (Sakas), who entered India later (around the 1st century BC) and displaced Indo-Greek rule, rather than establishing the original Greek kingdom. • Why C is incorrect: Zedrasia (Gedrosia) was the arid coastal satrapy corresponding to modern Makran/Balochistan in southwestern Pakistan and southeastern Iran, far south of northern Afghanistan. • Why D is incorrect: Aria was an ancient satrapy centered around the Hari River valley (modern Herat in western Afghanistan), not the power base of northern Afghanistan where the Indo-Greek state originated. • Often confused with: Greco-Bactrian Kingdom vs. Indo-Greek Kingdom — Greco-Bactria was the original Hellenistic state strictly north of the Hindu Kush, whereas the term Indo-Greeks specifically designates the Hellenistic rulers who expanded south of the Hindu Kush into Gandhara and the Punjab.",
+    "new_value": "- Alexander invaded northwest India in 326 BCE during the reign of the Nanda dynasty in Magadha, ruled at the time by Dhana Nanda (identified as Agrammes or Xandrames by classical Greek historians).\n- Maurya (Option B) is incorrect because Chandragupta Maurya defeated Dhana Nanda and established the Maurya Empire only after Alexander's campaign, around 321–322 BCE.\n- Sunga (Option C) is incorrect because Pushyamitra Sunga founded this dynasty around 185 BCE after assassinating the last Mauryan ruler, Brihadratha, over 140 years after Alexander's invasion.\n- Kanva (Option D) is incorrect because Vasudeva Kanva established the Kanva dynasty around 73 BCE by deposing the last Sunga king, Devabhuti, centuries after Alexander.\n- Often confused with: The Maurya dynasty, because Chandragupta Maurya famously fought Alexander's general, Seleucus I Nicator (c. 305 BCE), leading candidates to mistakenly believe the Mauryas were in power during Alexander's invasion itself.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Option C contains an archaic or corrupted spelling ('Zedrasia' instead of 'Gedrosia').",
-      "Historically, Bactria itself is the Greco-Bactrian home territory; the question conflates the geographical region of northern Afghanistan (Bactria) with the resultant 'Indo-Greek' kingdoms south of the Hindu Kush."
+      "Commonly misses the precise chronological marker of Alexander's invasion (326 BCE) versus the founding of the Maurya Empire (c. 322–321 BCE).",
+      "Candidates frequently confuse Alexander's invasion with the later Maurya-Seleucid conflict (c. 305 BCE)."
     ]
   }
 ]
