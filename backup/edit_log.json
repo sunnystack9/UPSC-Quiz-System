@@ -1,15 +1,15 @@
 [
   {
-    "timestamp": "2026-09-11T04:10:59.289231",
+    "timestamp": "2026-09-11T05:09:30.980011",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_063",
+    "question_id": "UPSC_ANC_064",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Alexander invaded northwest India in 326 BCE during the reign of the Nanda dynasty in Magadha, ruled at the time by Dhana Nanda (identified as Agrammes or Xandrames by classical Greek historians).\n- Maurya (Option B) is incorrect because Chandragupta Maurya defeated Dhana Nanda and established the Maurya Empire only after Alexander's campaign, around 321–322 BCE.\n- Sunga (Option C) is incorrect because Pushyamitra Sunga founded this dynasty around 185 BCE after assassinating the last Mauryan ruler, Brihadratha, over 140 years after Alexander's invasion.\n- Kanva (Option D) is incorrect because Vasudeva Kanva established the Kanva dynasty around 73 BCE by deposing the last Sunga king, Devabhuti, centuries after Alexander.\n- Often confused with: The Maurya dynasty, because Chandragupta Maurya famously fought Alexander's general, Seleucus I Nicator (c. 305 BCE), leading candidates to mistakenly believe the Mauryas were in power during Alexander's invasion itself.",
+    "new_value": "• Core Fact: According to Class 6 and Class 11 NCERT (Ancient India), Jainism placed an extreme emphasis on ahimsa (non-injury to all living beings, including invisible microorganisms). Because ploughing and harvesting inevitably kill insects, worms, and small pests, farmers found it practically impossible to observe these rigorous vows without abandoning their livelihood. Consequently, Jainism was primarily embraced by traders and merchants rather than agriculturalists.\n• Why R correctly explains A: The direct causal link between the occupational reality of agriculture (killing pests/insects during tillage) and the doctrinal rigidity of ahimsa explains precisely why agricultural communities could not adopt the religion.\n• Why Option B is incorrect: It fails to recognize this direct cause-and-effect relationship; Reason (R) is the explicit, foundational reason for Assertion (A).\n• Why Option C is incorrect: Reason (R) is factually accurate regarding agricultural practices and the Jaina perspective on tilling soil.\n• Why Option D is incorrect: Assertion (A) is a well-documented historical phenomenon corroborated by primary Jaina texts and canonical traditions.\n• Often confused with: Buddhism's spread among commoners and farmers. Unlike Jainism, Buddhism advocated the 'Middle Path' (Majjhima Patipada), avoiding extreme self-mortification and hyper-strict interpretations of ahimsa, which allowed wider acceptance among agrarian populations.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Commonly misses the precise chronological marker of Alexander's invasion (326 BCE) versus the founding of the Maurya Empire (c. 322–321 BCE).",
-      "Candidates frequently confuse Alexander's invasion with the later Maurya-Seleucid conflict (c. 305 BCE)."
+      "Prior explanations often fail to explicitly cite the standard NCERT Ancient India source material.",
+      "Explanations frequently omit contrasting Jainism's strict interpretation of Ahimsa with Buddhism's Middle Path, which is a common conceptual trap in UPSC exams."
     ]
   }
 ]
