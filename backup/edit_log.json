@@ -1,27 +1,14 @@
 [
   {
-    "timestamp": "2026-09-11T10:11:17.696333",
+    "timestamp": "2026-09-11T13:11:08.657454",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_065",
+    "question_id": "UPSC_ANC_058",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Specific Fact/Evidence: Assertion (A) is true because the earliest roots of Indian feudal vassalage arose from military expeditions where conquered kings were reinstated as tributary chiefs or feudatories (samantas), prominently recorded in Samudragupta's 4th-century CE Prayag Prashasti (the policy of 'grahan-moksha-anugraha'). Reason (R) is also true because the Gupta period (c. 319–550 CE) witnessed the widespread proliferation of land grants (agrahara and brahmadeya) with fiscal and judicial immunities, accelerating feudal decentralization.\n- Why R does not explain A: The chronological expansion of feudal tendencies during the Gupta age describes a stage of growth and consolidation, not the initial cause or origin of the feudal system; thus, R does not explain A.\n- Why Option A is incorrect: While both statements are historically accurate, R is a description of subsequent expansion rather than the causal origin asserted in A.\n- Why Option C is incorrect: Reason (R) is factually correct, as evidenced by numerous epigraphic records showing widespread delegation of revenue and administrative powers to local elites during Gupta rule.\n- Why Option D is incorrect: Assertion (A) is factually correct because military campaigns systematically generated the subordinate ruler (feudatory) hierarchy that initiated feudal governance in early India.\n- Often confused with: European feudalism vs. Indian feudalism. European feudalism originated primarily from reciprocal contractual military service (fiefs for knights), whereas Indian feudalism largely evolved through unilateral royal land charters granting revenue and administrative rights, accompanied by the assimilation of defeated rulers as samantas.",
+    "new_value": "- Core Fact: Harshavardhana regularly convened the Quinquennial Assembly (Maha Moksha Parishad) at Prayag (confluence of Ganga and Yamuna), where he gave lavish alms to ascetics of all religions, including followers of Buddha, Shiva, and Surya, demonstrating eclecticism rather than an exclusive Buddhist agenda. Thus, Assertion (A) is true, but Reason (R) is false.\n- Why Option A is incorrect: Reason (R) is factually incorrect because Harsha's goal at Prayag was universal charity and multifaith religious giving, not the exclusive propagation of Mahayana Buddhism.\n- Why Option B is incorrect: It incorrectly treats Reason (R) as a true statement.\n- Why Option D is incorrect: It treats Assertion (A) as false, whereas historical accounts by Xuanzang confirm Harsha regularly held the assembly at Prayag (the sixth one recorded during Xuanzang's visit in 643 CE).\n- Often confused with: The Kannauj Assembly (643 CE), which was specifically convened by Harsha to honor Xuanzang and propagate the Mahayana sect of Buddhism, unlike the Prayag Assembly which was ecumenical and philanthropic.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Previous explanations often fail to specify the historical evidence connecting military campaigns to feudal origins (such as Harishena's Prayag Prashasti and Samudragupta's tribute-collecting policies).",
-      "Standard explanations frequently treat the growth of land grants as the sole origin, confusing the origin (military/political vassalage) with its later expansion mechanism (agrarian land grants)."
-    ]
-  },
-  {
-    "timestamp": "2026-09-11T10:12:30.808698",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_066",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Fact/Source: Ashoka annexed Kalinga in his 8th regnal year (c. 261 BCE), as documented in Major Rock Edict XIII. Kalinga held immense strategic and economic value because it commanded both maritime routes to Southeast Asia and overland routes connecting the Gangetic plains to peninsular South India, making Reason (R) the direct geopolitical motivation for Assertion (A).\n- Why Option B is incorrect: R provides the precise economic and geopolitical rationale behind the annexation; it is not merely an unrelated true statement.\n- Why Option C is incorrect: R is historically factually correct; Kalinga's ports (such as Tamralipti nearby and Manikapatna) and coastal geography dominated major trade arteries toward the South.\n- Why Option D is incorrect: A is historically accurate, as Ashoka's successful military campaign incorporated Kalinga into the empire as a distinct province with its headquarters at Tosali.\n- Often confused with: The post-war transformation (Ashoka adopting Dhamma and abandoning Digvijaya for Dhammavijaya) is often mistakenly thought to be the context of the war itself; the war was driven purely by traditional imperial expansion and trade corridor control.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Standard explanations often fail to explicitly articulate Kalinga's specific geographic role as a trade bottleneck connecting northern India to southern and maritime domains, confusing imperial motives with Ashoka's later moral shift."
+      "Commonly confused with the Kannauj Assembly, which was specifically organized to promote Mahayana Buddhism, leading candidates to mistakenly mark Reason (R) as true."
     ]
   }
 ]
