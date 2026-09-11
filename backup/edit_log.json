@@ -1,14 +1,11 @@
 [
   {
-    "timestamp": "2026-09-11T21:09:21.972624",
+    "timestamp": "2026-09-11T22:09:45.295738",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_059",
+    "question_id": "UPSC_ANC_060",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Core fact: Rajaraja I (r. 985–1014 CE) invaded Ceylon (Sri Lanka) around 993 CE, defeated King Mahinda V, destroyed the capital Anuradhapura, and annexed its northern half as a Chola province named Mummudi Chola Mandalam.\n• Option A is incorrect: Aditya I (r. 871–907 CE) expanded the Chola kingdom by defeating the Pallava ruler Aparajita and the Western Gangas, but did not mount a naval campaign against Ceylon.\n• Option C is incorrect: Rajendra I (r. 1014–1044 CE) completed the conquest of the entirety of Ceylon in 1017 CE, capturing the Sinhala king Mahinda V along with the royal jewels, rather than initiating the first conquest.\n• Option D is incorrect: Vijayalaya (r. c. 850–871 CE) re-established the imperial Chola dynasty by capturing Thanjavur from the Muttaraiyars; his realm was confined to the Kaveri delta.\n• Often confused with: Rajendra I vs. Rajaraja I — Rajaraja I conquered northern Ceylon (setting up Polonnaruwa as the administrative seat), whereas his son Rajendra I extended Chola control to the whole island.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Ambiguity in historical phrasing: Rajaraja I conquered northern Ceylon (c. 993 CE), while Rajendra I conquered the entire island (1017 CE), leading to frequent confusion between Options B and C."
-    ]
+    "new_value": "- Supporting fact: The Fourth Buddhist Council was held at Kundalvana (Kashmir) in the 1st century CE under the patronage of Kushan King Kanishka; it was presided over by the scholar-monk Vasumitra, with Asvaghosha serving as the vice-president.\n- Why Option A is incorrect: Parsva was a senior Buddhist monk who advised Kanishka to convene the Fourth Council, but he did not preside over it.\n- Why Option B is incorrect: Nagarjuna was the founder of the Madhyamaka school of Mahayana Buddhism and a prominent philosopher of the era, but he did not preside over this council.\n- Why Option C is incorrect: Sudraka was an ancient Indian dramatist and king celebrated as the author of the classical Sanskrit play 'Mrichchhakatika' ('The Little Clay Cart'), having no connection to presiding over Buddhist councils.\n- Often confused with: Asvaghosha, who participated prominently in the exact same council under Kanishka, but served specifically as the vice-president (deputy) rather than the president.",
+    "source": "Import AI Explanation (gemini-3.8-flash)"
   }
 ]
