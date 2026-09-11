@@ -1,27 +1,15 @@
 [
   {
-    "timestamp": "2026-09-11T00:14:47.701597",
+    "timestamp": "2026-09-11T02:11:06.074225",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_071",
+    "question_id": "UPSC_ANC_073",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Chronological order of their visits:\n  * Megasthenes (III): Greek ambassador of Seleucus I Nicator to the Mauryan court of Chandragupta Maurya around 302–298 BCE.\n  * Fa-Hien (I): Chinese Buddhist monk who visited northern India during the Gupta reign of Chandragupta II around 399–412 CE.\n  * Hieun-Tsang (IV): Chinese pilgrim who traveled across India during the reign of King Harshavardhana around 629–645 CE.\n  * I-Tsing (II): Chinese traveler who studied at Nalanda and visited India around 671–695 CE, shortly after Xuanzang.\n- Why other options are incorrect:\n  * Option A places I-Tsing (late 7th century CE) before Hieun-Tsang (mid-7th century CE).\n  * Option C and Option D incorrectly place Fa-Hien (5th century CE) before Megasthenes (4th century BCE).\n- Often confused with: The order of Chinese Buddhist travelers—remember the mnemonic 'F-H-I' (Fa-Hien in 5th c., Hieun-Tsang in mid-7th c., I-Tsing in late 7th c.) to easily distinguish their relative chronology.",
+    "new_value": "• Correct Answer A (Bactria): In the early second century BC (around 190–180 BC), Demetrius I, ruler of the Greco-Bactrian kingdom centered in northern Afghanistan (the fertile Oxus river basin), pushed south across the Hindu Kush into the northwestern Indian subcontinent, establishing the Indo-Greek realm. • Why B is incorrect: Scythia refers to the domain of the nomadic Indo-Scythians (Sakas), who entered India later (around the 1st century BC) and displaced Indo-Greek rule, rather than establishing the original Greek kingdom. • Why C is incorrect: Zedrasia (Gedrosia) was the arid coastal satrapy corresponding to modern Makran/Balochistan in southwestern Pakistan and southeastern Iran, far south of northern Afghanistan. • Why D is incorrect: Aria was an ancient satrapy centered around the Hari River valley (modern Herat in western Afghanistan), not the power base of northern Afghanistan where the Indo-Greek state originated. • Often confused with: Greco-Bactrian Kingdom vs. Indo-Greek Kingdom — Greco-Bactria was the original Hellenistic state strictly north of the Hindu Kush, whereas the term Indo-Greeks specifically designates the Hellenistic rulers who expanded south of the Hindu Kush into Gandhara and the Punjab.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Aspirants frequently confuse the sequence of Hieun-Tsang and I-Tsing because both visited in the 7th century CE.",
-      "Transliterations of names vary across sources (e.g., Faxian, Xuanzang, Yijing), which can occasionally cause confusion."
-    ]
-  },
-  {
-    "timestamp": "2026-09-11T00:14:54.571671",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_072",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Core fact: In the early 6th century BCE, at the beginning of the Mahajanapada period, Kashi was initially the most powerful kingdom/city-state, with its capital Varanasi playing a dominant political and economic role across the Gangetic plain (as recorded in early Buddhist texts/Jatakas).\n- Why A is incorrect: Gandhara (capital Taxila) was a prominent northwestern frontier mahajanapada and center of trade, but it did not command supreme political dominance in the Indian subcontinent.\n- Why B is incorrect: Kamboja, located near the Hindukush region, was famous for its cavalry and trade horses rather than being the leading political power.\n- Why D is incorrect: Magadha eventually emerged as the undisputed imperial superpower of northern India under the Haryanka, Shishunaga, Nanda, and Maurya dynasties, but its rise occurred later through the conquests of Bimbisara and Ajatashatru, not at the very start of the 6th century BCE.\n- Often confused with: Magadha. Distinguish between 'initially' (Kashi was dominant early on, later absorbed by Kosala) versus 'ultimately' (Magadha achieved final supremacy over all other mahajanapadas).",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Many standard answer keys lack an explicit distinction between initial 6th century BCE supremacy (Kashi) and eventual long-term hegemony (Magadha), leading students to mistakenly select Magadha."
+      "Option C contains an archaic or corrupted spelling ('Zedrasia' instead of 'Gedrosia').",
+      "Historically, Bactria itself is the Greco-Bactrian home territory; the question conflates the geographical region of northern Afghanistan (Bactria) with the resultant 'Indo-Greek' kingdoms south of the Hindu Kush."
     ]
   }
 ]
