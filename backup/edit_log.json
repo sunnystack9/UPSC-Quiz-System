@@ -1,17 +1,15 @@
 [
   {
-    "timestamp": "2026-09-11T07:16:10.401642",
+    "timestamp": "2026-09-11T10:11:17.696333",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_056",
+    "question_id": "UPSC_ANC_065",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Specific facts supporting the correct archaeological matches:\n  - Lothal (Gujarat): Known for the world's earliest identified tidal dockyard (Match A-2).\n  - Kalibangan (Rajasthan): Yielded the earliest known evidence of a furrowed / ploughed agricultural field dating to the Early Harappan phase (Match B-1).\n  - Dholavira (Gujarat): Famous for a monumental ten-character Harappan signboard inscription found near the northern gateway of the citadel (Match C-4).\n  - Banawali (Haryana): Yielded a well-preserved terracotta model/replica of a plough (Match D-3).\n- Why other pairings fail:\n  - Pairing Kalibangan with a dockyard (Options A and C) is incorrect because Kalibangan is an inland site on the dry bed of the Ghaggar river, lacking maritime infrastructure.\n  - Pairing Lothal with a ploughed field (Options A and C) is incorrect because agricultural furrow marks were uniquely excavated at Kalibangan, whereas Lothal was primarily an industrial/port town.\n  - Pairing Banawali with the ten-sign inscription (Options A, B, C, D as printed) is incorrect because the famous ten-sign inscription was discovered specifically at Dholavira, not Banawali.\n- Often confused with:\n  - Ploughed field vs. Terracotta plough replica: The actual physical ploughed field with criss-cross furrows was discovered at Kalibangan; the terracotta toy/replica of a plough was discovered at Banawali.",
+    "new_value": "- Specific Fact/Evidence: Assertion (A) is true because the earliest roots of Indian feudal vassalage arose from military expeditions where conquered kings were reinstated as tributary chiefs or feudatories (samantas), prominently recorded in Samudragupta's 4th-century CE Prayag Prashasti (the policy of 'grahan-moksha-anugraha'). Reason (R) is also true because the Gupta period (c. 319–550 CE) witnessed the widespread proliferation of land grants (agrahara and brahmadeya) with fiscal and judicial immunities, accelerating feudal decentralization.\n- Why R does not explain A: The chronological expansion of feudal tendencies during the Gupta age describes a stage of growth and consolidation, not the initial cause or origin of the feudal system; thus, R does not explain A.\n- Why Option A is incorrect: While both statements are historically accurate, R is a description of subsequent expansion rather than the causal origin asserted in A.\n- Why Option C is incorrect: Reason (R) is factually correct, as evidenced by numerous epigraphic records showing widespread delegation of revenue and administrative powers to local elites during Gupta rule.\n- Why Option D is incorrect: Assertion (A) is factually correct because military campaigns systematically generated the subordinate ruler (feudatory) hierarchy that initiated feudal governance in early India.\n- Often confused with: European feudalism vs. Indian feudalism. European feudalism originated primarily from reciprocal contractual military service (fiefs for knights), whereas Indian feudalism largely evolved through unilateral royal land charters granting revenue and administrative rights, accompanied by the assimilation of defeated rulers as samantas.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "List I Site D is corrupted as '——— (site with Banawali inscription)' instead of 'Banawali'.",
-      "List II Item 4 erroneously includes the word 'Banawali' ('ten large-sized signs of the Banawali Harappan script'), giving away the name while misattributing the Dholavira signboard.",
-      "Option B contains a typo ('C-2' instead of 'C-4') and incorrectly maps Banawali to 4 rather than 3 (the correct sequence is A-2, B-1, C-4, D-3).",
-      "Options A and C are exact duplicates ('A-1, B-2, C-3, D-4')."
+      "Previous explanations often fail to specify the historical evidence connecting military campaigns to feudal origins (such as Harishena's Prayag Prashasti and Samudragupta's tribute-collecting policies).",
+      "Standard explanations frequently treat the growth of land grants as the sole origin, confusing the origin (military/political vassalage) with its later expansion mechanism (agrarian land grants)."
     ]
   }
 ]
