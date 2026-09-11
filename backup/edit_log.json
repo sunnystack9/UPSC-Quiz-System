@@ -11,5 +11,17 @@
       "Previous explanations often fail to specify the historical evidence connecting military campaigns to feudal origins (such as Harishena's Prayag Prashasti and Samudragupta's tribute-collecting policies).",
       "Standard explanations frequently treat the growth of land grants as the sole origin, confusing the origin (military/political vassalage) with its later expansion mechanism (agrarian land grants)."
     ]
+  },
+  {
+    "timestamp": "2026-09-11T10:12:30.808698",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_066",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Fact/Source: Ashoka annexed Kalinga in his 8th regnal year (c. 261 BCE), as documented in Major Rock Edict XIII. Kalinga held immense strategic and economic value because it commanded both maritime routes to Southeast Asia and overland routes connecting the Gangetic plains to peninsular South India, making Reason (R) the direct geopolitical motivation for Assertion (A).\n- Why Option B is incorrect: R provides the precise economic and geopolitical rationale behind the annexation; it is not merely an unrelated true statement.\n- Why Option C is incorrect: R is historically factually correct; Kalinga's ports (such as Tamralipti nearby and Manikapatna) and coastal geography dominated major trade arteries toward the South.\n- Why Option D is incorrect: A is historically accurate, as Ashoka's successful military campaign incorporated Kalinga into the empire as a distinct province with its headquarters at Tosali.\n- Often confused with: The post-war transformation (Ashoka adopting Dhamma and abandoning Digvijaya for Dhammavijaya) is often mistakenly thought to be the context of the war itself; the war was driven purely by traditional imperial expansion and trade corridor control.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Standard explanations often fail to explicitly articulate Kalinga's specific geographic role as a trade bottleneck connecting northern India to southern and maritime domains, confusing imperial motives with Ashoka's later moral shift."
+    ]
   }
 ]
