@@ -1,14 +1,14 @@
 [
   {
-    "timestamp": "2026-09-11T13:11:08.657454",
+    "timestamp": "2026-09-11T21:09:21.972624",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_058",
+    "question_id": "UPSC_ANC_059",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Core Fact: Harshavardhana regularly convened the Quinquennial Assembly (Maha Moksha Parishad) at Prayag (confluence of Ganga and Yamuna), where he gave lavish alms to ascetics of all religions, including followers of Buddha, Shiva, and Surya, demonstrating eclecticism rather than an exclusive Buddhist agenda. Thus, Assertion (A) is true, but Reason (R) is false.\n- Why Option A is incorrect: Reason (R) is factually incorrect because Harsha's goal at Prayag was universal charity and multifaith religious giving, not the exclusive propagation of Mahayana Buddhism.\n- Why Option B is incorrect: It incorrectly treats Reason (R) as a true statement.\n- Why Option D is incorrect: It treats Assertion (A) as false, whereas historical accounts by Xuanzang confirm Harsha regularly held the assembly at Prayag (the sixth one recorded during Xuanzang's visit in 643 CE).\n- Often confused with: The Kannauj Assembly (643 CE), which was specifically convened by Harsha to honor Xuanzang and propagate the Mahayana sect of Buddhism, unlike the Prayag Assembly which was ecumenical and philanthropic.",
+    "new_value": "• Core fact: Rajaraja I (r. 985–1014 CE) invaded Ceylon (Sri Lanka) around 993 CE, defeated King Mahinda V, destroyed the capital Anuradhapura, and annexed its northern half as a Chola province named Mummudi Chola Mandalam.\n• Option A is incorrect: Aditya I (r. 871–907 CE) expanded the Chola kingdom by defeating the Pallava ruler Aparajita and the Western Gangas, but did not mount a naval campaign against Ceylon.\n• Option C is incorrect: Rajendra I (r. 1014–1044 CE) completed the conquest of the entirety of Ceylon in 1017 CE, capturing the Sinhala king Mahinda V along with the royal jewels, rather than initiating the first conquest.\n• Option D is incorrect: Vijayalaya (r. c. 850–871 CE) re-established the imperial Chola dynasty by capturing Thanjavur from the Muttaraiyars; his realm was confined to the Kaveri delta.\n• Often confused with: Rajendra I vs. Rajaraja I — Rajaraja I conquered northern Ceylon (setting up Polonnaruwa as the administrative seat), whereas his son Rajendra I extended Chola control to the whole island.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Commonly confused with the Kannauj Assembly, which was specifically organized to promote Mahayana Buddhism, leading candidates to mistakenly mark Reason (R) as true."
+      "Ambiguity in historical phrasing: Rajaraja I conquered northern Ceylon (c. 993 CE), while Rajendra I conquered the entire island (1017 CE), leading to frequent confusion between Options B and C."
     ]
   }
 ]
