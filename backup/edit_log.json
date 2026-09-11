@@ -1,15 +1,17 @@
 [
   {
-    "timestamp": "2026-09-11T05:09:30.980011",
+    "timestamp": "2026-09-11T07:16:10.401642",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_064",
+    "question_id": "UPSC_ANC_056",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Core Fact: According to Class 6 and Class 11 NCERT (Ancient India), Jainism placed an extreme emphasis on ahimsa (non-injury to all living beings, including invisible microorganisms). Because ploughing and harvesting inevitably kill insects, worms, and small pests, farmers found it practically impossible to observe these rigorous vows without abandoning their livelihood. Consequently, Jainism was primarily embraced by traders and merchants rather than agriculturalists.\n• Why R correctly explains A: The direct causal link between the occupational reality of agriculture (killing pests/insects during tillage) and the doctrinal rigidity of ahimsa explains precisely why agricultural communities could not adopt the religion.\n• Why Option B is incorrect: It fails to recognize this direct cause-and-effect relationship; Reason (R) is the explicit, foundational reason for Assertion (A).\n• Why Option C is incorrect: Reason (R) is factually accurate regarding agricultural practices and the Jaina perspective on tilling soil.\n• Why Option D is incorrect: Assertion (A) is a well-documented historical phenomenon corroborated by primary Jaina texts and canonical traditions.\n• Often confused with: Buddhism's spread among commoners and farmers. Unlike Jainism, Buddhism advocated the 'Middle Path' (Majjhima Patipada), avoiding extreme self-mortification and hyper-strict interpretations of ahimsa, which allowed wider acceptance among agrarian populations.",
+    "new_value": "- Specific facts supporting the correct archaeological matches:\n  - Lothal (Gujarat): Known for the world's earliest identified tidal dockyard (Match A-2).\n  - Kalibangan (Rajasthan): Yielded the earliest known evidence of a furrowed / ploughed agricultural field dating to the Early Harappan phase (Match B-1).\n  - Dholavira (Gujarat): Famous for a monumental ten-character Harappan signboard inscription found near the northern gateway of the citadel (Match C-4).\n  - Banawali (Haryana): Yielded a well-preserved terracotta model/replica of a plough (Match D-3).\n- Why other pairings fail:\n  - Pairing Kalibangan with a dockyard (Options A and C) is incorrect because Kalibangan is an inland site on the dry bed of the Ghaggar river, lacking maritime infrastructure.\n  - Pairing Lothal with a ploughed field (Options A and C) is incorrect because agricultural furrow marks were uniquely excavated at Kalibangan, whereas Lothal was primarily an industrial/port town.\n  - Pairing Banawali with the ten-sign inscription (Options A, B, C, D as printed) is incorrect because the famous ten-sign inscription was discovered specifically at Dholavira, not Banawali.\n- Often confused with:\n  - Ploughed field vs. Terracotta plough replica: The actual physical ploughed field with criss-cross furrows was discovered at Kalibangan; the terracotta toy/replica of a plough was discovered at Banawali.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Prior explanations often fail to explicitly cite the standard NCERT Ancient India source material.",
-      "Explanations frequently omit contrasting Jainism's strict interpretation of Ahimsa with Buddhism's Middle Path, which is a common conceptual trap in UPSC exams."
+      "List I Site D is corrupted as '——— (site with Banawali inscription)' instead of 'Banawali'.",
+      "List II Item 4 erroneously includes the word 'Banawali' ('ten large-sized signs of the Banawali Harappan script'), giving away the name while misattributing the Dholavira signboard.",
+      "Option B contains a typo ('C-2' instead of 'C-4') and incorrectly maps Banawali to 4 rather than 3 (the correct sequence is A-2, B-1, C-4, D-3).",
+      "Options A and C are exact duplicates ('A-1, B-2, C-3, D-4')."
     ]
   }
 ]
