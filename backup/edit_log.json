@@ -1,27 +1,15 @@
 [
   {
-    "timestamp": "2026-09-12T19:08:17.509677",
+    "timestamp": "2026-09-12T22:09:11.177681",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_040",
+    "question_id": "UPSC_ANC_035",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Statement 1 is correct: Archaeological findings confirm that IVC lacked large monumental temples, royal religious palaces, or a dominant theocracy (unlike contemporary Egypt or Mesopotamia). Religious practices like mother goddess worship, proto-Shiva seals, and ritual bathing existed, but civic, commercial, and utilitarian life dominated.\n• Statement 2 is correct: The Harappans were among the earliest known producers of cotton in the world; direct physical evidence includes woven cotton textiles and threads discovered adhering to a silver vase at Mohenjo-daro, as well as terracotta spindle whorls.\n• Option A is incorrect because it ignores the concrete archaeological evidence of cotton cultivation and textile production at sites like Mohenjo-daro and Mehrgarh.\n• Option B is incorrect because it rejects the well-established consensus that Harappan urban society was primarily secular and trade-oriented rather than temple-dominated.\n• Option D is incorrect because both statements represent verified historical and archaeological facts.\n• Often confused with: The Vedic Period. While the later Vedic society was heavily ritualistic and centered on sacrificial religion (dominated by a priestly class), the Indus Valley Civilization was an urban, commercial society where religion was personal and decentralized without dominating public administration.",
+    "new_value": "- Statement 1 is correct: The Sushruta Samhita, compiled in its early form around the turn of the common era (by or before the 1st century AD), details more than 120 surgical instruments (yantras and shastras) used for precise procedures like cataract surgery and laparotomy.\n- Statement 2 is incorrect: Transplantation of internal organs (e.g., kidney, liver, heart) is a 20th-century development; ancient Indian surgery excelled in rhinoplasty (nasal reconstruction using skin flaps) and cataract couching, but never practiced internal organ transplants.\n- Statement 3 is correct: Aryabhata in the Aryabhatiya (composed in 499 AD, 5th century AD) introduced the trigonometric sine function, referring to it as 'jya' or 'ardha-jya' alongside tables of half-chords.\n- Statement 4 is correct: Brahmagupta in his treatise Brahmasphutasiddhanta (composed in 628 AD, 7th century AD) gave rules and formulas for calculating the diagonals and area of a cyclic quadrilateral (Brahmagupta's formula).\n- Often confused with: Sushruta's ancient plastic surgery and skin grafting techniques are often mistakenly equated with modern internal organ transplantation.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Common student misconception: Assuming IVC was completely non-religious due to the word 'secular', whereas religion was present but did not dominate political/civic life.",
-      "Frequent confusion regarding the origin of cotton, mistakenly attributing its earliest use to the Greeks or Egyptians rather than the Indus region (who supplied cotton, referred to by Greeks as 'Sindon')."
-    ]
-  },
-  {
-    "timestamp": "2026-09-12T19:09:04.183501",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_041",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "• Core Vedic Concept: Statement 1 is correct. In ancient Indian thought (derived from the root 'dhr', meaning to uphold/sustain), 'Dharma' refers to individual and social obligations, ethical conduct, righteousness, and the duties one owes to oneself, family, and society.\n• Cosmic Order: Statement 2 is correct. In Rigvedic cosmology, 'Rita' (or Rta) is the ultimate physical, moral, and cosmic order that regulates the natural universe (day and night, seasonal cycles) and upholds universal truth, primarily guarded by the Vedic deity Varuna ('Ritasya Gopa').\n• Why Option A is incorrect: It wrongly omits Statement 2, which accurately defines Rita as the fundamental moral and cosmic law.\n• Why Option B is incorrect: It wrongly omits Statement 1, which accurately encapsulates Dharma as personal and collective ethical duty.\n• Why Option D is incorrect: Both statements are authentic, standard Rigvedic definitions, making 'Neither 1 nor 2' invalid.\n• Often confused with: 'Rita' vs. 'Dharma'—Rita represents the cosmic, natural, and universal moral order governing macro-level phenomena; Dharma is the operationalization of this order at the micro-level, dealing with individual actions, social conduct, and ethical duties.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Original explanations often swap or blur the distinction between Rita (cosmic/natural order overseen by Varuna) and Dharma (prescribed societal/individual duties and moral law)."
+      "Prior explanations often fail to explicitly contrast Sushruta's external tissue reconstruction/rhinoplasty with modern internal organ transplants.",
+      "The historical dates for texts (Aryabhatiya in 499 AD and Brahmasphutasiddhanta in 628 AD) are frequently omitted, obscuring the verification of 5th-century and 7th-century milestones."
     ]
   }
 ]
