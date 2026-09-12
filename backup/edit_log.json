@@ -1,15 +1,15 @@
 [
   {
-    "timestamp": "2026-09-12T02:11:05.377125",
+    "timestamp": "2026-09-12T07:09:36.683053",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_055",
+    "question_id": "UPSC_ANC_051",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Fact/Source: The Aihole Inscription (composed in 634 CE by court poet Ravikirti) records that the Chalukya ruler Pulakesin II defeated Emperor Harshavardhana on the banks of the Narmada River around 618–619 CE, after which Pulakesin II adopted the title 'Parameshwara'.\n- Option A is incorrect: Pulakesin I (reigned c. 543–566 CE) was the founder of the Chalukya dynasty of Badami and established Badami (Vatapi) as his capital; he ruled decades before Harsha ascended the throne in 606 CE.\n- Option C is incorrect: Vikramaditya I (reigned c. 655–680 CE) was the son of Pulakesin II who restored Chalukya power after the Pallava conquest of Vatapi; his reign began well after Harsha's death in 647 CE.\n- Option D is incorrect: Vikramaditya II (reigned c. 733–744 CE) was a later Badami Chalukya ruler famous for capturing the Pallava capital of Kanchipuram three times and defeating the Arab incursions into the Deccan.\n- Often confused with: Pulakesin I vs. Pulakesin II — Pulakesin I founded the dynasty and performed the Ashvamedha sacrifice, whereas Pulakesin II was the greatest Badami Chalukya monarch who checked Harsha's southward expansion and engaged in famous conflicts with the Pallava king Mahendravarman I.",
+    "new_value": "- Core fact: Neither statement is historically accurate, making Option D the correct answer.\n- Why Statement 1 is incorrect: The Fourth Buddhist Council took place during the reign of Kushan Emperor Kanishka around 72 CE at Kundalvana (Kashmir), whereas Fa-Hien visited India centuries later during the Gupta era under Chandragupta II (c. 399–414 CE).\n- Why Statement 2 is incorrect: Hiuen-Tsang (Xuanzang) visited India during Harsha's reign (c. 630–645 CE) and found him to be a devoted patron, not antagonistic; Harsha patronized Mahayana Buddhism and hosted the famous Kanauj and Prayag religious assemblies in Hiuen-Tsang's honour.\n- Why Options A, B, and C are wrong: Option A incorrectly affirms Statement 1, Option B incorrectly affirms Statement 2, and Option C treats both historical inaccuracies as true.\n- Often confused with: Chronology of Chinese pilgrims—remember the order: Fa-Hien (Guptas/Chandragupta II, 5th century CE), Hiuen-Tsang (Harshavardhana, 7th century CE), and I-Tsing (late 7th century CE).",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Common explanations often omit the primary source supporting this historical event (Ravikirti's Aihole Prashasti).",
-      "Generic explanations fail to provide the chronological context and distinct achievements of Pulakesin I, Vikramaditya I, and Vikramaditya II."
+      "Common misconception conflating the timeline of Kanishka (Kushan Empire, 1st-2nd century CE) with the travel period of Fa-Hien (Gupta Empire, 5th century CE).",
+      "Misidentification of Harsha's religious stance; he was one of Buddhism's greatest imperial patrons rather than an antagonist."
     ]
   }
 ]
