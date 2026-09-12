@@ -11,5 +11,18 @@
       "Attribution of the invention of zero solely to Aryabhata is historically debated; Aryabhata established place-value concepts, while the formal symbol and arithmetic rules for zero were formulated by Brahmagupta.",
       "Gyandev (13th century CE) belongs to the medieval period rather than ancient Indian history."
     ]
+  },
+  {
+    "timestamp": "2026-09-12T08:11:07.546883",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_048",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "• Fact Supporting the Answer: Statement 2 is correct because the Pala dynasty (8th to 12th century CE) in Eastern India were staunch patrons of Mahayana and Vajrayana Buddhism, establishing major monastic universities like Vikramashila and Somapura and actively sustaining Nalanda. • Why Statement 1 is Incorrect: The Ikshvakus of the Andhra region (capital Vijayapuri at Nagarjunakonda, 3rd to 4th century CE) were not antagonistic to Buddhism; while the kings performed Vedic sacrifices, royal ladies (such as Chamtisri and Bhatideva) and merchants made extensive endowments to build Buddhist stupas, monasteries, and chaityas, turning Nagarjunakonda into a renowned Buddhist center. • Why other options are incorrect: Option A is incorrect because Statement 1 is false. Option C is incorrect because Statement 1 is false. Option D is incorrect because Statement 2 is true. • Often confused with: Royal faith vs. state antagonism. Ikshvaku kings performed Brahmanical rites like the Ashvamedha, which is often misconstrued as anti-Buddhist hostility; however, religious tolerance prevailed, and Buddhist patronage was publicly supported by royal family members.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Common explanations often oversimplify the Ikshvaku kings' performance of Vedic sacrifices as evidence of antagonism towards other faiths.",
+      "Previous explanations frequently fail to mention the crucial role of Ikshvaku royal women (e.g., Santisri/Chamtisri) in patronizing Buddhist monuments at Nagarjunakonda."
+    ]
   }
 ]
