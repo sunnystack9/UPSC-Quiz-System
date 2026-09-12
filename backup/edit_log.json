@@ -1,36 +1,14 @@
 [
   {
-    "timestamp": "2026-09-11T22:09:45.295738",
+    "timestamp": "2026-09-12T00:13:28.182979",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_060",
+    "question_id": "UPSC_ANC_053",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Supporting fact: The Fourth Buddhist Council was held at Kundalvana (Kashmir) in the 1st century CE under the patronage of Kushan King Kanishka; it was presided over by the scholar-monk Vasumitra, with Asvaghosha serving as the vice-president.\n- Why Option A is incorrect: Parsva was a senior Buddhist monk who advised Kanishka to convene the Fourth Council, but he did not preside over it.\n- Why Option B is incorrect: Nagarjuna was the founder of the Madhyamaka school of Mahayana Buddhism and a prominent philosopher of the era, but he did not preside over this council.\n- Why Option C is incorrect: Sudraka was an ancient Indian dramatist and king celebrated as the author of the classical Sanskrit play 'Mrichchhakatika' ('The Little Clay Cart'), having no connection to presiding over Buddhist councils.\n- Often confused with: Asvaghosha, who participated prominently in the exact same council under Kanishka, but served specifically as the vice-president (deputy) rather than the president.",
-    "source": "Import AI Explanation (gemini-3.8-flash)"
-  },
-  {
-    "timestamp": "2026-09-11T22:09:53.527237",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_061",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "• Correct Answer: A (Cow). Extensive archaeological excavations across Indus Valley sites (e.g., Harappa, Mohenjo-daro) have yielded thousands of seals and terracotta figurines depicting a wide variety of animals, but the cow is entirely absent from both seals and terracotta art.\n• Option B is incorrect: The elephant is well-represented on Harappan steatite seals and terracotta figurines, notably seen on the Pashupati seal (to the left/upper side of the central seated figure).\n• Option C is incorrect: The one-horned rhinoceros is frequently portrayed on classic rectangular and square Harappan seals as well as terracotta models.\n• Option D is incorrect: The tiger is depicted on numerous Harappan seals, including the famous Pashupati seal and terracotta motifs showing figures fighting tigers.\n• Often confused with: The humped and humpless bull (zebu), which is the most prominent and frequently carved animal on Harappan seals. While cattle in the form of bulls were ubiquitous, the female cow itself was not depicted. Additionally, lions and horses are also famously absent from Harappan seals.",
+    "new_value": "• Statement 1 is incorrect: Vardhamana Mahavira's mother, Trishala (also called Priyakarini), was the sister of Lichchhavi chief Chetaka, not his daughter (Chetaka's daughter, Chellana, was married to King Bimbisara of Magadha).\n• Statement 2 is correct: Gautama Buddha's mother, Queen Mahamaya, was a princess of the Koliyan clan/dynasty, which traced its descent from the Koshalan royal lineage.\n• Statement 3 is correct: Parshvanatha, the 23rd Jain Tirthankara, was born in Banaras (Varanasi) around the 8th century BCE to King Ashvasena and Queen Vama of Kashi.\n• Often confused with: Trishala is frequently confused as Chetaka's daughter because Chetaka's daughter Chellana was also a prominent royal figure in Jain traditions; Trishala was Chetaka's sister.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "A common point of confusion is assuming that because cattle (specifically humped bulls) are the most common motif on Harappan seals, cows must also be depicted.",
-      "Aspirants frequently conflate the faunal record (animal bones found at archaeological sites) with artistic depictions (seals and terracotta art); cattle bones are common, but cow depictions on seals are absent."
-    ]
-  },
-  {
-    "timestamp": "2026-09-11T22:11:04.435696",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_057",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Core Fact: Written by Vishakhadatta around the 4th to 8th century CE (likely Gupta period), 'Mudrarakshasa' is a political drama detailing how Chanakya (Kautilya) outmaneuvered Rakshasa, the loyal minister of the defeated Nanda dynasty, to secure the throne and political stability for Chandragupta Maurya.\n- Why Option A is incorrect: The play contains no mythological struggle between Devas and Asuras; it is an entirely secular political drama devoid of divine intervention.\n- Why Option B is incorrect: 'Mudrarakshasa' lacks any conventional romantic subplot or heroine; romantic tales of princes and lower-class/tribal figures are themes seen in works like Sudraka's 'Mrichchhakatika' or folk narratives.\n- Why Option C is incorrect: The play deals with the historical dynastic transition from the Nandas to the Mauryas in Magadha, not Vedic inter-tribal warfare (such as the Battle of the Ten Kings from the Rigveda).\n- Often confused with: Vishakhadatta's other lost play, 'Devichandraguptam', which centers on the Gupta ruler Ramagupta, Dhruvadevi, and Chandragupta II rather than the Mauryan court of Chandragupta Maurya.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Prior explanations often fail to explicitly contrast Mudrarakshasa with Vishakhadatta's other famous political work, Devichandraguptam, leading to confusion between Chandragupta Maurya and Chandragupta II."
+      "Common misconception conflating Trishala (sister of Chetaka) with Chellana (daughter of Chetaka)."
     ]
   }
 ]
