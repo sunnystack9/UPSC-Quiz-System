@@ -72,5 +72,17 @@
       "Original explanations often omit precise centuries or historical causation for the migrations (such as the Yuezhi displacing the Sakas).",
       "Standard answer keys do not clearly distinguish the sequence between Sakas and Kushanas."
     ]
+  },
+  {
+    "timestamp": "2026-09-12T07:13:43.904283",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_049",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Fact/Key Evidence: The Allahabad Pillar Inscription, famously known as the 'Prayag Prashasti', was composed in classical Sanskrit (Champu kavya style) by Harisena, the court poet of the Gupta ruler Samudragupta, detailing his geneology, conquests, and political achievements across Aryavarta and Dakshinapatha.\n- Option A is incorrect: Mahapadma Nanda founded the Nanda dynasty around the 4th century BCE and left no known monolithic pillar inscriptions.\n- Option B is incorrect: Chandragupta Maurya has no epigraph on this pillar; his early imperial works are referenced in later epigraphs such as the Junagadh Rock Inscription of Rudradaman I.\n- Option C is incorrect: Although Emperor Ashoka originally erected this pillar at Kaushambi (inscribed with his Six Pillar Edicts, the Queen's Edict, and the Schism Edict), the term 'Allahabad Pillar Inscription' specifically denotes the celebrated Prashasti of Samudragupta in standard historiography and UPSC convention.\n- Often confused with: The pillar contains epigraphs from three distinct rulers across different eras: Ashoka (3rd century BCE, Prakrit in Brahmi script), Samudragupta (4th century CE, Sanskrit in Gupta Brahmi script), and Jahangir (17th century CE, Persian inscription by Mir Abdullah Mushkin Qalam).",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Ambiguity exists because the pillar originally belonged to Ashoka before Samudragupta and later Jahangir added inscriptions to it; without specifying 'Prayag Prashasti', both Ashoka (Option C) and Samudragupta (Option D) are historically linked to the pillar."
+    ]
   }
 ]
