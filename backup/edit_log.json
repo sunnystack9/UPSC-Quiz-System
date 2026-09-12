@@ -11,5 +11,19 @@
       "Common misconception conflating the timeline of Kanishka (Kushan Empire, 1st-2nd century CE) with the travel period of Fa-Hien (Gupta Empire, 5th century CE).",
       "Misidentification of Harsha's religious stance; he was one of Buddhism's greatest imperial patrons rather than an antagonist."
     ]
+  },
+  {
+    "timestamp": "2026-09-12T07:09:50.189315",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_052",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Correct Answer (C): King Kharavela of Kalinga (1st century BCE), known from the Hathigumpha inscription, was a devout patron of Jainism who constructed residential caves for Jain monks on the Udayagiri hills.\n- Why A is incorrect: Jainism spread to South India (Karnataka) under the leadership of Bhadrabahu, accompanied by Chandragupta Maurya, not Sthalabahu (Sthulabhadra).\n- Why B is incorrect: Followers of Bhadrabahu who went south became Digambaras (sky-clad), while those who remained in the north under Sthulabhadra became Svetambaras (white-clad).\n- Why D is incorrect: Early Jainism, like early Buddhism, did not practice idol or image worship; image worship (e.g., Tirthankara idols) emerged only in later centuries.\n- Often confused with: The leaders of the Great Schism—remember that Bhadrabahu led the southern migration (Digambaras), whereas Sthulabhadra stayed in Magadha (Svetambaras).",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Option A interchanges Bhadrabahu and Sthalabahu (Sthulabhadra).",
+      "Option B reverses the sect names; Bhadrabahu's followers became Digambaras, not Svetambaras.",
+      "Option D falsely attributes early image worship to Jainism over Buddhism, whereas both rejected idol worship initially."
+    ]
   }
 ]
