@@ -1,28 +1,14 @@
 [
   {
-    "timestamp": "2026-09-12T08:10:26.472353",
+    "timestamp": "2026-09-12T10:10:06.743782",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_044",
+    "question_id": "UPSC_ANC_043",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Bhaskaracharya (Bhaskara II) calculated the time taken by the Earth to orbit the Sun as approximately 365.258756 days in his 12th-century astronomical treatise 'Siddhanta Shiromani' (A matches 2).\n- Baudhayana (Budhayana) calculated an early approximation of the value of 'pi' (approx. 3.088) and the square root of 2 in the 'Baudhayana Shulba Sutra' (B matches 3).\n- Aryabhata is traditionally credited in classical curricula with the conceptual foundation of the digit zero and place-value notation in his 499 CE work 'Aryabhatiya' (C matches 1).\n- Sant Gyandev (Dnyaneshwar) invented 'Moksha Patam' (or 'Gyan Chauper') in the 13th century, which later inspired the modern board game Snakes and Ladders (D matches 4).\n- Why Option A is incorrect: It matches Baudhayana (3) with Snakes and Ladders and Gyandev (4) with the calculation of pi.\n- Why Option C is incorrect: It attributes the orbital calculation to Aryabhata and the invention of zero to Bhaskaracharya.\n- Why Option D is incorrect: It interchanges Aryabhata with Bhaskaracharya and Baudhayana with Gyandev.\n- Often confused with: Aryabhata calculated a remarkably precise value of pi (3.1416 or 62,832 divided by 20,000), but within this matching framework, Baudhayana is paired with pi due to Aryabhata being paired with the digit zero.",
+    "new_value": "• Baudhayana Sulva Sutra (composed c. 800–500 BCE) contains the earliest known Indian formulation of the Pythagorean theorem, stating that the area produced by the diagonal of a rectangle equals the sum of the areas produced by its length and breadth (relating lengths of sides of a right-angled triangle). • Why Option B is incorrect: While Sulva Sutras approximated circle squaring, the precise calculation of pi (approximated as 3.1416) is credited to Aryabhata I (499 CE) in the Aryabhatiya, not the Baudhayana theorem. • Why Option C is incorrect: Logarithmic principles were developed in 17th-century Europe by John Napier, though early Indian work on powers/indices appears in Jaina texts like the Anuyogadvara Sutra, not Baudhayana. • Why Option D is incorrect: The normal distribution (Gaussian curve) is an 18th-century development in modern probability formulated by Abraham de Moivre and Carl Friedrich Gauss. • Often confused with: The Pythagorean theorem; Baudhayana stated this geometric principle at least two centuries before Pythagoras, using it to construct Vedic fire altars (vedis).",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Attribution of the invention of zero solely to Aryabhata is historically debated; Aryabhata established place-value concepts, while the formal symbol and arithmetic rules for zero were formulated by Brahmagupta.",
-      "Gyandev (13th century CE) belongs to the medieval period rather than ancient Indian history."
-    ]
-  },
-  {
-    "timestamp": "2026-09-12T08:11:07.546883",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_048",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "• Fact Supporting the Answer: Statement 2 is correct because the Pala dynasty (8th to 12th century CE) in Eastern India were staunch patrons of Mahayana and Vajrayana Buddhism, establishing major monastic universities like Vikramashila and Somapura and actively sustaining Nalanda. • Why Statement 1 is Incorrect: The Ikshvakus of the Andhra region (capital Vijayapuri at Nagarjunakonda, 3rd to 4th century CE) were not antagonistic to Buddhism; while the kings performed Vedic sacrifices, royal ladies (such as Chamtisri and Bhatideva) and merchants made extensive endowments to build Buddhist stupas, monasteries, and chaityas, turning Nagarjunakonda into a renowned Buddhist center. • Why other options are incorrect: Option A is incorrect because Statement 1 is false. Option C is incorrect because Statement 1 is false. Option D is incorrect because Statement 2 is true. • Often confused with: Royal faith vs. state antagonism. Ikshvaku kings performed Brahmanical rites like the Ashvamedha, which is often misconstrued as anti-Buddhist hostility; however, religious tolerance prevailed, and Buddhist patronage was publicly supported by royal family members.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Common explanations often oversimplify the Ikshvaku kings' performance of Vedic sacrifices as evidence of antagonism towards other faiths.",
-      "Previous explanations frequently fail to mention the crucial role of Ikshvaku royal women (e.g., Santisri/Chamtisri) in patronizing Buddhist monuments at Nagarjunakonda."
+      "The question refers colloquially to the 'Baudhayana theorem', which is a modern pedagogical name for the geometric rule regarding right-angled triangles found in Baudhayana's Sulva Sutra."
     ]
   }
 ]
