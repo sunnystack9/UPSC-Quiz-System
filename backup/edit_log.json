@@ -59,5 +59,18 @@
     "issues_found": [
       "Option A contained a misspelling ('Jehelum' instead of 'Jhelum')."
     ]
+  },
+  {
+    "timestamp": "2026-09-12T07:12:52.785328",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_047",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Chronological order of arrival: Indo-Greeks (c. 2nd century BCE, notably Demetrius c. 180 BCE) -> Sakas/Scythians (c. 1st century BCE, displacing the Greeks in Bactria and Gandhara) -> Kushanas (c. 1st century CE, a branch of the Yuezhi tribe founded by Kujula Kadphises).\n- Option B is incorrect because Kushanas arrived in the 1st century CE, well after the Sakas who established dominance in the 1st century BCE.\n- Option C is incorrect because Indo-Greeks invaded northwestern India around 180 BCE, long before the Saka migrations.\n- Option D is incorrect because it reverses the entry sequence, placing Greeks last despite them being the first foreign rulers following Alexander's legacy in the post-Mauryan era.\n- Often confused with: The order of Sakas and Kushanas. Remember that the migration of the Yuezhi (ancestors of the Kushanas) in Central Asia originally pushed the Sakas southward into India first, followed later by the Kushanas themselves.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Original explanations often omit precise centuries or historical causation for the migrations (such as the Yuezhi displacing the Sakas).",
+      "Standard answer keys do not clearly distinguish the sequence between Sakas and Kushanas."
+    ]
   }
 ]
