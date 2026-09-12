@@ -1,26 +1,15 @@
 [
   {
-    "timestamp": "2026-09-12T00:13:28.182979",
+    "timestamp": "2026-09-12T02:11:05.377125",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_053",
+    "question_id": "UPSC_ANC_055",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Statement 1 is incorrect: Vardhamana Mahavira's mother, Trishala (also called Priyakarini), was the sister of Lichchhavi chief Chetaka, not his daughter (Chetaka's daughter, Chellana, was married to King Bimbisara of Magadha).\n• Statement 2 is correct: Gautama Buddha's mother, Queen Mahamaya, was a princess of the Koliyan clan/dynasty, which traced its descent from the Koshalan royal lineage.\n• Statement 3 is correct: Parshvanatha, the 23rd Jain Tirthankara, was born in Banaras (Varanasi) around the 8th century BCE to King Ashvasena and Queen Vama of Kashi.\n• Often confused with: Trishala is frequently confused as Chetaka's daughter because Chetaka's daughter Chellana was also a prominent royal figure in Jain traditions; Trishala was Chetaka's sister.",
+    "new_value": "- Fact/Source: The Aihole Inscription (composed in 634 CE by court poet Ravikirti) records that the Chalukya ruler Pulakesin II defeated Emperor Harshavardhana on the banks of the Narmada River around 618–619 CE, after which Pulakesin II adopted the title 'Parameshwara'.\n- Option A is incorrect: Pulakesin I (reigned c. 543–566 CE) was the founder of the Chalukya dynasty of Badami and established Badami (Vatapi) as his capital; he ruled decades before Harsha ascended the throne in 606 CE.\n- Option C is incorrect: Vikramaditya I (reigned c. 655–680 CE) was the son of Pulakesin II who restored Chalukya power after the Pallava conquest of Vatapi; his reign began well after Harsha's death in 647 CE.\n- Option D is incorrect: Vikramaditya II (reigned c. 733–744 CE) was a later Badami Chalukya ruler famous for capturing the Pallava capital of Kanchipuram three times and defeating the Arab incursions into the Deccan.\n- Often confused with: Pulakesin I vs. Pulakesin II — Pulakesin I founded the dynasty and performed the Ashvamedha sacrifice, whereas Pulakesin II was the greatest Badami Chalukya monarch who checked Harsha's southward expansion and engaged in famous conflicts with the Pallava king Mahendravarman I.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Common misconception conflating Trishala (sister of Chetaka) with Chellana (daughter of Chetaka)."
-    ]
-  },
-  {
-    "timestamp": "2026-09-12T00:14:22.310485",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_054",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Statement 1 is correct: According to Banabhatta's 'Harshacharita', the last Mauryan emperor Brihadratha was assassinated around 185 BCE during a military parade by his commander-in-chief (senapati), Pushyamitra Shunga, who founded the Shunga dynasty.\n- Statement 2 is correct: As recorded in the Puranas and 'Harshacharita', the last Shunga king Devabhuti, known for his vices, was murdered around 73 BCE by his Amatya (Brahmin minister) Vasudeva Kanva, who then established the Kanva dynasty.\n- Statement 3 is correct: The Puranic texts state that the Kanva dynasty lasted about 45 years and was brought to an end around 28 BCE when the last Kanva ruler, Susarman, was deposed/killed by the Andhras (Satavahanas).\n- Why Option A is incorrect: It omits Statement 3, which is historically validated by Puranic chronologies regarding the fall of the Kanvas to the Satavahanas.\n- Why Options B and C are incorrect: They fail to account for the truth of Statements 1 and 3 (for B) or 1 and 2 (for C), as all three dynastic successions occurred precisely as described.\n- Often confused with: The Kanva dynasty's overthrow is sometimes misattributed to local Magadhan rebellions, but historical texts specifically attribute it to the 'Andhrabhrityas' (Satavahanas under rulers related to Simuka/Kanha), who briefly established authority in eastern India.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Grammatical/typographical error in statement 3: 'Andhra’s' incorrectly uses an apostrophe to form a plural noun ('Andhras')."
+      "Common explanations often omit the primary source supporting this historical event (Ravikirti's Aihole Prashasti).",
+      "Generic explanations fail to provide the chronological context and distinct achievements of Pulakesin I, Vikramaditya I, and Vikramaditya II."
     ]
   }
 ]
