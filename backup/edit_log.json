@@ -1,88 +1,15 @@
 [
   {
-    "timestamp": "2026-09-12T07:09:36.683053",
+    "timestamp": "2026-09-12T08:10:26.472353",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_051",
+    "question_id": "UPSC_ANC_044",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Core fact: Neither statement is historically accurate, making Option D the correct answer.\n- Why Statement 1 is incorrect: The Fourth Buddhist Council took place during the reign of Kushan Emperor Kanishka around 72 CE at Kundalvana (Kashmir), whereas Fa-Hien visited India centuries later during the Gupta era under Chandragupta II (c. 399–414 CE).\n- Why Statement 2 is incorrect: Hiuen-Tsang (Xuanzang) visited India during Harsha's reign (c. 630–645 CE) and found him to be a devoted patron, not antagonistic; Harsha patronized Mahayana Buddhism and hosted the famous Kanauj and Prayag religious assemblies in Hiuen-Tsang's honour.\n- Why Options A, B, and C are wrong: Option A incorrectly affirms Statement 1, Option B incorrectly affirms Statement 2, and Option C treats both historical inaccuracies as true.\n- Often confused with: Chronology of Chinese pilgrims—remember the order: Fa-Hien (Guptas/Chandragupta II, 5th century CE), Hiuen-Tsang (Harshavardhana, 7th century CE), and I-Tsing (late 7th century CE).",
+    "new_value": "- Bhaskaracharya (Bhaskara II) calculated the time taken by the Earth to orbit the Sun as approximately 365.258756 days in his 12th-century astronomical treatise 'Siddhanta Shiromani' (A matches 2).\n- Baudhayana (Budhayana) calculated an early approximation of the value of 'pi' (approx. 3.088) and the square root of 2 in the 'Baudhayana Shulba Sutra' (B matches 3).\n- Aryabhata is traditionally credited in classical curricula with the conceptual foundation of the digit zero and place-value notation in his 499 CE work 'Aryabhatiya' (C matches 1).\n- Sant Gyandev (Dnyaneshwar) invented 'Moksha Patam' (or 'Gyan Chauper') in the 13th century, which later inspired the modern board game Snakes and Ladders (D matches 4).\n- Why Option A is incorrect: It matches Baudhayana (3) with Snakes and Ladders and Gyandev (4) with the calculation of pi.\n- Why Option C is incorrect: It attributes the orbital calculation to Aryabhata and the invention of zero to Bhaskaracharya.\n- Why Option D is incorrect: It interchanges Aryabhata with Bhaskaracharya and Baudhayana with Gyandev.\n- Often confused with: Aryabhata calculated a remarkably precise value of pi (3.1416 or 62,832 divided by 20,000), but within this matching framework, Baudhayana is paired with pi due to Aryabhata being paired with the digit zero.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Common misconception conflating the timeline of Kanishka (Kushan Empire, 1st-2nd century CE) with the travel period of Fa-Hien (Gupta Empire, 5th century CE).",
-      "Misidentification of Harsha's religious stance; he was one of Buddhism's greatest imperial patrons rather than an antagonist."
-    ]
-  },
-  {
-    "timestamp": "2026-09-12T07:09:50.189315",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_052",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Correct Answer (C): King Kharavela of Kalinga (1st century BCE), known from the Hathigumpha inscription, was a devout patron of Jainism who constructed residential caves for Jain monks on the Udayagiri hills.\n- Why A is incorrect: Jainism spread to South India (Karnataka) under the leadership of Bhadrabahu, accompanied by Chandragupta Maurya, not Sthalabahu (Sthulabhadra).\n- Why B is incorrect: Followers of Bhadrabahu who went south became Digambaras (sky-clad), while those who remained in the north under Sthulabhadra became Svetambaras (white-clad).\n- Why D is incorrect: Early Jainism, like early Buddhism, did not practice idol or image worship; image worship (e.g., Tirthankara idols) emerged only in later centuries.\n- Often confused with: The leaders of the Great Schism—remember that Bhadrabahu led the southern migration (Digambaras), whereas Sthulabhadra stayed in Magadha (Svetambaras).",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Option A interchanges Bhadrabahu and Sthalabahu (Sthulabhadra).",
-      "Option B reverses the sect names; Bhadrabahu's followers became Digambaras, not Svetambaras.",
-      "Option D falsely attributes early image worship to Jainism over Buddhism, whereas both rejected idol worship initially."
-    ]
-  },
-  {
-    "timestamp": "2026-09-12T07:10:12.964820",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_050",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Correct Answer: C (Milinda)\n- Chronological disparity: Milinda (Menander I) was an Indo-Greek king who ruled during the 2nd century BCE (c. 165/155–130 BCE), known from the philosophical Buddhist text 'Milindapanha' (questions posed to Buddhist monk Nagasena).\n- Why Option A is incorrect: Bimbisara was the founder-ruler of the Haryanka dynasty of Magadha (6th–5th century BCE) and a personal contemporary and patron of Gautama Buddha.\n- Why Option B is incorrect: Gautama Buddha lived during the 6th–5th century BCE (c. 563–483 BCE), the same era as Bimbisara and Prasenjit.\n- Why Option D is incorrect: Prasenjit (Pasenadi) was the ruler of Kosala in the 6th–5th century BCE, a contemporary of both Bimbisara and the Buddha, and closely associated with Buddhist discourses.\n- Often confused with: Menander I (Milinda) is sometimes confused with earlier Greek or Mauryan figures; remember that he is an Indo-Greek ruler post-dating Alexander's invasion (326 BCE) and the Mauryan Empire by roughly three centuries.",
-    "source": "Import AI Explanation (gemini-3.8-flash)"
-  },
-  {
-    "timestamp": "2026-09-12T07:12:27.693179",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_045",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "• Correct Answer (B) Dantidurga: Dantidurga (also known as Dantivarman II, r. 735–756 CE) laid the foundation of the imperial Rashtrakuta dynasty in 753 CE by overthrowing the Badami Chalukya ruler Kirtivarman II and famously performing the 'Hiranyagarbha' (golden womb) ritual at Ujjain.\n• Why Option A is incorrect: Amoghavarsha I (r. 814–878 CE) was the greatest patron king of the dynasty, credited with establishing Manyakheta (Malkhed) as the capital and authoring 'Kavirajamarga', the earliest extant Kannada work on poetics.\n• Why Option C is incorrect: Dhruva (r. 780–793 CE) came to power much later and was noted for initiating Rashtrakuta military intervention in North India during the Tripartite Struggle against the Palas and Gurjara-Pratiharas.\n• Why Option D is incorrect: Krishna I (r. 756–774 CE) was Dantidurga's uncle and successor who consolidated the empire and carved out the monolithic rock-cut Kailash Temple (Cave 16) at Ellora.\n• Often confused with: Krishna I — students frequently confuse Krishna I with the founder due to his fame in building the monolithic Kailash Temple at Ellora, whereas the actual political foundation and independence from the Chalukyas was achieved by Dantidurga.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Standard explanations often omit the specific historical event and date (defeating Chalukya king Kirtivarman II in 753 CE) confirming Dantidurga as the founder.",
-      "Explanations frequently fail to delineate the specific architectural or literary contributions that distinguish subsequent prominent kings like Krishna I and Amoghavarsha I."
-    ]
-  },
-  {
-    "timestamp": "2026-09-12T07:12:34.268460",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_046",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Core Fact: Ancient Takshashila (modern-day Taxila in Punjab, Pakistan) was the capital of the eastern Gandhara kingdom, situated in the Sind Sagar Doab between the Indus River to its west and the Jhelum (Hydaspes) River to its east.\n- Why Option B is wrong: The region between the Jhelum and Chenab is the Jech Doab, which formed the core territory of King Porus (Paurava kingdom), famous for the Battle of the Hydaspes (326 BCE).\n- Why Option C is wrong: The interfluve between the Chenab and Ravi is the Rechna Doab, historically associated with ancient tribal republics like the Malloi (Malavas) rather than Takshashila.\n- Why Option D is wrong: The area between the Ravi and Beas is the Bari Doab, which marked the easternmost reach of Alexander the Great's campaign before his troops mutinied along the Beas (Hyphasis).\n- Often confused with: Pushkalavati (modern Charsadda), another prominent capital of Gandhara; it lay to the west of the Indus near the confluence of the Swat and Kabul rivers, whereas Takshashila lay east of the Indus.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Option A contained a misspelling ('Jehelum' instead of 'Jhelum')."
-    ]
-  },
-  {
-    "timestamp": "2026-09-12T07:12:52.785328",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_047",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Chronological order of arrival: Indo-Greeks (c. 2nd century BCE, notably Demetrius c. 180 BCE) -> Sakas/Scythians (c. 1st century BCE, displacing the Greeks in Bactria and Gandhara) -> Kushanas (c. 1st century CE, a branch of the Yuezhi tribe founded by Kujula Kadphises).\n- Option B is incorrect because Kushanas arrived in the 1st century CE, well after the Sakas who established dominance in the 1st century BCE.\n- Option C is incorrect because Indo-Greeks invaded northwestern India around 180 BCE, long before the Saka migrations.\n- Option D is incorrect because it reverses the entry sequence, placing Greeks last despite them being the first foreign rulers following Alexander's legacy in the post-Mauryan era.\n- Often confused with: The order of Sakas and Kushanas. Remember that the migration of the Yuezhi (ancestors of the Kushanas) in Central Asia originally pushed the Sakas southward into India first, followed later by the Kushanas themselves.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Original explanations often omit precise centuries or historical causation for the migrations (such as the Yuezhi displacing the Sakas).",
-      "Standard answer keys do not clearly distinguish the sequence between Sakas and Kushanas."
-    ]
-  },
-  {
-    "timestamp": "2026-09-12T07:13:43.904283",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_049",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Fact/Key Evidence: The Allahabad Pillar Inscription, famously known as the 'Prayag Prashasti', was composed in classical Sanskrit (Champu kavya style) by Harisena, the court poet of the Gupta ruler Samudragupta, detailing his geneology, conquests, and political achievements across Aryavarta and Dakshinapatha.\n- Option A is incorrect: Mahapadma Nanda founded the Nanda dynasty around the 4th century BCE and left no known monolithic pillar inscriptions.\n- Option B is incorrect: Chandragupta Maurya has no epigraph on this pillar; his early imperial works are referenced in later epigraphs such as the Junagadh Rock Inscription of Rudradaman I.\n- Option C is incorrect: Although Emperor Ashoka originally erected this pillar at Kaushambi (inscribed with his Six Pillar Edicts, the Queen's Edict, and the Schism Edict), the term 'Allahabad Pillar Inscription' specifically denotes the celebrated Prashasti of Samudragupta in standard historiography and UPSC convention.\n- Often confused with: The pillar contains epigraphs from three distinct rulers across different eras: Ashoka (3rd century BCE, Prakrit in Brahmi script), Samudragupta (4th century CE, Sanskrit in Gupta Brahmi script), and Jahangir (17th century CE, Persian inscription by Mir Abdullah Mushkin Qalam).",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Ambiguity exists because the pillar originally belonged to Ashoka before Samudragupta and later Jahangir added inscriptions to it; without specifying 'Prayag Prashasti', both Ashoka (Option C) and Samudragupta (Option D) are historically linked to the pillar."
+      "Attribution of the invention of zero solely to Aryabhata is historically debated; Aryabhata established place-value concepts, while the formal symbol and arithmetic rules for zero were formulated by Brahmagupta.",
+      "Gyandev (13th century CE) belongs to the medieval period rather than ancient Indian history."
     ]
   }
 ]
