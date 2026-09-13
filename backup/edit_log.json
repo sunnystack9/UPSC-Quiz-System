@@ -22,5 +22,17 @@
     "issues_found": [
       "Standard answer keys and explanations often vaguely state that Gandhara and Avanti were Buddhist centers without clarifying the crucial distinction between the geographic spread of the religion versus the physical presence and events of the Buddha's actual lifetime."
     ]
+  },
+  {
+    "timestamp": "2026-09-13T07:11:26.379930",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_027",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "• Statement 1 is correct: Rigvedic texts frequently mention protective military gear like 'varman' (coat of mail/armor) and 'sipra' (helmet), whereas excavations from the Indus Valley Civilization (IVC) have yielded offensive bronze/copper weapons (spears, daggers) but no evidence of helmets or defensive armor.\n• Statement 2 is incorrect: IVC was a Bronze Age civilization that had extensive knowledge of gold, silver, copper, and bronze, but did not know iron. Iron was introduced to the subcontinent much later, around 1000 BCE during the Later Vedic period.\n• Statement 3 is correct (per official UPSC evaluation): The horse (ashva) played a central, well-documented role in Rigvedic culture and chariot warfare; in contrast, the IVC is characterized as non-horse-centric, with controversial or doubtful evidence (isolated, disputed skeletal remains at Surkotada), leading historians to conclude there is no clear or undisputed evidence of regular IVC horse domestication.\n• Incorrect Options A, B, and D: Option A omits Statement 3; Options B and D incorrectly include Statement 2, which wrongly claims IVC people knew iron and lacked knowledge of gold and silver.\n• Often confused with: The Later Vedic period vs. Rigvedic period—Rigvedic Aryans primarily used copper/bronze (referred to as 'ayas'), while iron ('shyam ayas' or 'krishna ayas') emerged only in the Later Vedic era.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Statement 3 is contested among modern archaeologists due to reported equine remains from Surkotada and terracotta figurines from Lothal, though UPSC officially upheld Statement 3 as correct (Option C) on the basis that the horse was not an integral or definitively established domesticate of IVC culture."
+    ]
   }
 ]
