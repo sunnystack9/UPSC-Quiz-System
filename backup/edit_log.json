@@ -1,14 +1,15 @@
 [
   {
-    "timestamp": "2026-09-13T02:09:59.266464",
+    "timestamp": "2026-09-13T04:10:23.784140",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_036",
+    "question_id": "UPSC_ANC_037",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Fact/Core concept: Both Buddhism and Jainism arose as Shramana traditions in the 6th century BCE that explicitly rejected the infallibility of the Vedas and the efficacy of Brahmanical sacrificial rituals (yajnas).\n- Statement 1 is incorrect: Buddhism advocated the 'Middle Path' (Madhyama Pratipada), consciously avoiding the extremes of severe asceticism and sensual indulgence. In contrast, Jainism prescribed extreme austerity, severe penance, and practices like Sallekhana (ritual fasting unto death).\n- Statement 2 is correct: Both traditions are heterodox (Nastika) systems that rejected the divine authority and supreme validity of the Vedas.\n- Statement 3 is correct: Both philosophies condemned ritualistic animal sacrifices, complex priestly rites, and the idea that rituals lead to spiritual liberation.\n- Why Options A, C, and D are wrong: They all include Statement 1, which applies exclusively to Buddhism rather than being common to both.\n- Often confused with: The concept of Ahimsa (non-violence); while both practiced non-violence, Jainism took Ahimsa to an absolute, extreme level (wearing face masks, not tilling land to avoid killing insects), whereas Buddhism adopted a pragmatic, moderate approach.",
+    "new_value": "- Core fact: In the Early Vedic (Rigvedic) period (c. 1500–1000 BCE), religion centered on personifying and worshipping forces of nature (such as Indra for thunder, Agni for fire, and Varuna for cosmic order) accompanied by the performance of simple domestic sacrifices and chanting of mantras (Yajnas). - Why Option A is incorrect: Bhakti (loving devotion to a personal god) arose much later with the Upanishadic/Bhagavata tradition and flourished during the medieval Bhakti movement. - Why Option B is incorrect: Early Vedic Aryans did not practice idol or image worship; temples and anthropomorphic idols emerged in the post-Vedic and Gupta periods. - Why Option D is incorrect: While 'worship of nature' is correct, the inclusion of 'Bhakti' invalidates this option for the Rigvedic era. - Often confused with: Later Vedic religion, which became far more ritualistic, dominated by complex priestly sacrifices and the rise of gods like Prajapati, whereas the Early Vedic religion was simpler and directly focused on nature deities invoked through Yajnas without temples or idols.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Common student error: Assuming both religions advocated moderate asceticism, overlooking that Jainism's core foundation is based on extreme penance and self-mortification."
+      "Original explanations often fail to explicitly contrast the nature-based Rigvedic religion with the later development of Bhakti and murti-puja (idol worship).",
+      "Many sources blur the lines between Early Vedic and Later Vedic ritualistic practices."
     ]
   }
 ]
