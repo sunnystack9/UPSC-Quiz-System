@@ -10,5 +10,17 @@
     "issues_found": [
       "Original explanations often fail to clarify the distinction between areas where Buddhism flourished later (Avanti and Gandhara) versus regions the historical Buddha actually visited and lived in during his lifetime (Kosala and Magadha)."
     ]
+  },
+  {
+    "timestamp": "2026-09-13T07:10:14.393997",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_031",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "• Direct Historical Fact: Gautama Buddha lived and preached extensively in the middle Gangetic plains, primarily within the Mahajanapadas of Magadha (attained enlightenment at Bodh Gaya, spent rainy retreats at Rajgir under Bimbisara and Ajatashatru) and Kosala (spent the majority of his monsoons at Jetavana monastery in Sravasti under King Prasenajit).\n• Why 1 (Avanti) is incorrect: Although King Pradyota of Avanti invited the Buddha, the Buddha declined due to old age and frail health, sending his disciple Mahakaccana instead. The Buddha never visited Avanti personally.\n• Why 2 (Gandhara) is incorrect: Gandhara (capital Taxila, in modern Pakistan/Afghanistan) lay far to the northwest; the Buddha never travelled outside the middle Gangetic plain during his lifetime. Gandhara became a prominent Buddhist center centuries later under the Mauryan and Kushan empires.\n• Why Options A, B, and C are incorrect: Any combination including 1 (Avanti) or 2 (Gandhara) is incorrect because neither kingdom witnessed the Buddha's physical presence or direct activities during his lifetime.\n• Often confused with: The spread of Buddhist art and patronage versus the life of the Buddha himself. Gandhara is famous for Greco-Buddhist art and Avanti (Ujjain/Sanchi) for Ashokan stupas, but these developments occurred long after the Buddha's Mahaparinirvana.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Standard answer keys and explanations often vaguely state that Gandhara and Avanti were Buddhist centers without clarifying the crucial distinction between the geographic spread of the religion versus the physical presence and events of the Buddha's actual lifetime."
+    ]
   }
 ]
