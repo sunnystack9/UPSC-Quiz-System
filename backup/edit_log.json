@@ -1,15 +1,14 @@
 [
   {
-    "timestamp": "2026-09-12T22:09:11.177681",
+    "timestamp": "2026-09-13T02:09:59.266464",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_035",
+    "question_id": "UPSC_ANC_036",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Statement 1 is correct: The Sushruta Samhita, compiled in its early form around the turn of the common era (by or before the 1st century AD), details more than 120 surgical instruments (yantras and shastras) used for precise procedures like cataract surgery and laparotomy.\n- Statement 2 is incorrect: Transplantation of internal organs (e.g., kidney, liver, heart) is a 20th-century development; ancient Indian surgery excelled in rhinoplasty (nasal reconstruction using skin flaps) and cataract couching, but never practiced internal organ transplants.\n- Statement 3 is correct: Aryabhata in the Aryabhatiya (composed in 499 AD, 5th century AD) introduced the trigonometric sine function, referring to it as 'jya' or 'ardha-jya' alongside tables of half-chords.\n- Statement 4 is correct: Brahmagupta in his treatise Brahmasphutasiddhanta (composed in 628 AD, 7th century AD) gave rules and formulas for calculating the diagonals and area of a cyclic quadrilateral (Brahmagupta's formula).\n- Often confused with: Sushruta's ancient plastic surgery and skin grafting techniques are often mistakenly equated with modern internal organ transplantation.",
+    "new_value": "- Fact/Core concept: Both Buddhism and Jainism arose as Shramana traditions in the 6th century BCE that explicitly rejected the infallibility of the Vedas and the efficacy of Brahmanical sacrificial rituals (yajnas).\n- Statement 1 is incorrect: Buddhism advocated the 'Middle Path' (Madhyama Pratipada), consciously avoiding the extremes of severe asceticism and sensual indulgence. In contrast, Jainism prescribed extreme austerity, severe penance, and practices like Sallekhana (ritual fasting unto death).\n- Statement 2 is correct: Both traditions are heterodox (Nastika) systems that rejected the divine authority and supreme validity of the Vedas.\n- Statement 3 is correct: Both philosophies condemned ritualistic animal sacrifices, complex priestly rites, and the idea that rituals lead to spiritual liberation.\n- Why Options A, C, and D are wrong: They all include Statement 1, which applies exclusively to Buddhism rather than being common to both.\n- Often confused with: The concept of Ahimsa (non-violence); while both practiced non-violence, Jainism took Ahimsa to an absolute, extreme level (wearing face masks, not tilling land to avoid killing insects), whereas Buddhism adopted a pragmatic, moderate approach.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Prior explanations often fail to explicitly contrast Sushruta's external tissue reconstruction/rhinoplasty with modern internal organ transplants.",
-      "The historical dates for texts (Aryabhatiya in 499 AD and Brahmasphutasiddhanta in 628 AD) are frequently omitted, obscuring the verification of 5th-century and 7th-century milestones."
+      "Common student error: Assuming both religions advocated moderate asceticism, overlooking that Jainism's core foundation is based on extreme penance and self-mortification."
     ]
   }
 ]
