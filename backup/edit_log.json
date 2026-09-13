@@ -1,24 +1,14 @@
 [
   {
-    "timestamp": "2026-09-13T04:10:23.784140",
+    "timestamp": "2026-09-13T07:10:06.512220",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_037",
+    "question_id": "UPSC_ANC_032",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Core fact: In the Early Vedic (Rigvedic) period (c. 1500–1000 BCE), religion centered on personifying and worshipping forces of nature (such as Indra for thunder, Agni for fire, and Varuna for cosmic order) accompanied by the performance of simple domestic sacrifices and chanting of mantras (Yajnas). - Why Option A is incorrect: Bhakti (loving devotion to a personal god) arose much later with the Upanishadic/Bhagavata tradition and flourished during the medieval Bhakti movement. - Why Option B is incorrect: Early Vedic Aryans did not practice idol or image worship; temples and anthropomorphic idols emerged in the post-Vedic and Gupta periods. - Why Option D is incorrect: While 'worship of nature' is correct, the inclusion of 'Bhakti' invalidates this option for the Rigvedic era. - Often confused with: Later Vedic religion, which became far more ritualistic, dominated by complex priestly sacrifices and the rise of gods like Prajapati, whereas the Early Vedic religion was simpler and directly focused on nature deities invoked through Yajnas without temples or idols.",
+    "new_value": "• Magadha (Statement 4) is directly associated with the Buddha: he attained enlightenment at Bodh Gaya, preached at Rajgriha, and received royal patronage from King Bimbisara and King Ajatashatru.\n• Kosala (Statement 3) is directly associated with the Buddha: he spent 21 rainy seasons (vassa) at the Jetavana monastery in Sravasti, Kosala's capital, under King Prasenajit's patronage.\n• Avanti (Statement 1) is incorrect: although its ruler King Chanda Pradyota invited the Buddha, the Buddha did not visit in person; instead, he sent his disciple Mahakaccana to preach Dhamma there.\n• Gandhara (Statement 2) is incorrect: located in the far northwest (modern Pakistan and Afghanistan), the Buddha never visited it during his lifetime; Buddhism spread there much later under Emperor Ashoka and the Kushans.\n• Often confused with: Gandhara's prominence in Buddhist art (Greco-Buddhist / Gandhara school) and Avanti's later Buddhist centers (like Sanchi in Vidisha), which leads candidates to mistakenly assume the Buddha personally visited them.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Original explanations often fail to explicitly contrast the nature-based Rigvedic religion with the later development of Bhakti and murti-puja (idol worship).",
-      "Many sources blur the lines between Early Vedic and Later Vedic ritualistic practices."
+      "Original explanations often fail to clarify the distinction between areas where Buddhism flourished later (Avanti and Gandhara) versus regions the historical Buddha actually visited and lived in during his lifetime (Kosala and Magadha)."
     ]
-  },
-  {
-    "timestamp": "2026-09-13T04:10:30.260381",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_038",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "• Core Textual Basis: Ancient legal texts like the Gautama Dharmasutra, Manusmriti, and Naradasmriti recognize the autonomous status of guilds (Shrenis), confirming their internal regulatory and judicial authority.\n• Statement 1 is incorrect: Guilds were largely autonomous bodies operating under their own customary laws (shreni-dharma). While the king recognized their customs and could intervene in cases of major conflict or sedition, he was not their chief administrative authority, nor was every guild centrally registered with the state.\n• Statement 2 is correct: Each Shreni had autonomous executive power to set standard wages, working hours, codes of conduct, production standards, and prices for goods within its craft or trade.\n• Statement 3 is correct: Guilds maintained their own courts (shreni-kula) with judicial jurisdiction to settle disputes among their members; legal treatises (like the Yajnavalkya and Brihaspati Smritis) place guild arbitration at a recognized level in the ancient judicial hierarchy.\n• Why other options fail: Options A and D include Statement 1, which wrongly depicts guilds as centralized state departments rather than autonomous bodies; Option B omits Statement 2, which correctly describes their economic self-regulation.\n• Often confused with: Mauryan state-controlled enterprises mentioned in the Arthashastra (run by state superintendents like the Pautavadhyaksha or Sansthadhyaksha), which differed fundamentally from autonomous merchant and artisan Shrenis that functioned independently under customary law.",
-    "source": "Import AI Explanation (gemini-3.8-flash)"
   }
 ]
