@@ -1,38 +1,11 @@
 [
   {
-    "timestamp": "2026-09-13T07:10:06.512220",
+    "timestamp": "2026-09-13T13:10:09.323974",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_032",
+    "question_id": "UPSC_ANC_033",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Magadha (Statement 4) is directly associated with the Buddha: he attained enlightenment at Bodh Gaya, preached at Rajgriha, and received royal patronage from King Bimbisara and King Ajatashatru.\n• Kosala (Statement 3) is directly associated with the Buddha: he spent 21 rainy seasons (vassa) at the Jetavana monastery in Sravasti, Kosala's capital, under King Prasenajit's patronage.\n• Avanti (Statement 1) is incorrect: although its ruler King Chanda Pradyota invited the Buddha, the Buddha did not visit in person; instead, he sent his disciple Mahakaccana to preach Dhamma there.\n• Gandhara (Statement 2) is incorrect: located in the far northwest (modern Pakistan and Afghanistan), the Buddha never visited it during his lifetime; Buddhism spread there much later under Emperor Ashoka and the Kushans.\n• Often confused with: Gandhara's prominence in Buddhist art (Greco-Buddhist / Gandhara school) and Avanti's later Buddhist centers (like Sanchi in Vidisha), which leads candidates to mistakenly assume the Buddha personally visited them.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Original explanations often fail to clarify the distinction between areas where Buddhism flourished later (Avanti and Gandhara) versus regions the historical Buddha actually visited and lived in during his lifetime (Kosala and Magadha)."
-    ]
-  },
-  {
-    "timestamp": "2026-09-13T07:10:14.393997",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_031",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "• Direct Historical Fact: Gautama Buddha lived and preached extensively in the middle Gangetic plains, primarily within the Mahajanapadas of Magadha (attained enlightenment at Bodh Gaya, spent rainy retreats at Rajgir under Bimbisara and Ajatashatru) and Kosala (spent the majority of his monsoons at Jetavana monastery in Sravasti under King Prasenajit).\n• Why 1 (Avanti) is incorrect: Although King Pradyota of Avanti invited the Buddha, the Buddha declined due to old age and frail health, sending his disciple Mahakaccana instead. The Buddha never visited Avanti personally.\n• Why 2 (Gandhara) is incorrect: Gandhara (capital Taxila, in modern Pakistan/Afghanistan) lay far to the northwest; the Buddha never travelled outside the middle Gangetic plain during his lifetime. Gandhara became a prominent Buddhist center centuries later under the Mauryan and Kushan empires.\n• Why Options A, B, and C are incorrect: Any combination including 1 (Avanti) or 2 (Gandhara) is incorrect because neither kingdom witnessed the Buddha's physical presence or direct activities during his lifetime.\n• Often confused with: The spread of Buddhist art and patronage versus the life of the Buddha himself. Gandhara is famous for Greco-Buddhist art and Avanti (Ujjain/Sanchi) for Ashokan stupas, but these developments occurred long after the Buddha's Mahaparinirvana.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Standard answer keys and explanations often vaguely state that Gandhara and Avanti were Buddhist centers without clarifying the crucial distinction between the geographic spread of the religion versus the physical presence and events of the Buddha's actual lifetime."
-    ]
-  },
-  {
-    "timestamp": "2026-09-13T07:11:26.379930",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_027",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "• Statement 1 is correct: Rigvedic texts frequently mention protective military gear like 'varman' (coat of mail/armor) and 'sipra' (helmet), whereas excavations from the Indus Valley Civilization (IVC) have yielded offensive bronze/copper weapons (spears, daggers) but no evidence of helmets or defensive armor.\n• Statement 2 is incorrect: IVC was a Bronze Age civilization that had extensive knowledge of gold, silver, copper, and bronze, but did not know iron. Iron was introduced to the subcontinent much later, around 1000 BCE during the Later Vedic period.\n• Statement 3 is correct (per official UPSC evaluation): The horse (ashva) played a central, well-documented role in Rigvedic culture and chariot warfare; in contrast, the IVC is characterized as non-horse-centric, with controversial or doubtful evidence (isolated, disputed skeletal remains at Surkotada), leading historians to conclude there is no clear or undisputed evidence of regular IVC horse domestication.\n• Incorrect Options A, B, and D: Option A omits Statement 3; Options B and D incorrectly include Statement 2, which wrongly claims IVC people knew iron and lacked knowledge of gold and silver.\n• Often confused with: The Later Vedic period vs. Rigvedic period—Rigvedic Aryans primarily used copper/bronze (referred to as 'ayas'), while iron ('shyam ayas' or 'krishna ayas') emerged only in the Later Vedic era.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Statement 3 is contested among modern archaeologists due to reported equine remains from Surkotada and terracotta figurines from Lothal, though UPSC officially upheld Statement 3 as correct (Option C) on the basis that the horse was not an integral or definitively established domesticate of IVC culture."
-    ]
+    "new_value": "- Statement 1 is incorrect: Unlike Fa-Hien's visit during the Gupta era when travel was safer, routes during Harsha's reign were prone to bandits; Yuan Chwang (Hiuen Tsang) was himself robbed multiple times, including by pirates on the Ganga.\n- Statement 2 is correct: Yuan Chwang noted that the judicial system used trial by ordeal—specifically involving fire, water, poison, and weighing—to determine innocence or guilt.\n- Statement 3 is correct: Government revenue included light commercial taxation; merchants were required to pay nominal tolls and duties at ferries, frontiers, and barrier stations.\n- Why Option A is incorrect: It accepts Statement 1 (false) and excludes Statements 2 and 3.\n- Why Option C is incorrect: It includes Statement 1, which directly contradicts Hiuen Tsang's personal accounts of highway robbery.\n- Why Option D is incorrect: It erroneously includes Statement 1 as correct.\n- Often confused with: Fa-Hien (visited during the reign of Chandragupta II). Fa-Hien recorded that internal travel was exceptionally safe and peaceful without harassment, whereas Hiuen Tsang documented deteriorating law and order on transit routes.",
+    "source": "Import AI Explanation (gemini-3.8-flash)"
   }
 ]
