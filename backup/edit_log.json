@@ -1,15 +1,11 @@
 [
   {
-    "timestamp": "2026-09-14T05:48:06.702477",
+    "timestamp": "2026-09-14T11:51:49.872535",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_034",
+    "question_id": "UPSC_ANC_029",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Correct Statement (2): Archaeological finds confirm the worship of both female deities (abundant terracotta Mother Goddess figurines) and male deities (the 'Proto-Shiva' or Pashupati seal depicting a horned male figure surrounded by animals at Mohenjo-daro), as well as nature and tree worship (pipal). • Why Statement 1 is incorrect: Unlike ancient Egypt or Mesopotamia, no dedicated monumental temples, royal palaces, or dynastic tombs have ever been identified in any Indus Valley site; public architecture was civic and utilitarian (e.g., the Great Bath, granaries). • Why Statement 3 is incorrect: Horse-drawn chariots were introduced during the later Vedic period. Harappan transportation relied primarily on solid-wheeled bullock carts and pack animals; there is no evidence of horse-drawn chariots used in warfare. • Often confused with: The Rigvedic civilization, which was horse-centric, pastoral, and heavily utilized horse-drawn chariots (ratha) in battle, unlike the largely peaceful, commercial, and urban Harappans.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Commonly confused because large Harappan structures (Citadel, Great Bath, Granaries) are mistaken for religious temples or royal palaces.",
-      "Candidates frequently conflate Rigvedic military technology (horse-drawn chariots) with the Indus Valley Civilization."
-    ]
+    "new_value": "• Statement 1 is incorrect: Sautrantika (which prioritized the Sutta Pitaka) and Sammitiya (known for the Pudgala/person theory) were early schools of Nikaya Buddhism, not Jainism (whose major sects are Digambara and Svetambara).\n• Statement 2 is correct: Sarvastivada (literally \"the doctrine that all exists\" from 'sarvam asti') asserted that the ultimate constituents of phenomena (dharmas) exist across all three divisions of time—past, present, and future—and are therefore not entirely momentary, persisting in a latent state.\n• Why other options are incorrect:\n  - Option A is incorrect because Statement 1 misidentifies Buddhist sects as Jain.\n  - Option C is incorrect because Statement 1 is false.\n  - Option D is incorrect because Statement 2 accurately characterizes Sarvastivada ontology.\n• Often confused with: Early Buddhist schools (such as Sautrantika, Vaibhashika, and Sammitiya) are frequently confused with minor Jain sub-sects (such as Sthanakvasi, Terapanthi, and Murtipujaka). Additionally, Sarvastivada's belief in the persistence of dharmas directly contrasts with Sautrantika's radical momentariness (ksanikavada).",
+    "source": "Import AI Explanation (gemini-3.8-flash)"
   }
 ]
