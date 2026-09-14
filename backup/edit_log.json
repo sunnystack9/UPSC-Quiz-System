@@ -1,24 +1,15 @@
 [
   {
-    "timestamp": "2026-09-14T11:51:49.872535",
+    "timestamp": "2026-09-14T21:31:30.840478",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_029",
+    "question_id": "UPSC_ANC_030",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Statement 1 is incorrect: Sautrantika (which prioritized the Sutta Pitaka) and Sammitiya (known for the Pudgala/person theory) were early schools of Nikaya Buddhism, not Jainism (whose major sects are Digambara and Svetambara).\n• Statement 2 is correct: Sarvastivada (literally \"the doctrine that all exists\" from 'sarvam asti') asserted that the ultimate constituents of phenomena (dharmas) exist across all three divisions of time—past, present, and future—and are therefore not entirely momentary, persisting in a latent state.\n• Why other options are incorrect:\n  - Option A is incorrect because Statement 1 misidentifies Buddhist sects as Jain.\n  - Option C is incorrect because Statement 1 is false.\n  - Option D is incorrect because Statement 2 accurately characterizes Sarvastivada ontology.\n• Often confused with: Early Buddhist schools (such as Sautrantika, Vaibhashika, and Sammitiya) are frequently confused with minor Jain sub-sects (such as Sthanakvasi, Terapanthi, and Murtipujaka). Additionally, Sarvastivada's belief in the persistence of dharmas directly contrasts with Sautrantika's radical momentariness (ksanikavada).",
-    "source": "Import AI Explanation (gemini-3.8-flash)"
-  },
-  {
-    "timestamp": "2026-09-14T11:52:40.241018",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_025",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "• Supporting Fact: Excavations conducted by the Archaeological Survey of India (ASI) between 1994 and 1998 at Kanganahalli (part of Sannati, Kalaburagi district, Karnataka) unearthed a broken relief slab showing Ashoka flanked by his queens, inscribed in Brahmi script with the label 'Ranyo Asoko' (King Ashoka).\n• Why B is incorrect: Sanchi (Madhya Pradesh) contains numerous relief sculptures and stupas depicting events from Buddha's life and Ashoka's pilgrimage, but none contain an inscribed stone portrait labeled 'Ranyo Ashoka'.\n• Why C is incorrect: Shahbazgarhi (Khyber Pakhtunkhwa, Pakistan) is a site of Major Rock Edicts inscribed in the Kharosthi script; it contains text-only inscriptions on rock faces, with no relief portrait sculptures.\n• Why D is incorrect: Sohgaura (Gorakhpur, Uttar Pradesh) is known for a Mauryan-period copper plate inscription dealing with famine relief and granary management, written in Brahmi script, containing no stone portrait.\n• Often confused with: Maski or Gujarra rock edicts—these are famous for explicitly mentioning the personal name 'Ashoka' instead of just 'Devanampiya Piyadassi', but Kanganahalli is unique because it combines his name and royal title directly with his carved stone portrait.",
+    "new_value": "• Correct Fact: James Prinsep, an officer at the Calcutta Mint and secretary of the Asiatic Society of Bengal, successfully deciphered the Ashokan Brahmi script in 1837, establishing that the title 'Devanampiya Piyadasi' referred to Emperor Ashoka.\n• Why Georg Bühler is incorrect: Although a major German Indologist who authored 'Indian Paleography' and translated the Manusmriti, his epigraphical work took place decades later in the late 19th century.\n• Why Max Müller is incorrect: A German philologist and Orientalist best known for editing the 'Sacred Books of the East' and translating Vedic texts such as the Rigveda; he did not decipher early Indian inscriptions.\n• Why William Jones is incorrect: He founded the Asiatic Society in 1784 and accurately identified 'Sandrokottos' of Greek accounts as Chandragupta Maurya, but he passed away in 1794, well before the Ashokan Brahmi script was deciphered.\n• Often confused with: William Jones vs James Prinsep — Remember that William Jones identified Chandragupta Maurya via Greek sources, whereas James Prinsep deciphered the Ashokan edicts via Brahmi script.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "A common mistake is confusing sites where Ashoka's personal name appears in text edicts (like Maski and Gujarra) with Kanganahalli, which uniquely features his named portrait sculpture.",
-      "Candidates often mix up Sohgaura (a copper-plate inscription) and Shahbazgarhi (a Kharosthi rock edict) with sculptural/stupa sites."
+      "Standard explanations often fail to specify the decipherment year (1837) or the script involved (Ashokan Brahmi).",
+      "Explanations frequently omit why William Jones is a major distracter (identifying Chandragupta Maurya as Sandrokottos vs deciphering Ashokan edicts)."
     ]
   }
 ]
