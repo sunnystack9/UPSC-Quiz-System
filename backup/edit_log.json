@@ -1,11 +1,15 @@
 [
   {
-    "timestamp": "2026-09-13T13:10:09.323974",
+    "timestamp": "2026-09-14T05:48:06.702477",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_033",
+    "question_id": "UPSC_ANC_034",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Statement 1 is incorrect: Unlike Fa-Hien's visit during the Gupta era when travel was safer, routes during Harsha's reign were prone to bandits; Yuan Chwang (Hiuen Tsang) was himself robbed multiple times, including by pirates on the Ganga.\n- Statement 2 is correct: Yuan Chwang noted that the judicial system used trial by ordeal—specifically involving fire, water, poison, and weighing—to determine innocence or guilt.\n- Statement 3 is correct: Government revenue included light commercial taxation; merchants were required to pay nominal tolls and duties at ferries, frontiers, and barrier stations.\n- Why Option A is incorrect: It accepts Statement 1 (false) and excludes Statements 2 and 3.\n- Why Option C is incorrect: It includes Statement 1, which directly contradicts Hiuen Tsang's personal accounts of highway robbery.\n- Why Option D is incorrect: It erroneously includes Statement 1 as correct.\n- Often confused with: Fa-Hien (visited during the reign of Chandragupta II). Fa-Hien recorded that internal travel was exceptionally safe and peaceful without harassment, whereas Hiuen Tsang documented deteriorating law and order on transit routes.",
-    "source": "Import AI Explanation (gemini-3.8-flash)"
+    "new_value": "• Correct Statement (2): Archaeological finds confirm the worship of both female deities (abundant terracotta Mother Goddess figurines) and male deities (the 'Proto-Shiva' or Pashupati seal depicting a horned male figure surrounded by animals at Mohenjo-daro), as well as nature and tree worship (pipal). • Why Statement 1 is incorrect: Unlike ancient Egypt or Mesopotamia, no dedicated monumental temples, royal palaces, or dynastic tombs have ever been identified in any Indus Valley site; public architecture was civic and utilitarian (e.g., the Great Bath, granaries). • Why Statement 3 is incorrect: Horse-drawn chariots were introduced during the later Vedic period. Harappan transportation relied primarily on solid-wheeled bullock carts and pack animals; there is no evidence of horse-drawn chariots used in warfare. • Often confused with: The Rigvedic civilization, which was horse-centric, pastoral, and heavily utilized horse-drawn chariots (ratha) in battle, unlike the largely peaceful, commercial, and urban Harappans.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Commonly confused because large Harappan structures (Citadel, Great Bath, Granaries) are mistaken for religious temples or royal palaces.",
+      "Candidates frequently conflate Rigvedic military technology (horse-drawn chariots) with the Indus Valley Civilization."
+    ]
   }
 ]
