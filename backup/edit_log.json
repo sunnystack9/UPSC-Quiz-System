@@ -1,29 +1,14 @@
 [
   {
-    "timestamp": "2026-09-15T11:10:26.119664",
+    "timestamp": "2026-09-15T22:52:07.562258",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_018",
+    "question_id": "UPSC_ANC_024",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Mahendravarman I (Pallava Dynasty): Ruled circa 590–630 CE; laid the foundation of great Pallava power and architecture, making Event 2 the earliest among the given options.\n• Gopala (Pala Dynasty): Elected king around 750 CE, ending the period of anarchy (matsyanyaya) in Bengal, placing Event 4 second.\n• King Bhoja / Mihira Bhoja (Gurjara-Pratihara Dynasty): Ascended the throne in circa 836 CE and ruled until 885 CE, consolidating Pratihara power and placing Event 1 third.\n• Parantaka I (Imperial Cholas): Ruled from circa 907 to 955 CE, expanding Chola supremacy in the south, making Event 3 the latest.\n• Chronological sequence: Mahendravarman I (c. 600 CE) → Gopala (c. 750 CE) → Bhoja (c. 836 CE) → Parantaka I (c. 907 CE), giving 2 – 4 – 1 – 3.\n• Why Option A is incorrect: It places Bhoja (1) before Gopala (4), whereas the Pala dynasty was founded in 750 CE, decades before Bhoja's accession in 836 CE.\n• Why Option B is incorrect: It wrongly begins with Parantaka I (3), who ruled in the 10th century CE, which is the latest event, not the earliest.\n• Why Option D is incorrect: It also incorrectly begins with Parantaka I (3) and ends with Mahendravarman I (2), completely reversing the timeline.\n• Often confused with: Candidates often confuse King Bhoja of the Gurjara-Pratihara dynasty (9th century CE) with King Bhoja of the Paramara dynasty of Malwa (11th century CE, c. 1010–1055 CE). Similarly, Parantaka I (c. 907 CE) is often confused with Vijayalaya (c. 850 CE), who initially revived Chola rule from Thanjavur.",
+    "new_value": "- Sohgaura is not a Harappan site; it is a Mauryan-era site in Gorakhpur district, Uttar Pradesh, best known for the Sohgaura copper plate inscription written in Prakrit (Brahmi script) detailing state famine relief measures.\n- Chanhudaro (Option A) is a major Mature Harappan site in Sindh, Pakistan, known as an industrial craft and bead-making center that lacked a fortified citadel.\n- Kot Diji (Option B) is an Early-to-Mature Harappan site located near Mohenjo-daro in Sindh, Pakistan, noted for distinctive wheel-made pottery and pre-Harappan defensive walls.\n- Desalpur (Option D) is a fortified Mature Harappan settlement situated in the Kutch district of Gujarat, India.\n- Often confused with: Sohgaura is frequently tested alongside Harappan settlements due to its ancient archaeological prominence, but its primary historical material dates to the Mauryan period (circa 3rd century BCE)—more than a millennium after the decline of the Mature Harappan phase (circa 1900 BCE).",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Original question lacked precise regnal/foundational dates for the rulers.",
-      "Potential confusion between Gurjara-Pratihara King Bhoja (9th century CE) and Paramara King Bhoja (11th century CE).",
-      "Potential confusion between Parantaka I and the initial restorer of Chola power, Vijayalaya."
-    ]
-  },
-  {
-    "timestamp": "2026-09-15T11:11:00.201698",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_019",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Core fact: A 'Hundi' was an indigenous financial instrument developed in early medieval/post-Harsha India that functioned as an unconditional bill of exchange or promissory note, facilitating long-distance trade, credit transactions, and remittance without the physical transfer of coins.\n- Why Option A is incorrect: Royal advisories or royal proclamations issued by kings to subordinates were known as 'Sasana' (edicts) or 'Raja-sasana', not Hundis.\n- Why Option B is incorrect: Daily accounting diaries or record registers kept by merchants or state accountants were known as 'Bahi-Khata' or 'Roznamcha'.\n- Why Option D is incorrect: Feudal commands or administrative orders were known by terms like 'Hukm', 'Patra', or 'Parwana', which carried coercive administrative authority rather than commercial debt/credit obligations.\n- Often confused with: Hawala (an informal money transfer system based strictly on trust networks without negotiable paper) and Tamassuk (a formal debt bond or mortgage deed acknowledging a personal loan, unlike the transferable, negotiable nature of a Hundi).",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Prior explanations often fail to distinguish indigenous negotiable paper instruments (Hundi) from general loan deeds (Tamassuk) and royal orders.",
-      "Explanations frequently cite Mughal/colonial usage of Hundi rather than contextualizing its early medieval post-Harsha origins."
+      "Test takers often confuse Sohgaura with Harappan sites due to its famous ancient inscription, mistaking early historic epigraphy for Bronze Age IVC archaeological sites."
     ]
   }
 ]
