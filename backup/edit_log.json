@@ -12,5 +12,18 @@
       "Potential confusion between Gurjara-Pratihara King Bhoja (9th century CE) and Paramara King Bhoja (11th century CE).",
       "Potential confusion between Parantaka I and the initial restorer of Chola power, Vijayalaya."
     ]
+  },
+  {
+    "timestamp": "2026-09-15T11:11:00.201698",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_019",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Core fact: A 'Hundi' was an indigenous financial instrument developed in early medieval/post-Harsha India that functioned as an unconditional bill of exchange or promissory note, facilitating long-distance trade, credit transactions, and remittance without the physical transfer of coins.\n- Why Option A is incorrect: Royal advisories or royal proclamations issued by kings to subordinates were known as 'Sasana' (edicts) or 'Raja-sasana', not Hundis.\n- Why Option B is incorrect: Daily accounting diaries or record registers kept by merchants or state accountants were known as 'Bahi-Khata' or 'Roznamcha'.\n- Why Option D is incorrect: Feudal commands or administrative orders were known by terms like 'Hukm', 'Patra', or 'Parwana', which carried coercive administrative authority rather than commercial debt/credit obligations.\n- Often confused with: Hawala (an informal money transfer system based strictly on trust networks without negotiable paper) and Tamassuk (a formal debt bond or mortgage deed acknowledging a personal loan, unlike the transferable, negotiable nature of a Hundi).",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Prior explanations often fail to distinguish indigenous negotiable paper instruments (Hundi) from general loan deeds (Tamassuk) and royal orders.",
+      "Explanations frequently cite Mughal/colonial usage of Hundi rather than contextualizing its early medieval post-Harsha origins."
+    ]
   }
 ]
