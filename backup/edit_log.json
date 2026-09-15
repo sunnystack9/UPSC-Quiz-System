@@ -1,14 +1,16 @@
 [
   {
-    "timestamp": "2026-09-15T00:18:07.871196",
+    "timestamp": "2026-09-15T11:10:26.119664",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_028",
+    "question_id": "UPSC_ANC_018",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Core Concept: In democratic political theory and constitutional law (e.g., Part III of the Constitution of India), rights are recognized as justified claims of individuals/citizens against the State, imposing negative obligations on the State to prevent authoritarian overreach and ensure individual freedom and dignity.\n- Why Option A is incorrect: The State imposes duties and legal obligations on citizens, not rights against them; rights exist primarily to protect individuals from State encroachments.\n- Why Option B is incorrect: Rights are universal entitlements inherent to human beings, not 'privileges' (which are discretionary advantages granted selectively by an authority).\n- Why Option D is incorrect: Democratic rights are universal and egalitarian, applying equally to all persons/citizens (e.g., Article 14 ensures equality before the law), directly opposing feudal or oligarchic privileges reserved for a select few.\n- Often confused with: Option B; rights are fundamental entitlements available to all citizens equally, whereas 'privileges' are special, revocable concessions granted to select individuals or groups.",
+    "new_value": "• Mahendravarman I (Pallava Dynasty): Ruled circa 590–630 CE; laid the foundation of great Pallava power and architecture, making Event 2 the earliest among the given options.\n• Gopala (Pala Dynasty): Elected king around 750 CE, ending the period of anarchy (matsyanyaya) in Bengal, placing Event 4 second.\n• King Bhoja / Mihira Bhoja (Gurjara-Pratihara Dynasty): Ascended the throne in circa 836 CE and ruled until 885 CE, consolidating Pratihara power and placing Event 1 third.\n• Parantaka I (Imperial Cholas): Ruled from circa 907 to 955 CE, expanding Chola supremacy in the south, making Event 3 the latest.\n• Chronological sequence: Mahendravarman I (c. 600 CE) → Gopala (c. 750 CE) → Bhoja (c. 836 CE) → Parantaka I (c. 907 CE), giving 2 – 4 – 1 – 3.\n• Why Option A is incorrect: It places Bhoja (1) before Gopala (4), whereas the Pala dynasty was founded in 750 CE, decades before Bhoja's accession in 836 CE.\n• Why Option B is incorrect: It wrongly begins with Parantaka I (3), who ruled in the 10th century CE, which is the latest event, not the earliest.\n• Why Option D is incorrect: It also incorrectly begins with Parantaka I (3) and ends with Mahendravarman I (2), completely reversing the timeline.\n• Often confused with: Candidates often confuse King Bhoja of the Gurjara-Pratihara dynasty (9th century CE) with King Bhoja of the Paramara dynasty of Malwa (11th century CE, c. 1010–1055 CE). Similarly, Parantaka I (c. 907 CE) is often confused with Vijayalaya (c. 850 CE), who initially revived Chola rule from Thanjavur.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Theme mismatch: The question belongs to Indian Polity / Political Theory (UPSC CSE Prelims 2017), not Ancient History."
+      "Original question lacked precise regnal/foundational dates for the rulers.",
+      "Potential confusion between Gurjara-Pratihara King Bhoja (9th century CE) and Paramara King Bhoja (11th century CE).",
+      "Potential confusion between Parantaka I and the initial restorer of Chola power, Vijayalaya."
     ]
   }
 ]
