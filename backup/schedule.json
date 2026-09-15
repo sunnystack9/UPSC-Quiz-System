@@ -92,12 +92,12 @@
     "next_due": "2026-09-08T19:07:09.116358"
   },
   "Dev Maan::UPSC_ANC_008": {
-    "stage": 0,
-    "next_due": "2026-09-07T03:48:51.611183"
+    "stage": 1,
+    "next_due": "2026-09-15T18:28:01.051747"
   },
   "Dev Maan::UPSC_ANC_004": {
     "stage": 0,
-    "next_due": "2026-09-07T03:50:58.041887"
+    "next_due": "2026-09-15T16:25:58.924820"
   },
   "Dev Maan::NCERT_ANC_419": {
     "stage": 0,
@@ -112,15 +112,39 @@
     "next_due": "2026-09-08T15:32:57.604976"
   },
   "Dev Maan::NCERT_ANC_122": {
-    "stage": 0,
-    "next_due": "2026-09-08T15:33:45.885174"
+    "stage": 1,
+    "next_due": "2026-09-15T19:57:51.801552"
   },
   "Dev Maan::NCERT_ANC_642": {
     "stage": 0,
     "next_due": "2026-09-08T15:36:29.684402"
   },
   "Dev Maan::NCERT_ANC_069": {
+    "stage": 1,
+    "next_due": "2026-09-15T18:23:18.509175"
+  },
+  "Dev Maan::NCERT_ANC_337": {
     "stage": 0,
-    "next_due": "2026-09-08T15:37:08.280936"
+    "next_due": "2026-09-15T16:20:43.583510"
+  },
+  "Dev Maan::NCERT_ANC_251": {
+    "stage": 0,
+    "next_due": "2026-09-15T16:22:45.776395"
+  },
+  "Dev Maan::NCERT_ANC_600": {
+    "stage": 0,
+    "next_due": "2026-09-15T16:24:35.046021"
+  },
+  "Dev Maan::UPSC_ANC_001": {
+    "stage": 0,
+    "next_due": "2026-09-15T16:25:30.001651"
+  },
+  "Dev Maan::NCERT_ANC_499": {
+    "stage": 0,
+    "next_due": "2026-09-15T16:26:30.997759"
+  },
+  "Dev Maan::NCERT_ANC_475": {
+    "stage": 0,
+    "next_due": "2026-09-15T16:27:06.218691"
   }
 }
