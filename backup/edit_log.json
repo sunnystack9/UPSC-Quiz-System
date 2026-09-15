@@ -1,15 +1,14 @@
 [
   {
-    "timestamp": "2026-09-14T21:31:30.840478",
+    "timestamp": "2026-09-15T00:18:07.871196",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_030",
+    "question_id": "UPSC_ANC_028",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Correct Fact: James Prinsep, an officer at the Calcutta Mint and secretary of the Asiatic Society of Bengal, successfully deciphered the Ashokan Brahmi script in 1837, establishing that the title 'Devanampiya Piyadasi' referred to Emperor Ashoka.\n• Why Georg Bühler is incorrect: Although a major German Indologist who authored 'Indian Paleography' and translated the Manusmriti, his epigraphical work took place decades later in the late 19th century.\n• Why Max Müller is incorrect: A German philologist and Orientalist best known for editing the 'Sacred Books of the East' and translating Vedic texts such as the Rigveda; he did not decipher early Indian inscriptions.\n• Why William Jones is incorrect: He founded the Asiatic Society in 1784 and accurately identified 'Sandrokottos' of Greek accounts as Chandragupta Maurya, but he passed away in 1794, well before the Ashokan Brahmi script was deciphered.\n• Often confused with: William Jones vs James Prinsep — Remember that William Jones identified Chandragupta Maurya via Greek sources, whereas James Prinsep deciphered the Ashokan edicts via Brahmi script.",
+    "new_value": "- Core Concept: In democratic political theory and constitutional law (e.g., Part III of the Constitution of India), rights are recognized as justified claims of individuals/citizens against the State, imposing negative obligations on the State to prevent authoritarian overreach and ensure individual freedom and dignity.\n- Why Option A is incorrect: The State imposes duties and legal obligations on citizens, not rights against them; rights exist primarily to protect individuals from State encroachments.\n- Why Option B is incorrect: Rights are universal entitlements inherent to human beings, not 'privileges' (which are discretionary advantages granted selectively by an authority).\n- Why Option D is incorrect: Democratic rights are universal and egalitarian, applying equally to all persons/citizens (e.g., Article 14 ensures equality before the law), directly opposing feudal or oligarchic privileges reserved for a select few.\n- Often confused with: Option B; rights are fundamental entitlements available to all citizens equally, whereas 'privileges' are special, revocable concessions granted to select individuals or groups.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Standard explanations often fail to specify the decipherment year (1837) or the script involved (Ashokan Brahmi).",
-      "Explanations frequently omit why William Jones is a major distracter (identifying Chandragupta Maurya as Sandrokottos vs deciphering Ashokan edicts)."
+      "Theme mismatch: The question belongs to Indian Polity / Political Theory (UPSC CSE Prelims 2017), not Ancient History."
     ]
   }
 ]
