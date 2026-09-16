@@ -1,14 +1,11 @@
 [
   {
-    "timestamp": "2026-09-15T22:52:07.562258",
+    "timestamp": "2026-09-16T01:07:08.769695",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_024",
+    "question_id": "UPSC_ANC_026",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Sohgaura is not a Harappan site; it is a Mauryan-era site in Gorakhpur district, Uttar Pradesh, best known for the Sohgaura copper plate inscription written in Prakrit (Brahmi script) detailing state famine relief measures.\n- Chanhudaro (Option A) is a major Mature Harappan site in Sindh, Pakistan, known as an industrial craft and bead-making center that lacked a fortified citadel.\n- Kot Diji (Option B) is an Early-to-Mature Harappan site located near Mohenjo-daro in Sindh, Pakistan, noted for distinctive wheel-made pottery and pre-Harappan defensive walls.\n- Desalpur (Option D) is a fortified Mature Harappan settlement situated in the Kutch district of Gujarat, India.\n- Often confused with: Sohgaura is frequently tested alongside Harappan settlements due to its ancient archaeological prominence, but its primary historical material dates to the Mauryan period (circa 3rd century BCE)—more than a millennium after the decline of the Mature Harappan phase (circa 1900 BCE).",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Test takers often confuse Sohgaura with Harappan sites due to its famous ancient inscription, mistaking early historic epigraphy for Bronze Age IVC archaeological sites."
-    ]
+    "new_value": "- Specific supporting fact: In contemporary land-grant charters (copper plates) and epigraphic records such as the Junagadh Inscription of Skandagupta, Vishti (forced labour) is explicitly categorized as an unpaid corvée levy and listed alongside regular taxes (like Bali, Bhaga, and Kara) as an imperial resource or income extracted by the state and delegated to grant-holders.\n- Why Option B is incorrect: Inscriptions from the Maitrakas of Valabhi (Kathiawar region) and land grants from central India (Madhya Pradesh) explicitly mention Vishti, confirming it was prevalent rather than absent in these regions.\n- Why Option C is incorrect: By definition, Vishti was unfree and unpaid labour demanded by rulers or local landlords; no weekly or periodic wages were provided.\n- Why Option D is incorrect: There was no customary or statutory rule specifying that the eldest son had to be sent; labour could be extracted generally from any peasant or artisan household as required.\n- Often confused with: 'Begar' in later medieval/colonial times. While both signify unpaid forced labour, ancient Vishti in the Gupta period held formal legal status as an institutionalized tax paid in the form of physical work, rather than an informal feudal imposition.",
+    "source": "Import AI Explanation (gemini-3.8-flash)"
   }
 ]
