@@ -1,28 +1,15 @@
 [
   {
-    "timestamp": "2026-09-16T07:18:42.279063",
+    "timestamp": "2026-09-16T17:58:21.764743",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_013",
+    "question_id": "UPSC_ANC_017",
     "field": "explanation",
     "old_value": "",
-    "new_value": "• Correct Answer: A (Dholavira) - Located on Khadir Bet island in the Rann of Kutch (Gujarat), Dholavira featured an advanced water management network comprising at least 16 rock-cut reservoirs, dams/bunds across the seasonal rivulets Mansar and Manhar, and stone-cut feeder channels.\n• Why B is incorrect (Kalibangan): Located in Rajasthan along the dried-up Ghaggar riverbed; best known for the earliest ploughed field, fire altars, and mud-brick fortifications, not stone-built cascade reservoirs.\n• Why C is incorrect (Rakhigarhi): Located in Hisar, Haryana; known as the largest Indus Valley site by area with distinct habitation mounds and cemeteries, but lacks an elaborate dam-and-reservoir water-harvesting system.\n• Why D is incorrect (Ropar / Rupnagar): Located along the Sutlej in Punjab; known for yielding the first post-independence Harappan excavations and unique dog-buried-with-human grave, without large-scale water-control engineering.\n• Often confused with: Lothal (Gujarat), which featured a tidal dockyard connected to the Sabarmati/Bhogavo river for maritime trade, whereas Dholavira managed freshwater harvesting through inland dams and reservoirs.",
+    "new_value": "- Statement 1 is incorrect: Sthaviravadins (literally 'Elders') belong to early Nikaya Buddhism (Theravada/Hinayana tradition), representing the conservative faction after the First Buddhist Council/Second Buddhist Council schism, not Mahayana.\n- Statement 2 is correct: The Lokottaravadins emerged as one of the major sub-sects or offshoots of the Mahasanghika school, primarily distinguished by their supramundane (lokottara) concept of the Buddha.\n- Statement 3 is correct: Mahasanghikas conceptualized the Buddha as transcendental, eternal, and supramundane (deification of Buddha), along with promoting the Bodhisattva ideal, which directly paved the way for and fostered Mahayana Buddhism.\n- Why Options A and D are wrong: Both include Statement 1, which wrongly assigns Sthaviravadins to Mahayana rather than the precursor to Theravada.\n- Why Option C is wrong: It omits Statement 2, which is historically accurate regarding Buddhist sectarian lineages recorded in texts like the 'Samayabhedoparacanacakra' by Vasumitra.\n- Often confused with: Sthaviravada vs. Theravada vs. Mahasanghika. Sthaviravada is the Sanskrit term corresponding to the Pali 'Theravada'; Mahasanghika was the liberal breakaway faction from which Lokottaravada and eventually Mahayana doctrinal elements arose.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Standard explanations often omit the names of the seasonal streams (Mansar and Manhar) harnessed at Dholavira.",
-      "Explanations frequently confuse Lothal's marine dockyard architecture with Dholavira's freshwater reservoir system."
-    ]
-  },
-  {
-    "timestamp": "2026-09-16T07:20:32.062747",
-    "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_015",
-    "field": "explanation",
-    "old_value": "",
-    "new_value": "- Pair 1 is incorrectly matched: Burzahom (Srinagar district, Jammu & Kashmir) is a prominent Neolithic-Megalithic site famous for subterranean pit-dwellings, bone tools, and unique burials (such as dogs buried with masters), not rock-cut shrines.\\n- Pair 2 is correctly matched: Chandraketugarh (North 24 Parganas, West Bengal) was a major river-port town famous for its elaborate Shunga-Kushana period terracotta figurines, plaques, and pottery.\\n- Pair 3 is correctly matched: Ganeshwar (Sikar, Rajasthan), located near the Khetri copper belt, is the type site of the Ganeshwar-Jodhpura Chalcolithic culture, renowned for hundreds of copper artefacts (arrowheads, celts, chisels, fishhooks) supplied to Harappan sites.\\n- Why Option A is incorrect: Pair 1 is false, and it omits valid pairs 2 and 3.\\n- Why Option B is incorrect: Pair 1 is false.\\n- Why Option C is incorrect: It omits pair 2, which is also factually correct.\\n- Often confused with: Burzahom's underground pit-dwellings are sometimes conflated with rock-cut chambers; pit-dwellings were cut into Karewa clay/loess soil with post-holes for timber/thatch roofs, unlike true rock-cut shrines (e.g., Barabar Caves, Ajanta) carved into solid bedrock.",
-    "source": "Import AI Explanation (gemini-3.8-flash)",
-    "issues_found": [
-      "Original explanations often fail to clarify the difference between Burzahom's Neolithic pit dwellings and rock-cut cave architecture.",
-      "Explanations frequently omit the specific cultural and temporal context (e.g., Shunga-Kushana period for Chandraketugarh terracotta, Khetri link for Ganeshwar copper)."
+      "Original explanations often fail to specify the Council lineage (Second Buddhist Council at Vaishali) where the original split between Sthaviravadins and Mahasanghikas occurred.",
+      "Candidates frequently confuse Sthaviravada with Mahayana due to the complex Sanskrit terminology."
     ]
   }
 ]
