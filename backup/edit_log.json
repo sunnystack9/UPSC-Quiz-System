@@ -11,5 +11,18 @@
       "Standard explanations often omit the names of the seasonal streams (Mansar and Manhar) harnessed at Dholavira.",
       "Explanations frequently confuse Lothal's marine dockyard architecture with Dholavira's freshwater reservoir system."
     ]
+  },
+  {
+    "timestamp": "2026-09-16T07:20:32.062747",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_015",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Pair 1 is incorrectly matched: Burzahom (Srinagar district, Jammu & Kashmir) is a prominent Neolithic-Megalithic site famous for subterranean pit-dwellings, bone tools, and unique burials (such as dogs buried with masters), not rock-cut shrines.\\n- Pair 2 is correctly matched: Chandraketugarh (North 24 Parganas, West Bengal) was a major river-port town famous for its elaborate Shunga-Kushana period terracotta figurines, plaques, and pottery.\\n- Pair 3 is correctly matched: Ganeshwar (Sikar, Rajasthan), located near the Khetri copper belt, is the type site of the Ganeshwar-Jodhpura Chalcolithic culture, renowned for hundreds of copper artefacts (arrowheads, celts, chisels, fishhooks) supplied to Harappan sites.\\n- Why Option A is incorrect: Pair 1 is false, and it omits valid pairs 2 and 3.\\n- Why Option B is incorrect: Pair 1 is false.\\n- Why Option C is incorrect: It omits pair 2, which is also factually correct.\\n- Often confused with: Burzahom's underground pit-dwellings are sometimes conflated with rock-cut chambers; pit-dwellings were cut into Karewa clay/loess soil with post-holes for timber/thatch roofs, unlike true rock-cut shrines (e.g., Barabar Caves, Ajanta) carved into solid bedrock.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Original explanations often fail to clarify the difference between Burzahom's Neolithic pit dwellings and rock-cut cave architecture.",
+      "Explanations frequently omit the specific cultural and temporal context (e.g., Shunga-Kushana period for Chandraketugarh terracotta, Khetri link for Ganeshwar copper)."
+    ]
   }
 ]
