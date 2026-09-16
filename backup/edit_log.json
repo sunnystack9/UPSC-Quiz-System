@@ -1,11 +1,15 @@
 [
   {
-    "timestamp": "2026-09-16T01:07:08.769695",
+    "timestamp": "2026-09-16T07:18:42.279063",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_026",
+    "question_id": "UPSC_ANC_013",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Specific supporting fact: In contemporary land-grant charters (copper plates) and epigraphic records such as the Junagadh Inscription of Skandagupta, Vishti (forced labour) is explicitly categorized as an unpaid corvée levy and listed alongside regular taxes (like Bali, Bhaga, and Kara) as an imperial resource or income extracted by the state and delegated to grant-holders.\n- Why Option B is incorrect: Inscriptions from the Maitrakas of Valabhi (Kathiawar region) and land grants from central India (Madhya Pradesh) explicitly mention Vishti, confirming it was prevalent rather than absent in these regions.\n- Why Option C is incorrect: By definition, Vishti was unfree and unpaid labour demanded by rulers or local landlords; no weekly or periodic wages were provided.\n- Why Option D is incorrect: There was no customary or statutory rule specifying that the eldest son had to be sent; labour could be extracted generally from any peasant or artisan household as required.\n- Often confused with: 'Begar' in later medieval/colonial times. While both signify unpaid forced labour, ancient Vishti in the Gupta period held formal legal status as an institutionalized tax paid in the form of physical work, rather than an informal feudal imposition.",
-    "source": "Import AI Explanation (gemini-3.8-flash)"
+    "new_value": "• Correct Answer: A (Dholavira) - Located on Khadir Bet island in the Rann of Kutch (Gujarat), Dholavira featured an advanced water management network comprising at least 16 rock-cut reservoirs, dams/bunds across the seasonal rivulets Mansar and Manhar, and stone-cut feeder channels.\n• Why B is incorrect (Kalibangan): Located in Rajasthan along the dried-up Ghaggar riverbed; best known for the earliest ploughed field, fire altars, and mud-brick fortifications, not stone-built cascade reservoirs.\n• Why C is incorrect (Rakhigarhi): Located in Hisar, Haryana; known as the largest Indus Valley site by area with distinct habitation mounds and cemeteries, but lacks an elaborate dam-and-reservoir water-harvesting system.\n• Why D is incorrect (Ropar / Rupnagar): Located along the Sutlej in Punjab; known for yielding the first post-independence Harappan excavations and unique dog-buried-with-human grave, without large-scale water-control engineering.\n• Often confused with: Lothal (Gujarat), which featured a tidal dockyard connected to the Sabarmati/Bhogavo river for maritime trade, whereas Dholavira managed freshwater harvesting through inland dams and reservoirs.",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Standard explanations often omit the names of the seasonal streams (Mansar and Manhar) harnessed at Dholavira.",
+      "Explanations frequently confuse Lothal's marine dockyard architecture with Dholavira's freshwater reservoir system."
+    ]
   }
 ]
