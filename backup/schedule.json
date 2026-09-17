@@ -97,7 +97,7 @@
   },
   "Dev Maan::UPSC_ANC_004": {
     "stage": 0,
-    "next_due": "2026-09-15T16:25:58.924820"
+    "next_due": "2026-09-17T13:47:43.967998"
   },
   "Dev Maan::NCERT_ANC_419": {
     "stage": 0,
@@ -124,16 +124,16 @@
     "next_due": "2026-09-15T18:23:18.509175"
   },
   "Dev Maan::NCERT_ANC_337": {
-    "stage": 0,
-    "next_due": "2026-09-15T16:20:43.583510"
+    "stage": 1,
+    "next_due": "2026-09-17T17:07:09.194662"
   },
   "Dev Maan::NCERT_ANC_251": {
     "stage": 0,
     "next_due": "2026-09-15T16:22:45.776395"
   },
   "Dev Maan::NCERT_ANC_600": {
-    "stage": 0,
-    "next_due": "2026-09-15T16:24:35.046021"
+    "stage": 1,
+    "next_due": "2026-09-17T17:23:02.808554"
   },
   "Dev Maan::UPSC_ANC_001": {
     "stage": 0,
@@ -148,16 +148,16 @@
     "next_due": "2026-09-15T16:27:06.218691"
   },
   "Dev Maan::UPSC_MEDHIST_PW_Q0022": {
-    "stage": 0,
-    "next_due": "2026-09-17T11:20:20.934491"
+    "stage": 1,
+    "next_due": "2026-09-17T15:32:24.392627"
   },
   "Dev Maan::UPSC_MEDHIST_PW_Q0249": {
     "stage": 0,
     "next_due": "2026-09-17T11:22:33.750028"
   },
   "Dev Maan::UPSC_MEDHIST_PW_Q0059": {
-    "stage": 0,
-    "next_due": "2026-09-17T11:24:32.281257"
+    "stage": 1,
+    "next_due": "2026-09-17T17:13:38.904950"
   },
   "Dev Maan::UPSC_MEDHIST_PW_Q0286": {
     "stage": 0,
@@ -173,7 +173,7 @@
   },
   "Dev Maan::UPSC_MEDHIST_PW_Q0055": {
     "stage": 0,
-    "next_due": "2026-09-17T13:17:20.780658"
+    "next_due": "2026-09-17T13:33:44.921574"
   },
   "Dev Maan::UPSC_MEDHIST_PW_Q0227": {
     "stage": 0,
@@ -186,5 +186,21 @@
   "Dev Maan::UPSC_MEDHIST_PW_Q0229": {
     "stage": 0,
     "next_due": "2026-09-17T13:24:00.148737"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0117": {
+    "stage": 0,
+    "next_due": "2026-09-17T13:29:57.192649"
+  },
+  "Dev Maan::NCERT_ANC_608": {
+    "stage": 0,
+    "next_due": "2026-09-17T13:39:31.583672"
+  },
+  "Dev Maan::NCERT_ANC_309": {
+    "stage": 0,
+    "next_due": "2026-09-17T13:42:25.637192"
+  },
+  "Dev Maan::NCERT_ANC_047": {
+    "stage": 0,
+    "next_due": "2026-09-17T13:44:49.422194"
   }
 }
