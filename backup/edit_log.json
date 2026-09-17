@@ -291,5 +291,18 @@
     "field": "question stem",
     "old_value": "Consider the following dynasties/polities: (1) Bahamani Kingdom (2) Khilji Dynasty (3) Maratha polity (4) Vijayanagara Empire. Based on the timeline of establishment given in the text, arrange them in chronological order.",
     "new_value": "Consider the following dynasties/polities: \n(1) Bahamani Kingdom (2) Khilji Dynasty (3) Maratha polity (4) Vijayanagara Empire. \nBased on the timeline of establishment given in the text, arrange them in chronological order."
+  },
+  {
+    "timestamp": "2026-09-17T13:26:11.023326",
+    "user": "Dev Maan",
+    "question_id": "UPSC_MEDHIST_PW_Q0059",
+    "field": "explanation",
+    "old_value": "- Text confirms all three points about bandagan: favoured by Iltutmish, purchased and trained for military/political roles, and valued for dependence-driven trust.",
+    "new_value": "- Statement 1 is correct because early Delhi Sultans, especially Shams-ud-din Iltutmish, favored the special slaves known as bandagan rather than depending solely on aristocrats and landed chieftains (iqtadars). \n- Statement 2 is correct because these slaves were carefully purchased for military service, given rigorous training in various administrative and military skills, and subsequently entrusted with important political offices. \n- Statement 3 is correct because the bandagan were totally dependent upon their master, the Sultan, which was perceived by the rulers as fostering absolute trust and reliability in administration, as they had no independent family or political base. \n- Since all three statements are accurate, option d is the correct answer. \n- Options a, b, and c are incorrect because each of them omits at least one valid statement detailing the nature, training, and strategic employment of the bandagan by the early Delhi Sultans.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "The current explanation is overly brief and lacks the structured bullet-point format required for effective UPSC exam review.",
+      "It does not explicitly explain why partial combinations are incorrect by addressing the specific conditions of each statement."
+    ]
   }
 ]
