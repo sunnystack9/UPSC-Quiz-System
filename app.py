@@ -2137,6 +2137,27 @@ def _build_ai_explanation_prompt(q, mode):
 _GEMINI_RETRY_ATTEMPTS = 3
 _GEMINI_RETRY_BACKOFF_SECONDS = (2, 4)  # waited before attempt 2 and attempt 3 respectively
 
+# Pinned to a specific STABLE model rather than the "gemini-flash-latest"
+# alias this used to use. "-latest" gets hot-swapped by Google to whatever
+# their newest Flash release is -- as of Sept 2026 that's Gemini 3.8 Flash,
+# their heaviest current Flash tier ("long-horizon software engineering,
+# autonomous agents, complex enterprise workflows"), which is far more than
+# a short bullet-point MCQ explanation needs. That extra weight isn't free:
+# the full-weight Flash tier's free-tier daily quota (~20 requests/day as of
+# Sept 2026) is a small fraction of the lighter Flash-Lite tier's (~500/day)
+# -- which is what was actually causing Auto-fill-missing-explanations to
+# exhaust its quota after only one or two batches of AI_AUTOFILL_MAX_PER_RUN.
+# gemini-3.5-flash-lite is explicitly positioned by Google for exactly this
+# kind of high-throughput, low-complexity task, and -- unlike the 2.0 and
+# 2.5 generations, both already shut down or shutting down within weeks of
+# this comment being written -- it's a current-generation Stable model with
+# no deprecation notice as of this writing. Pinning (rather than aliasing to
+# "-latest") also means this can't silently float back onto a heavier,
+# tighter-quota model the next time Google ships a new Flash release --
+# revisit this constant manually if Gemini 3.5 Flash-Lite itself is ever
+# deprecated, rather than switching back to an auto-floating alias.
+GEMINI_EXPLANATION_MODEL = "gemini-3.5-flash-lite"
+
 # Floor on the gap between the START of one Gemini call and the next,
 # enforced by _throttle_gemini_call() below -- separate from
 # _GEMINI_RETRY_BACKOFF_SECONDS above, which only spaces out RETRIES of the
@@ -2362,10 +2383,11 @@ def suggest_ai_explanation(q, mode):
     it reproducing the same failure question after question.
 
     model_version comes straight from the API response, not from the model=
-    string we sent -- since that string is the "gemini-flash-latest" alias
-    (see the model= argument below), this is the only way to know which
-    actual model version answered a given call, both for display right after
-    the call and for the provenance tag apply_explanation_edit() logs on save."""
+    string we sent -- since that string is a pinned model id, not a "-latest"
+    alias (see GEMINI_EXPLANATION_MODEL below and the model= argument in the
+    API call), this still confirms which exact model actually answered a
+    given call, both for display right after the call and for the
+    provenance tag apply_explanation_edit() logs on save."""
     client = _gemini_client()
     if client is None:
         return {"error": "Gemini isn't configured — check gemini_api_key in secrets and that google-genai is installed."}
@@ -2378,7 +2400,7 @@ def suggest_ai_explanation(q, mode):
         _throttle_gemini_call()
         try:
             response = client.models.generate_content(
-                model="gemini-flash-latest",
+                model=GEMINI_EXPLANATION_MODEL,
                 contents=_build_ai_explanation_prompt(q, mode),
                 config=genai_types.GenerateContentConfig(
                     response_mime_type="application/json",
