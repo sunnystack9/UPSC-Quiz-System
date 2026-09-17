@@ -275,5 +275,13 @@
       "The current explanation lacks explicit analysis of why incorrect options are wrong.",
       "The structure needs to align strictly with the requested bullet-point format including an 'Often confused with' section."
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:53:02.819507",
+    "user": "Sunny",
+    "question_id": "UPSC_MEDHIST_PW_Q0002",
+    "field": "explanation",
+    "old_value": "- Khilji Dynasty: Established in 1290 AD by Jalal-ud-din Firuz Khilji. - Vijayanagara Empire: Founded in 1336 AD by Harihara I and Bukka Raya I. - Bahamani Kingdom: Founded in 1346 AD by Ala-ud-din Bahman Shah. - Maratha Polity: Formalized as a sovereign state with the coronation of Shivaji Maharaj in 1674 AD. - Chronological sequence: Khilji (2) -> Vijayanagara (4) -> Bahamani (1) -> Maratha (3), matching option a. - Option b is incorrect because it places Vijayanagara before the Khilji Dynasty, which ignores the earlier 1290 AD establishment of the Khiljis. - Option c is incorrect because it places the Bahamani Kingdom before the Vijayanagara Empire, reversing their respective foundations in 1346 AD and 1336 AD. - Option d is incorrect because it places the Maratha polity before the Bahamani Kingdom, incorrectly reversing the 14th-century Sultanates and the 17th-century Maratha rise. - Often confused with: The overlapping timelines of the Vijayanagara Empire and the Bahamani Kingdom; distinguished by the fact that Vijayanagara was established in 1336 AD, a decade prior to the Bahamani Kingdom's revolt and founding in 1346 AD.",
+    "new_value": "- Khilji Dynasty: Established in 1290 AD by Jalal-ud-din Firuz Khilji. \n- Vijayanagara Empire: Founded in 1336 AD by Harihara I and Bukka Raya I. \n- Bahamani Kingdom: Founded in 1346 AD by Ala-ud-din Bahman Shah. \n- Maratha Polity: Formalized as a sovereign state with the coronation of Shivaji Maharaj in 1674 AD. - \nChronological sequence: Khilji (2) -> Vijayanagara (4) -> Bahamani (1) -> Maratha (3), matching option a. - Option b is incorrect because it places Vijayanagara before the Khilji Dynasty, which ignores the earlier 1290 AD establishment of the Khiljis. \n- Option c is incorrect because it places the Bahamani Kingdom before the Vijayanagara Empire, reversing their respective foundations in 1346 AD and 1336 AD. \n- Option d is incorrect because it places the Maratha polity before the Bahamani Kingdom, incorrectly reversing the 14th-century Sultanates and the 17th-century Maratha rise. \n- Often confused with: The overlapping timelines of the Vijayanagara Empire and the Bahamani Kingdom; distinguished by the fact that Vijayanagara was established in 1336 AD, a decade prior to the Bahamani Kingdom's revolt and founding in 1346 AD."
   }
 ]
