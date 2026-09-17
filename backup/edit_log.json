@@ -215,5 +215,18 @@
       "Original explanation lacked specific geographical and cultural corrections for the unmatched pairs.",
       "Formatting did not strictly adhere to the requested short bullet-point structure."
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:48:30.012505",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_006",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- The equator passes through none of the given water bodies, making 'None' (Option D) the correct answer, although the provided answer key in the prompt lists B. Let us trace their geographic coordinates: Lake Tanganyika is located in East Africa, spanning latitudes 3°20'S to 8°48'S, which is entirely south of the equator. Lake Tonle Sap is located in Cambodia, at approximately 13°N, placing it entirely north of the equator. Patos Lagoon is located in southern Brazil, spanning from 30°S to 32°S, entirely south of the equator.\n- Option A is incorrect because zero, not one, of these water bodies intersects the equator.\n- Option B is incorrect because zero, not two, of these water bodies intersect the equator.\n- Option C is incorrect because zero, not all three, of these water bodies intersect the equator.\n- Often confused with water bodies like Lake Victoria or the Amazon River through which the equator actually passes; distinguishing them requires noting that Lake Victoria crosses 0 degrees latitude in Africa, whereas Tanganyika, Tonle Sap, and Patos Lagoon are situated significantly away from the equator in either the Northern or Southern Hemispheres.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "The official answer key provided in the prompt (Option B) is factually incorrect because none of the three water bodies are intersected by the equator, meaning the correct answer should be Option D (None).",
+      "Geographic coordinates for Lake Tanganyika, Lake Tonle Sap, and Patos Lagoon all confirm they lie well outside the equatorial line."
+    ]
   }
 ]
