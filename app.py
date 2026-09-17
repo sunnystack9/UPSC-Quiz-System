@@ -52,10 +52,47 @@ ACTIVE_SESSIONS_FILE = Path(__file__).parent / "active_sessions.json"
 # Jan 2026) -- re-check this against the current-year official notification
 # (hpsc.gov.in / upsc.gov.in) before relying on it for real practice.
 # Only paper "1" (GS Paper I) is modeled; this app doesn't cover CSAT Paper II.
+# Keys are the CANONICAL paper value ("1") -- see _normalize_paper() below
+# for the actual spellings accepted from /data files.
 MARKING_CONFIG = {
     ("UPSC", "1"): {"marks_correct": 2.0, "marks_wrong": -0.66, "label": "UPSC GS Paper I"},
     ("HCS", "1"): {"marks_correct": 1.0, "marks_wrong": -0.25, "label": "HCS GS Paper I"},
 }
+
+# Every spelling of "Paper I" seen across /data extraction batches so far,
+# normalized (lowercased, hyphens/multiple spaces collapsed to one space,
+# trailing "." stripped) -- see _normalize_paper(). Add a new entry here
+# the next time a differently-worded batch shows up, rather than editing
+# that batch's JSON to match everything that came before it.
+_PAPER_ONE_ALIASES = {
+    "1", "i",
+    "paper 1", "paper i",
+    "gs paper 1", "gs paper i",
+}
+
+
+def _normalize_paper(paper):
+    """Maps any recognized spelling of "Paper I" (see _PAPER_ONE_ALIASES) to
+    the canonical "1" that MARKING_CONFIG's keys use, so marking_for() below
+    doesn't require every /data file to agree on one exact spelling for this
+    field -- some extraction batches wrote "1", others "GS Paper I", etc.,
+    and normalizing at LOOKUP time (rather than rewriting every JSON file to
+    match) means old files, new files, and old responses.json entries
+    already saved with a different spelling all resolve the same way with
+    no data migration needed.
+
+    Anything that ISN'T a recognized Paper-I spelling -- a genuine Paper II,
+    an unrelated exam's paper numbering, or a malformed value -- is returned
+    UNCHANGED. That's deliberate: this only ever adds new matches for
+    Paper I, it never invents a match for something that was never Paper I
+    to begin with. marking_for() already handles "no scheme found" for any
+    unmatched (exam, paper) pair gracefully (see its own docstring), so an
+    unrecognized value here just continues to fall through to that same
+    existing, safe "no marking scheme" behavior -- not a new failure mode."""
+    if paper is None:
+        return paper
+    normalized = re.sub(r"[\s\-]+", " ", str(paper).strip().lower()).strip().rstrip(".")
+    return "1" if normalized in _PAPER_ONE_ALIASES else str(paper)
 
 
 def marking_for(exam, paper):
@@ -64,7 +101,7 @@ def marking_for(exam, paper):
     rather than assume every question has a known marking scheme -- this
     keeps the door open to adding more exams/papers to the data later
     without a matching MARKING_CONFIG entry crashing scoring."""
-    return MARKING_CONFIG.get((exam, str(paper)))
+    return MARKING_CONFIG.get((exam, _normalize_paper(paper)))
 
 
 try:
@@ -1463,6 +1500,18 @@ def load_questions():
                     "record_preview": str(q)[:200],
                 })
                 continue
+            # Normalize year to int -- some /data files store it as a string
+            # ("2023") rather than a number. Mixing types in one merged set
+            # breaks any later sorted()/comparison over q["year"] (both the
+            # Smart Quiz setup screen and the Question Bank tab build a
+            # sorted list of years from the whole pool) with a TypeError,
+            # since Python can't order an int against a str. Left as-is (not
+            # coerced, not dropped) if it's some other non-numeric value --
+            # the sorted() calls at both call sites fall back to key=str for
+            # that remaining edge case rather than crashing outright.
+            if isinstance(q.get("year"), str) and q["year"].strip().isdigit():
+                q["year"] = int(q["year"].strip())
+
             sources[qid].append((f.name, q))
             existing = by_id.get(qid)
             if existing is None or (not existing.get("explanation") and q.get("explanation")):
@@ -4239,7 +4288,12 @@ def render_practice(questions, user):
     # ---- Setup screen (only shown when no session is active) ----
 
     exams = sorted(set(q["exam"] for q in practice_questions))
-    years = sorted(set(q["year"] for q in practice_questions))
+    # key=str guards against a mixed-type 'year' column (int vs str) still
+    # slipping through despite the normalization in load_questions() -- e.g.
+    # a genuinely unparseable value like "N/A". All real years here are
+    # 4-digit, so string order matches numeric order, and this can never
+    # crash the way a bare sorted() over mixed types would.
+    years = sorted(set(q["year"] for q in practice_questions), key=str)
     themes = sorted(set(q["theme"] for q in practice_questions))
 
     # Sky blue tags for the Exams/Subject multiselect pills, by request
@@ -5935,7 +5989,9 @@ def render_question_bank(questions, user, source_file_by_id):
     pool = st.session_state.qb_pool
 
     with st.expander("🔍 Filters", expanded=False):
-        years = sorted({q.get("year") for q in pool if q.get("year") is not None})
+        # key=str guards against a mixed-type 'year' column the same way
+        # render_practice()'s years list does above -- see that comment.
+        years = sorted({q.get("year") for q in pool if q.get("year") is not None}, key=str)
 
         # Centers every filter's own label ("Year", "Theme", "Has
         # explanation", etc.) above its box, and the selected/placeholder
