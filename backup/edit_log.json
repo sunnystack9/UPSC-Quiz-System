@@ -162,5 +162,18 @@
       "Jaugada is in Odisha, not Madhya Pradesh.",
       "Kalsi is in Uttarakhand, not Karnataka."
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:44:36.666985",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_009",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Statement 1 is incorrect because the architectural form of the stupa originated in pre-Buddhist Vedic and folk traditions as simple earthen burial mounds for revered persons, not exclusively in Buddhism. - Statement 2 is correct because major stupas (like Sanchi and Sarnath) were built as repositories of the physical relics of the Buddha or his close disciples. - Statement 3 is correct because stupas eventually evolved into important Buddhist architectural structures serving commemorative purposes (marking significant life events of the Buddha) and votive purposes (built by pilgrims to earn spiritual merit). - Consequently, only two statements (2 and 3) are correct, making option B the right answer. - Often confused with the origin of the religion itself, the architectural concept of the stupa actually predates Buddhism and was later co-opted and elaborated upon by Buddhists.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "Original explanation lacked explicit breakdown of pre-Buddhist origin of stupas",
+      "Did not adequately distinguish between structural functions like relic preservation versus votive use"
+    ]
   }
 ]
