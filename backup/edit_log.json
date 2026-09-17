@@ -136,5 +136,18 @@
       "Original explanation lacked concise bullet points",
       "Did not adequately detail why individual incorrect statements were wrong"
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:44:22.531021",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_011",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "Kautilya's Arthashastra details various forms of slavery and the legal rights of slaves in ancient India. Statement 1 is incorrect because while the Arthashastra recognizes several grounds for enslavement such as capture in war, defaulting on a debt, or self-sale, enslavement as a direct judicial punishment (criminal sentencing) is not prescribed as a general source of slavery in Kautilya's framework. Statement 2 is correct because the Arthashastra explicitly states that if a female slave bore her master a son, both she and the child were legally freed immediately. Statement 3 is correct because a son born to a female slave and fathered by her master was entitled to inherit the property and legal status of the master's legitimate son, receiving a son's share. Therefore, statements 2 and 3 are correct, making option B the right choice. Often confused with later medieval or Smriti legal texts which imposed stricter restrictions on lower-caste slaves; Kautilya's text notably offers protective provisions allowing slaves to purchase their freedom and safeguarding them from physical abuse.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "Initial explanation lacked itemized breakdown of why statement 1 was false.",
+      "Did not explicitly contrast Kautilya's unique progressive provisions with later legal codes."
+    ]
   }
 ]
