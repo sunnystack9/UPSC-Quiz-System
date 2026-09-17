@@ -175,5 +175,19 @@
       "Original explanation lacked explicit breakdown of pre-Buddhist origin of stupas",
       "Did not adequately distinguish between structural functions like relic preservation versus votive use"
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:44:44.235029",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_010",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Korkai, Poompuhar, and Muchiri were prominent ancient ports in South India associated with the Sangam age, engaged in brisk maritime trade with the Roman Empire and Southeast Asia. - Option A is incorrect because capital cities of the major Sangam dynasties were Madurai (Pandyas), Uraiyur/Poompuhar (Cholas), and Vanji/Karur (Cheras), whereas Korkai and Poompuhar were primarily port cities. - Option C is incorrect because centers of iron-and-steel making in ancient South India included sites like Kodumanal and Paiyampalli, known for producing Wootz steel, not these specific ports. - Option D is incorrect because these locations were commercial and maritime hubs, not religious shrines or prominent centers of Jain Tirthankaras like Sravanabelagola. - Often confused with inland administrative or trade centers of the Sangam period; however, Korkai (Pandyan port famous for pearl fishery), Poompuhar/Kaveripattinam (Chola port at the mouth of the Kaveri), and Muchiri/Muziris (Chera port on the Malabar coast) are distinctly identified in classical Tamil literature and foreign accounts like the Periplus of the Erythraean Sea as maritime ports.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "The explanation needed to be structured as short bullet points rather than paragraphs.",
+      "Specific distinguishing facts for both correct and incorrect options were missing.",
+      "The 'Often confused with' section needed to be added to clarify the distinction between ports and inland centers."
+    ]
   }
 ]
