@@ -1,15 +1,37 @@
 [
   {
-    "timestamp": "2026-09-16T17:58:21.764743",
+    "timestamp": "2026-09-15T11:10:26.119664",
     "user": "auto (GitHub Actions)",
-    "question_id": "UPSC_ANC_017",
+    "question_id": "UPSC_ANC_018",
     "field": "explanation",
     "old_value": "",
-    "new_value": "- Statement 1 is incorrect: Sthaviravadins (literally 'Elders') belong to early Nikaya Buddhism (Theravada/Hinayana tradition), representing the conservative faction after the First Buddhist Council/Second Buddhist Council schism, not Mahayana.\n- Statement 2 is correct: The Lokottaravadins emerged as one of the major sub-sects or offshoots of the Mahasanghika school, primarily distinguished by their supramundane (lokottara) concept of the Buddha.\n- Statement 3 is correct: Mahasanghikas conceptualized the Buddha as transcendental, eternal, and supramundane (deification of Buddha), along with promoting the Bodhisattva ideal, which directly paved the way for and fostered Mahayana Buddhism.\n- Why Options A and D are wrong: Both include Statement 1, which wrongly assigns Sthaviravadins to Mahayana rather than the precursor to Theravada.\n- Why Option C is wrong: It omits Statement 2, which is historically accurate regarding Buddhist sectarian lineages recorded in texts like the 'Samayabhedoparacanacakra' by Vasumitra.\n- Often confused with: Sthaviravada vs. Theravada vs. Mahasanghika. Sthaviravada is the Sanskrit term corresponding to the Pali 'Theravada'; Mahasanghika was the liberal breakaway faction from which Lokottaravada and eventually Mahayana doctrinal elements arose.",
+    "new_value": "• Mahendravarman I (Pallava Dynasty): Ruled circa 590–630 CE; laid the foundation of great Pallava power and architecture, making Event 2 the earliest among the given options.\n• Gopala (Pala Dynasty): Elected king around 750 CE, ending the period of anarchy (matsyanyaya) in Bengal, placing Event 4 second.\n• King Bhoja / Mihira Bhoja (Gurjara-Pratihara Dynasty): Ascended the throne in circa 836 CE and ruled until 885 CE, consolidating Pratihara power and placing Event 1 third.\n• Parantaka I (Imperial Cholas): Ruled from circa 907 to 955 CE, expanding Chola supremacy in the south, making Event 3 the latest.\n• Chronological sequence: Mahendravarman I (c. 600 CE) → Gopala (c. 750 CE) → Bhoja (c. 836 CE) → Parantaka I (c. 907 CE), giving 2 – 4 – 1 – 3.\n• Why Option A is incorrect: It places Bhoja (1) before Gopala (4), whereas the Pala dynasty was founded in 750 CE, decades before Bhoja's accession in 836 CE.\n• Why Option B is incorrect: It wrongly begins with Parantaka I (3), who ruled in the 10th century CE, which is the latest event, not the earliest.\n• Why Option D is incorrect: It also incorrectly begins with Parantaka I (3) and ends with Mahendravarman I (2), completely reversing the timeline.\n• Often confused with: Candidates often confuse King Bhoja of the Gurjara-Pratihara dynasty (9th century CE) with King Bhoja of the Paramara dynasty of Malwa (11th century CE, c. 1010–1055 CE). Similarly, Parantaka I (c. 907 CE) is often confused with Vijayalaya (c. 850 CE), who initially revived Chola rule from Thanjavur.",
     "source": "Import AI Explanation (gemini-3.8-flash)",
     "issues_found": [
-      "Original explanations often fail to specify the Council lineage (Second Buddhist Council at Vaishali) where the original split between Sthaviravadins and Mahasanghikas occurred.",
-      "Candidates frequently confuse Sthaviravada with Mahayana due to the complex Sanskrit terminology."
+      "Original question lacked precise regnal/foundational dates for the rulers.",
+      "Potential confusion between Gurjara-Pratihara King Bhoja (9th century CE) and Paramara King Bhoja (11th century CE).",
+      "Potential confusion between Parantaka I and the initial restorer of Chola power, Vijayalaya."
     ]
+  },
+  {
+    "timestamp": "2026-09-15T11:11:00.201698",
+    "user": "auto (GitHub Actions)",
+    "question_id": "UPSC_ANC_019",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Core fact: A 'Hundi' was an indigenous financial instrument developed in early medieval/post-Harsha India that functioned as an unconditional bill of exchange or promissory note, facilitating long-distance trade, credit transactions, and remittance without the physical transfer of coins.\n- Why Option A is incorrect: Royal advisories or royal proclamations issued by kings to subordinates were known as 'Sasana' (edicts) or 'Raja-sasana', not Hundis.\n- Why Option B is incorrect: Daily accounting diaries or record registers kept by merchants or state accountants were known as 'Bahi-Khata' or 'Roznamcha'.\n- Why Option D is incorrect: Feudal commands or administrative orders were known by terms like 'Hukm', 'Patra', or 'Parwana', which carried coercive administrative authority rather than commercial debt/credit obligations.\n- Often confused with: Hawala (an informal money transfer system based strictly on trust networks without negotiable paper) and Tamassuk (a formal debt bond or mortgage deed acknowledging a personal loan, unlike the transferable, negotiable nature of a Hundi).",
+    "source": "Import AI Explanation (gemini-3.8-flash)",
+    "issues_found": [
+      "Prior explanations often fail to distinguish indigenous negotiable paper instruments (Hundi) from general loan deeds (Tamassuk) and royal orders.",
+      "Explanations frequently cite Mughal/colonial usage of Hundi rather than contextualizing its early medieval post-Harsha origins."
+    ]
+  },
+  {
+    "timestamp": "2026-09-17T05:53:39.257037",
+    "user": "Dev Maan",
+    "question_id": "UPSC_MEDHIST_PW_Q0280",
+    "field": "explanation",
+    "old_value": "- Statements 1 and 2 are confirmed.\n- Statement 3 is false: 'all these sources record instances of conflicts between peasants, zamindars & the state.'",
+    "new_value": "Statement Analysis\n * Statement 1 is correct: The Ain-i Akbari, completed in 1598 by Akbar's court historian Abu'l Fazl as the third volume of the Akbarnama, serves as the primary imperial administrative source detailing Mughal land revenue, cultivation patterns, and state regulation of agriculture.\n * Statement 2 is correct: Regional revenue archives—notably the pargana records and arhsattas from Rajasthan, and village land documentation from 17th–18th century Gujarat and Maharashtra—offer granular, non-courtly evidence on agrarian structures, landholding, and rural taxation.\n * Statement 3 is incorrect: Detailed records of the English East India Company from eastern India (specifically Bengal, Bihar, and Odisha) document widespread agrarian tensions, tax defaults, and active conflicts among peasants, zamindars, and the colonial state leading up to and following the Permanent Settlement of 1793.\nOften Confused With\n * Ain-i Akbari vs. Akbarnama: The Akbarnama is Abu'l Fazl's broader three-volume chronicle of Akbar's reign, whereas the Ain-i Akbari is specifically the administrative and statistical third volume dealing with governance, finance, and revenue administration.\n * Imperial Chronicles vs. Regional/Company Records: Mughal court chronicles present an official top-down view focused on imperial order, while regional documents (arhsattas, sanads) and Company records capture local caste tensions, peasant protests, and revenue friction on the ground."
   }
 ]
