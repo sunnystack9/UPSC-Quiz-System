@@ -149,5 +149,18 @@
       "Initial explanation lacked itemized breakdown of why statement 1 was false.",
       "Did not explicitly contrast Kautilya's unique progressive provisions with later legal codes."
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:44:29.231243",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_012",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Dhauli is a major rock edict site of Ashoka located in the Khurda district of Odisha, making pair 1 correctly matched.\n- Erragudi is a major rock edict site of Ashoka located in the Kurnool district of Andhra Pradesh, making pair 2 correctly matched.\n- Jaugada is a major rock edict site located in the Ganjam district of Odisha, not Madhya Pradesh, making pair 3 incorrectly matched.\n- Kalsi is a major rock edict site located in the Dehradun district of Uttarakhand, not Karnataka, making pair 4 incorrectly matched.\n- Only two pairs are correctly matched, which makes Option B the correct answer.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "Jaugada is in Odisha, not Madhya Pradesh.",
+      "Kalsi is in Uttarakhand, not Karnataka."
+    ]
   }
 ]
