@@ -83,5 +83,18 @@
     "issues_found": [
       "The official UPSC key for this specific question designated Krishnadeva Raya (Option D) as the correct answer based on medieval inscriptions of the Vijayanagara Empire, despite the superficial similarity to Ashoka's Rock Edict XII."
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:43:54.490202",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_022",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Pair 1 is correctly matched: A Parivrajak refers to a wandering ascetic or renunciant in ancient Indian tradition who renounced worldly life to seek spiritual liberation. - Pair 2 is incorrectly matched: A Shramana refers to a seeker, renunciant, or ascetic who stood outside the orthodox Vedic tradition, rather than a high-status Vedic priest (who were known as Brahmanas). - Pair 3 is correctly matched: An Upasaka denotes a lay devotee or follower of Buddhism (and sometimes Jainism) who supports the monastic order while living a householder life. - Often confused with: The terms Shramana and Brahmana; Shramanas belonged to non-Vedic, ascetic traditions characterized by self-mortification and wandering, whereas Brahmanas belonged to the orthodox, ritualistic Vedic tradition based on hereditary priestly status.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "Original explanation lacked sufficient historical detail on Vedic vs. non-Vedic traditions",
+      "Did not explicitly contrast Shramana with Brahmana in the initial text"
+    ]
   }
 ]
