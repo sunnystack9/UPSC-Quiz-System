@@ -96,5 +96,18 @@
       "Original explanation lacked sufficient historical detail on Vedic vs. non-Vedic traditions",
       "Did not explicitly contrast Shramana with Brahmana in the initial text"
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:44:01.420887",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_023",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Ghantasala, Kadura, and Chaul were prominent ancient Indian ports actively involved in maritime trade with foreign regions, particularly the Roman Empire and Southeast Asia during the Gupta and Satavahana periods.\n- Option B is incorrect because these locations were coastal trading settlements and port towns rather than administrative capitals of major kingdoms.\n- Option C is incorrect as these sites were primarily commercial and economic hubs rather than renowned centers for exquisite stone art and architecture like Ajanta or Ellora.\n- Option D is incorrect because while some of these ports had Buddhist presence, they were fundamentally celebrated for commerce and shipping rather than functioning as primary Buddhist pilgrimage centers like Sanchi or Bodh Gaya.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "The original explanation lacked specific details about the commercial function and trade partners of the ports.",
+      "The incorrect options were not individually debunked with specific historical counter-facts."
+    ]
   }
 ]
