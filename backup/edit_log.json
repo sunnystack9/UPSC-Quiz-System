@@ -123,5 +123,18 @@
       "Did not individually address every single option with specific historical periods or geographic locations.",
       "Lacked the 'Often confused with' section to clarify the distinction between the main imperial Guptas and the Later Guptas of Magadha."
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:44:15.424927",
+    "user": "Sunny",
+    "question_id": "UPSC_ANC_016",
+    "field": "explanation",
+    "old_value": "",
+    "new_value": "- Statement 1 is incorrect because both Mitakshara and Dayabhaga were schools of Hindu inheritance law applicable to different geographical regions and traditions, not divided by caste lines. - Statement 2 is correct because under the Mitakshara school, sons acquire a birthright in ancestral property and can claim it during the father's lifetime, whereas under the Dayabhaga school, the sons acquire ownership only after the father's death. - Statement 3 is incorrect because neither system restricted property matters exclusively to male members or included female property holdings in the manner described; both primarily governed Hindu joint family inheritance rights. - Often confused with personal laws based on caste or gender, but Mitakshara and Dayabhaga actually differed specifically on the timing of property rights acquisition (birth versus father's death) and the concept of coparcenary.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "Original explanation lacked concise bullet points",
+      "Did not adequately detail why individual incorrect statements were wrong"
+    ]
   }
 ]
