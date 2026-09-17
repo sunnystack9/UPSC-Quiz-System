@@ -189,5 +189,18 @@
       "Specific distinguishing facts for both correct and incorrect options were missing.",
       "The 'Often confused with' section needed to be added to clarify the distinction between ports and inland centers."
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:45:18.102934",
+    "user": "Sunny",
+    "question_id": "UPSC_MEDHIST_PW_Q0001",
+    "field": "explanation",
+    "old_value": "- Text: Western tradition divides at 5th/15th century AD; Indian context divides at 8th/18th century.\n- The chapter itself states medieval India is studied as spanning roughly the 7th to 18th centuries.\n- All three statements are directly supported by the text.",
+    "new_value": "- Statement 1 is correct because Western historiography traditionally uses the 5th century AD (fall of the Roman Empire) and the 15th century AD (rise of modernity/Renaissance) to divide history into Ancient, Medieval, and Modern periods.\n- Statement 2 is correct because in the Indian context, historians typically mark the transition to the medieval period around the 8th century and the shift to the modern period around the 18th century.\n- Statement 3 is correct because the medieval period in Indian history is broadly understood to span from the 7th to the 18th centuries, encompassing major sociopolitical transformations.\n- Since all three statements are accurate and supported by standard historical periodisation texts, options excluding any of them are incorrect.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "The current explanation is overly brief and lacks detailed justification for each statement.",
+      "It does not explicitly clarify why incorrect options are wrong."
+    ]
   }
 ]
