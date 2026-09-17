@@ -240,5 +240,19 @@
     "issues_found": [
       "The original answer key incorrectly listed option A (carnelian) as the correct answer instead of option C (bronze)."
     ]
+  },
+  {
+    "timestamp": "2026-09-17T06:49:35.236661",
+    "user": "Sunny",
+    "question_id": "UPSC_MEDHIST_PW_Q0003",
+    "field": "explanation",
+    "old_value": "- Per the chapter's timeline: Slave Dynasty 1206-1290 AD; Tughlaq 1320-1414 AD; Sayyid & Lodhi 1414-1526 AD; Mughal 1526-1857 AD.",
+    "new_value": "- Slave Dynasty: Ruled from 1206-1290 AD, founded by Qutb-ud-din Aibak, marking the beginning of the Delhi Sultanate. - Tughlaq Dynasty: Ruled from 1320-1414 AD, succeeding the Khilji dynasty and known for extensive territorial reach under Muhammad bin Tughlaq. - Sayyid and Lodhi Dynasty: Ruled from 1414-1526 AD, representing the final phases of the Delhi Sultanate before the Mughal conquest. - Mughal Dynasty: Ruled from 1526-1857 AD, beginning with Babur's victory at the First Battle of Panipat and lasting until the British deposed Bahadur Shah Zafar. - Option b is incorrect because it misattributes the Slave Dynasty to 1320-1414 AD and the Tughlaq Dynasty to 1206-1290 AD. - Option c is incorrect because it incorrectly swaps the timelines of the Tughlaq and Sayyid & Lodhi dynasties. - Option d is incorrect because it places the Mughal Dynasty at 1206-1290 AD and the Slave Dynasty at 1526-1857 AD, completely reversing the chronological sequence. - Often confused with: The Khilji dynasty period (1290-1320 AD), which sits chronologically between the Slave and Tughlaq dynasties.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "The current explanation lacks a clear breakdown of why incorrect options are wrong.",
+      "The explanation is not formatted in short bullet points as required.",
+      "It lacks an 'Often confused with' section to aid exam retention."
+    ]
   }
 ]
