@@ -312,8 +312,8 @@
     "next_due": "2026-09-21T19:29:43.263015"
   },
   "Dev Maan::UPSC_MODHIST_NCERT_Q0100": {
-    "stage": 0,
-    "next_due": "2026-09-21T15:41:57.215097"
+    "stage": 1,
+    "next_due": "2026-09-23T19:20:58.193148"
   },
   "Dev Maan::UPSC_ANC_006": {
     "stage": 0,
@@ -414,5 +414,41 @@
   "Dev Maan::UPSC_MEDHIST_PW_Q0065": {
     "stage": 0,
     "next_due": "2026-09-22T15:58:03.119726"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0043": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:24:35.610740"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0082": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:26:11.712616"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0160": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:40:20.778529"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0132": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:40:50.420446"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0120": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:41:59.999379"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0102": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:43:07.237030"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0133": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:44:17.463229"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0184": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:45:36.281437"
+  },
+  "Dev Maan::UPSC_MODHIST_NCERT_Q0042": {
+    "stage": 0,
+    "next_due": "2026-09-23T15:46:56.714184"
   }
 }
