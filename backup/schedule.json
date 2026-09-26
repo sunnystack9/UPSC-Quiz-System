@@ -680,12 +680,12 @@
     "next_due": "2026-09-25T20:01:09.481543"
   },
   "Dev Maan::UPSC_MEDHIST_PW_Q0043": {
-    "stage": 0,
-    "next_due": "2026-09-25T16:26:09.868953"
+    "stage": 1,
+    "next_due": "2026-09-26T19:47:23.376545"
   },
   "Dev Maan::UPSC_MEDHIST_PW_Q0127": {
-    "stage": 0,
-    "next_due": "2026-09-25T16:27:09.386526"
+    "stage": 1,
+    "next_due": "2026-09-26T19:50:05.244706"
   },
   "Dev Maan::NCERT_ANC_544": {
     "stage": 1,
@@ -750,5 +750,37 @@
   "Dev Maan::NCERT_ANC_369": {
     "stage": 0,
     "next_due": "2026-09-26T16:00:35.760257"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0068": {
+    "stage": 0,
+    "next_due": "2026-09-26T16:02:34.358417"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0080": {
+    "stage": 0,
+    "next_due": "2026-09-26T16:03:04.391286"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0035": {
+    "stage": 0,
+    "next_due": "2026-09-26T16:06:07.371093"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0060": {
+    "stage": 0,
+    "next_due": "2026-09-26T16:08:19.718414"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0166": {
+    "stage": 0,
+    "next_due": "2026-09-26T16:09:54.359333"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0160": {
+    "stage": 0,
+    "next_due": "2026-09-26T16:10:48.778111"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0090": {
+    "stage": 0,
+    "next_due": "2026-09-26T16:13:06.732062"
+  },
+  "Dev Maan::UPSC_MEDHIST_PW_Q0244": {
+    "stage": 0,
+    "next_due": "2026-09-26T16:16:35.892210"
   }
 }
