@@ -717,7 +717,7 @@
   },
   "Dev Maan::NCERT_ANC_003": {
     "stage": 0,
-    "next_due": "2026-09-26T15:55:28.170270"
+    "next_due": "2026-09-28T15:30:53.214233"
   },
   "Dev Maan::NCERT_ANC_666": {
     "stage": 0,
@@ -846,5 +846,41 @@
   "Dev Maan::UPSC_MODHIST_NCERT_Q0217": {
     "stage": 0,
     "next_due": "2026-09-28T15:26:32.631613"
+  },
+  "Dev Maan::NCERT_ANC_085": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:28:32.076140"
+  },
+  "Dev Maan::NCERT_ANC_416": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:29:34.911007"
+  },
+  "Dev Maan::NCERT_ANC_738": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:32:59.998645"
+  },
+  "Dev Maan::NCERT_ANC_653": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:34:21.465529"
+  },
+  "Dev Maan::NCERT_ANC_121": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:35:03.267918"
+  },
+  "Dev Maan::NCERT_ANC_019": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:36:51.253658"
+  },
+  "Dev Maan::NCERT_ANC_469": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:38:05.741295"
+  },
+  "Dev Maan::NCERT_ANC_456": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:39:11.164202"
+  },
+  "Dev Maan::NCERT_ANC_323": {
+    "stage": 0,
+    "next_due": "2026-09-28T15:40:18.636899"
   }
 }
