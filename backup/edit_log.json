@@ -318,5 +318,19 @@
       "It does not explicitly explain why statements 1, 2, and 3 are correct.",
       "It misses the 'Often confused with' comparison to reinforce the conceptual distinction between Palaeolithic and Neolithic periods."
     ]
+  },
+  {
+    "timestamp": "2026-10-11T13:02:14.146325",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_005",
+    "field": "explanation",
+    "old_value": "Statement 2 is incorrect: the chapter states many manuscripts were in Sanskrit, but others were in Prakrit and Tamil. Statements 1, 3 and 4 are correct.",
+    "new_value": "- Statement 1 is correct: Manuscripts were traditionally hand-written, often on specially prepared palm leaves or the bark of the birch tree, which grew in the Himalayas.\n- Statement 2 is incorrect: Manuscripts were written in multiple languages including Sanskrit, Prakrit, and Tamil, not exclusively in Sanskrit.\n- Statement 3 is correct: Over the centuries, many manuscripts were eaten away by insects, but a large number survived because they were preserved in temples and monasteries.\n- Statement 4 is correct: The subjects covered in manuscripts include religious beliefs and practices, the lives of kings, medicine, science, poems, and plays.\n- Often confused with: Inscriptions, which were engraved on relatively hard surfaces such as stone or metal, whereas manuscripts were written on soft, perishable materials.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "The current explanation lacks structured bullet points for each statement.",
+      "It does not explicitly detail the contents of statements 1 and 4 in the explanation.",
+      "It lacks a 'Often confused with' section to distinguish manuscripts from inscriptions."
+    ]
   }
 ]
