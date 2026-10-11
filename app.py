@@ -2602,6 +2602,11 @@ def render_explanation_editor(q, user, source_file_by_id):
                         ai_model=result["model_version"], issues_found=result["issues_found"],
                     )
                     st.session_state[f"explfix_{qid}"] = result["revised_explanation"]
+                    if "error" not in save_result and result["revised_explanation"].strip():
+                        # Same safety net the typo editor uses: even if the
+                        # question list hasn't caught up yet, THIS session
+                        # shows what was just saved.
+                        _record_local_question_edit(qid, explanation=result["revised_explanation"].strip())
                     st.session_state[f"ai_import_meta_{qid}"] = {
                         "label": "AI-generated explanation" if mode == "generate" else "AI-suggested revision",
                         "model_version": result["model_version"],
@@ -2655,6 +2660,8 @@ def render_explanation_editor(q, user, source_file_by_id):
         )
         if st.button("Save explanation", key=f"explfix_save_{qid}"):
             save_result = apply_explanation_edit(qid, new_explanation, user, source_file_by_id)
+            if "error" not in save_result and (new_explanation or "").strip():
+                _record_local_question_edit(qid, explanation=new_explanation.strip())
             if "error" in save_result:
                 st.error(save_result["error"])
             elif not save_result["changed"]:
@@ -3879,6 +3886,9 @@ def main():
     )
 
     questions, question_conflicts, skipped_records, source_file_by_id = load_questions()
+    # Layer this session's own just-saved edits on top, so every tab shows
+    # what was just saved even if the cached question list is a step behind.
+    questions = [_apply_local_question_edits(q) for q in questions]
     if not questions:
         st.error("No question bank found in /data. Add a question-bank JSON file first.")
         return
@@ -6189,7 +6199,15 @@ def render_question_bank(questions, user, source_file_by_id):
         st.info("Pick a subject above, then tap Load / Reload to start browsing.")
         return
 
-    pool = st.session_state.qb_pool
+    # qb_pool is a snapshot taken when "Load / Reload" was pressed, so it
+    # remembers each question exactly as it was THEN. Anything saved since
+    # (an AI explanation, a typo fix) lives only in the freshly loaded
+    # `questions` list -- so look each question up there again on every
+    # refresh. Which questions are in the pool, and their order, still come
+    # from the snapshot; only the CONTENT is refreshed. (Before this, a saved
+    # explanation reached the file but the screen kept showing the old text.)
+    _current_by_id = {qq["question_id"]: qq for qq in questions}
+    pool = [_current_by_id.get(snap["question_id"], snap) for snap in st.session_state.qb_pool]
 
     with st.expander("🔍 Filters", expanded=False):
         # key=str guards against a mixed-type 'year' column the same way
