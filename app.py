@@ -2134,9 +2134,13 @@ _AI_EXPLANATION_SCHEMA = {
     "type": "object",
     "properties": {
         "revised_explanation": {"type": "string"},
-        "issues_found": {"type": "array", "items": {"type": "string"}},
+        # No "issues_found" list on purpose: the prompt never told Gemini
+        # what to put there, so it used it to complain about the OLD
+        # explanation (e.g. "lacks bullet points") and the app showed that
+        # as a "Flagged for human review" warning. Removed by request --
+        # the trust decision is the admin's.
     },
-    "required": ["revised_explanation", "issues_found"],
+    "required": ["revised_explanation"],
 }
 
 
@@ -2644,8 +2648,6 @@ def render_explanation_editor(q, user, source_file_by_id):
                         f"The separate edit-log sync failed, though: {save_result['github_log_msg']}. "
                         "The question itself is fine; the provenance record just hasn't synced yet."
                     )
-            if meta["issues_found"]:
-                st.warning("⚠️ Flagged for human review: " + "; ".join(meta["issues_found"]))
 
         new_explanation = st.text_area(
             "Explanation", value=q.get("explanation", ""), height=150,
@@ -6147,19 +6149,6 @@ def render_question_bank(questions, user, source_file_by_id):
                     st.warning(f"{qid} is no longer in the bank (last touched {entry.get('timestamp', '')}).")
                 else:
                     st.caption(f"{qq['exam']} / {qq['theme']}  ·  {entry.get('source', '')}  ·  {entry.get('timestamp', '')}")
-                    # Gemini's own self-reported list of details it wasn't
-                    # confident about (see suggest_ai_explanation() /
-                    # log_edit()'s issues_found param) -- durable, so still
-                    # worth showing here even long after the save, unlike a
-                    # GitHub sync outcome (deliberately not tracked
-                    # per-entry: whether a push succeeded AT SAVE TIME goes
-                    # stale the moment anything resyncs the file, so an old
-                    # entry claiming "sync failed" could easily be wrong by
-                    # the time someone's looking at it here; the save-time
-                    # success/failure message in the Edit Explanation
-                    # expander itself is the accurate, live place for that).
-                    if entry.get("issues_found"):
-                        st.warning("⚠️ Flagged by Gemini: " + "; ".join(entry["issues_found"]))
                     render_full_question(qq, key_prefix="ai_saves")
 
         # Bulk counterpart to the single-question Import AI Explanation
