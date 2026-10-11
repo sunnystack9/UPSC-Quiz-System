@@ -377,5 +377,14 @@
     "old_value": "The chapter presents the sequence as Palaeolithic (from 2 million years ago), followed by the Mesolithic (12,000–10,000 years ago), followed by the Neolithic (from about 10,000 years ago).",
     "new_value": "- Palaeolithic period: Spans from approximately 2 million years ago up to about 12,000 years ago, representing the oldest archaeological phase.\n- Mesolithic period: Spans roughly from 12,000 years ago to 10,000 years ago, representing the transitional phase between the Palaeolithic and Neolithic.\n- Neolithic period: Begins from about 10,000 years ago, marking the youngest archaeological phase among the choices with the advent of agriculture and settled life.\n- Option A is incorrect because it reverses the actual historical timeline by placing the Neolithic before the Mesolithic and Palaeolithic.\n- Option B is incorrect because it places the Neolithic before the Mesolithic, whereas the Mesolithic chronologically precedes the Neolithic.\n- Option D is incorrect because it places the Mesolithic and Palaeolithic out of order, starting with the Mesolithic instead of the oldest Palaeolithic period.\n- Often confused with: The order of the Mesolithic and Neolithic periods; distinguished by the fact that the Mesolithic featured transitional microlithic stone tools and hunter-gatherer economies, while the Neolithic is defined by polished stone axes, agriculture, and animal domestication.",
     "source": "Import AI Explanation (gemini-3.5-flash-lite)"
+  },
+  {
+    "timestamp": "2026-10-11T13:24:34.398573",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_011",
+    "field": "explanation",
+    "old_value": "The chapter defines the Mesolithic as lasting from about 12,000 to about 10,000 years ago, marked by tiny stone tools called microliths — not large tools, and not defined by wheat/barley domestication.",
+    "new_value": "- Option A is correct because the Mesolithic period is historically dated from about 12,000 years ago to about 10,000 years ago, and its primary material culture marker is the use of tiny stone tools known as microliths.\n- Option B is incorrect because polished stone tools are a defining characteristic of the subsequent Neolithic period, not the Mesolithic.\n- Option C is incorrect because the Mesolithic is characterized by very small stone tools (microliths), whereas large stone tools for felling trees are associated with earlier Paleolithic phases or specific heavy-duty Neolithic implements.\n- Option D is incorrect because the domestication of crops like wheat and barley primarily marks the beginning of the Neolithic period, alongside settled agriculture.\n- Often confused with: The Neolithic period; distinguished by the fact that the Mesolithic still relies heavily on hunting-gathering with microliths, whereas the Neolithic transitions into polished stone axes and food production.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)"
   }
 ]
