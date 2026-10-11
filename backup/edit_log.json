@@ -359,5 +359,14 @@
     "old_value": "The chapter states the inscription dates to about 2250 years ago and was inscribed in two scripts and languages — Greek and Aramaic — not a single script, and it has no connection to palm-leaf manuscripts or the term Bharata.",
     "new_value": "- Option B is correct because the famous Kandahar Inscription of Ashoka dates to about 2250 years ago and was written in two different scripts and languages, Greek and Aramaic.\n- Option A is incorrect because the inscription was written in two scripts and languages (Greek and Aramaic), not a single script.\n- Option C is incorrect because the inscription is from around 2250 years ago, not 2500 years ago, and does not record the earliest use of the term Bharata.\n- Option D is incorrect because the inscription was carved on stone or rock surfaces, not written on a palm leaf and preserved in a monastery.",
     "source": "Import AI Explanation (gemini-3.5-flash-lite)"
+  },
+  {
+    "timestamp": "2026-10-11T13:22:49.923945",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_008",
+    "field": "explanation",
+    "old_value": "Statement 4 is incorrect — the chapter says the name Bharata was ‘later used for the country’. Statements 1-3 are correct.",
+    "new_value": "- Statement 1 is correct: The word 'India' derives from the Indus, called Sindhu in Sanskrit, through the terms used by the Iranians and Greeks who came to the northwest about 2500 years ago.\n- Statement 2 is correct: These foreign visitors applied the name 'India' to the land mass located to the east of the river Indus.\n- Statement 3 is correct: The name 'Bharata' was used for a group of people mentioned in the Rigveda, the earliest composition in Sanskrit dating to about 3500 years ago, who lived in the northwest.\n- Statement 4 is incorrect: The name 'Bharata' was not permanently restricted to this one tribal group; it was later used for the country as a whole in the later Sanskrit work, the Ramayana and Mahabharata.\n- Often confused with: The interchangeable usage of 'India' and 'Bharat' in modern contexts; historically, 'India' originated from external visitors identifying the region by the Indus river, while 'Bharata' originated indigenously from a specific Rigvedic tribe before generalizing to the entire subcontinent.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)"
   }
 ]
