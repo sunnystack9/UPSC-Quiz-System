@@ -304,5 +304,19 @@
       "The current explanation is overly brief and lacks the structured bullet-point format required for effective UPSC exam review.",
       "It does not explicitly explain why partial combinations are incorrect by addressing the specific conditions of each statement."
     ]
+  },
+  {
+    "timestamp": "2026-10-11T11:30:23.106136",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_010",
+    "field": "explanation",
+    "old_value": "Statement 4 is incorrect: the chapter states this span covers about 99 percent of human history, not roughly half. Statements 1-3 are correct.",
+    "new_value": "- Statement 1 is correct: The term Palaeolithic comes from the Greek words 'palaeo' meaning old and 'lithos' meaning stone, reflecting the use of stone tools.\n- Statement 2 is correct: The Palaeolithic period extends from about 2 million years ago to about 12,000 years ago, a vast span of time divided by archaeologists.\n- Statement 3 is correct: This long period is further subdivided into the Lower, Middle, and Upper Palaeolithic based on the gradual evolution of stone tool technologies.\n- Statement 4 is incorrect: This long time span covers roughly 99 percent of human history, not roughly half as stated.\n- Often confused with the Neolithic period, which is distinguished by the beginning of agriculture, settled village life, and polished stone tools, whereas the Palaeolithic period is characterized by hunting-gathering and crude stone tools.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)",
+    "issues_found": [
+      "The current explanation lacks bullet-point formatting required for exam-focused clarity.",
+      "It does not explicitly explain why statements 1, 2, and 3 are correct.",
+      "It misses the 'Often confused with' comparison to reinforce the conceptual distinction between Palaeolithic and Neolithic periods."
+    ]
   }
 ]
