@@ -350,5 +350,14 @@
     "old_value": "The chapter explicitly states that men and women, ‘including kings and queens’, recorded what they did through inscriptions — so option (c) is not correct.",
     "new_value": "- Option C is not correct because historical inscriptions record achievements of both kings and queens, alongside other men and women, proving that royal women also commissioned inscriptions.\n- Option A is correct because inscriptions were carved on relatively hard surfaces such as stone or metal to ensure durability.\n- Option B is correct because rulers frequently used inscriptions to issue royal orders and decrees so that subjects could read and comply with them.\n- Option D is correct because inscriptions were commonly used by monarchs to document their military victories and conquests in battle.\n- Often confused with manuscripts, inscriptions are distinguished by being engraved on hard, durable surfaces rather than written on soft materials like palm leaf or specially prepared bark.",
     "source": "Import AI Explanation (gemini-3.5-flash-lite)"
+  },
+  {
+    "timestamp": "2026-10-11T13:22:09.630610",
+    "user": "Sunny",
+    "question_id": "NCERT_ANC_007",
+    "field": "explanation",
+    "old_value": "The chapter states the inscription dates to about 2250 years ago and was inscribed in two scripts and languages — Greek and Aramaic — not a single script, and it has no connection to palm-leaf manuscripts or the term Bharata.",
+    "new_value": "- Option B is correct because the famous Kandahar Inscription of Ashoka dates to about 2250 years ago and was written in two different scripts and languages, Greek and Aramaic.\n- Option A is incorrect because the inscription was written in two scripts and languages (Greek and Aramaic), not a single script.\n- Option C is incorrect because the inscription is from around 2250 years ago, not 2500 years ago, and does not record the earliest use of the term Bharata.\n- Option D is incorrect because the inscription was carved on stone or rock surfaces, not written on a palm leaf and preserved in a monastery.",
+    "source": "Import AI Explanation (gemini-3.5-flash-lite)"
   }
 ]
