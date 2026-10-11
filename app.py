@@ -983,6 +983,39 @@ def render_explanation_text(text):
     st.markdown(text, unsafe_allow_html=True)
 
 
+def syllabus_caption_text(correlation):
+    """Builds the "📖 Syllabus: ..." caption line from a question's
+    syllabus_correlation field, or returns None if there's nothing usable
+    to show.
+
+    Before this existed, three places in the app wrote
+    correlation['topic'], correlation['chapter_2025_act'] and
+    correlation['chapter_1961_act'] directly -- square brackets mean
+    "this key MUST exist or crash with a KeyError". Any question whose
+    syllabus_correlation was shaped differently (e.g. a UPSC question with
+    just a topic and no Income-tax chapters) would have crashed the whole
+    screen. This version uses .get(), which just returns None for a
+    missing key, and only adds the pieces that actually exist."""
+    if not isinstance(correlation, dict):
+        return None
+    topic = correlation.get("topic")
+    new_chapter = correlation.get("chapter_2025_act")
+    old_chapter = correlation.get("chapter_1961_act")
+    if not topic:
+        return None
+    text = f"📖 Syllabus: {topic}"
+    if new_chapter and old_chapter:
+        text += (
+            f" — Chapter {new_chapter} of the Income-tax Act, 2025 "
+            f"(Chapter {old_chapter} of the 1961 Act)"
+        )
+    elif new_chapter:
+        text += f" — Chapter {new_chapter} of the Income-tax Act, 2025"
+    elif old_chapter:
+        text += f" — Chapter {old_chapter} of the 1961 Income-tax Act"
+    return text
+
+
 def render_copy_button(label, text, key):
     """Renders a single-click 'copy to clipboard' button via a small HTML/
     JS component -- unlike st.code()'s built-in copy icon (used elsewhere
@@ -1153,7 +1186,11 @@ def get_current_user():
                     "here would silently take over that profile's data."
                 )
                 can_create = False
-            set_pin = st.checkbox("Protect this profile with a short PIN (optional — a light deterrent against accidental mix-ups, not real security)")
+            if name and _is_admin_name(name):
+                st.warning("This name is reserved for an admin profile, so a PIN is required.")
+                set_pin = True
+            else:
+                set_pin = st.checkbox("Protect this profile with a short PIN (optional — a light deterrent against accidental mix-ups, not real security)")
             if set_pin:
                 new_pin = st.text_input("Set a PIN:", type="password", max_chars=6)
                 pin_ok = bool(new_pin and new_pin.strip())
@@ -1165,10 +1202,18 @@ def get_current_user():
             pin_ok = _verify_pin(stored_pin, entered_pin)
             if entered_pin and not pin_ok:
                 st.error("Incorrect PIN.")
+        elif _is_admin_name(name):
+            # An admin profile that has no PIN yet (e.g. created before this
+            # rule existed): make the person set one right now, otherwise
+            # they'd be locked out of their own admin tools.
+            st.warning("This is an admin profile. Set a PIN now -- admin tools stay switched off until a PIN exists.")
+            set_pin = True
+            new_pin = st.text_input("Set a PIN for this admin profile:", type="password", max_chars=6)
+            pin_ok = bool(new_pin and new_pin.strip())
 
     if st.button("Continue", type="primary", disabled=not (can_create and name.strip() and pin_ok)):
         clean = name.strip()
-        if choice == "Create new profile..." and set_pin and new_pin:
+        if set_pin and new_pin and new_pin.strip():
             save_user_pin(clean, new_pin.strip())
         # Re-read every *.json file in data/ fresh on each login, rather than
         # trusting whatever this running process happened to cache. Data
@@ -1199,7 +1244,10 @@ _BACKUP_FILES = [
 ]
 
 
-def _is_admin(user):
+def _is_admin_name(user):
+    """True if this profile NAME is on the admin list in secrets. Says
+    nothing about whether the person is actually allowed in -- see
+    _is_admin() below for the real check."""
     try:
         admin = st.secrets.get("admin_user")
     except Exception:
@@ -1215,6 +1263,18 @@ def _is_admin(user):
         # A TOML array of names (admin_user = ["Sunny", "Friend"]).
         admins = [str(a).strip() for a in admin if str(a).strip()]
     return user in admins
+
+
+def _is_admin(user):
+    """Admin powers (answer-key edits, Gemini calls, GitHub commits) need
+    TWO things: the name is on the admin list, AND that profile has a PIN
+    set. Before, the name alone was enough -- and since anyone can pick any
+    name from the profile dropdown, anyone could pick the admin's name and
+    get all admin powers. With a PIN required, get_current_user() makes
+    them type it before they can log in as that profile at all."""
+    if not _is_admin_name(user):
+        return False
+    return bool(load_users().get(user))
 
 
 # How many times _github_commit_file() retries a genuine write conflict
@@ -1240,18 +1300,38 @@ def _github_config():
 
 
 def github_restore_if_needed():
+    """If a state file (responses.json, schedule.json, ...) is missing
+    locally -- e.g. the app just restarted on a fresh server -- download
+    the last backup of it from GitHub.
+
+    The old version asked GitHub's normal Contents API, which wraps the
+    file in JSON and sends its text as a base64 "content" field. GitHub
+    only fills that field for files up to 1 MB; for bigger files it comes
+    back EMPTY. So a big responses.json used to be "restored" as an empty
+    file, and the next backup then pushed that empty file over the good
+    copy on GitHub -- silently wiping everyone's history.
+
+    Fix: ask for the RAW media type ("application/vnd.github.raw+json"),
+    which sends the file's actual text directly and works for large files
+    too. Two safety checks before anything is written locally: the
+    download must not be empty, and it must be valid JSON. If either check
+    fails, nothing is written at all -- a missing file is better than a
+    broken or empty one."""
     cfg = _github_config()
     if not cfg:
         return
+    raw_headers = {**cfg["headers"], "Accept": "application/vnd.github.raw+json"}
     for local_path, repo_path in _BACKUP_FILES:
         if local_path.exists():
             continue
         try:
             url = f"https://api.github.com/repos/{cfg['repo']}/contents/{repo_path}"
-            resp = requests.get(url, headers=cfg["headers"], timeout=10)
+            resp = requests.get(url, headers=raw_headers, timeout=20)
             if resp.status_code == 200:
-                content_b64 = resp.json().get("content", "").replace("\n", "")
-                content = base64.b64decode(content_b64).decode("utf-8")
+                content = resp.content.decode("utf-8")
+                if not content.strip():
+                    continue
+                json.loads(content)  # raises if it isn't valid JSON -> skipped below
                 local_path.write_text(content, encoding="utf-8")
         except Exception:
             pass
@@ -3726,9 +3806,19 @@ def main():
     with st.sidebar:
         st.write(f"Practicing as **{user}**")
         if st.button("Switch user"):
-            del st.session_state.current_user
-            if "user" in st.query_params:
-                del st.query_params["user"]
+            # Forget EVERYTHING the app remembers about the current person
+            # (their quiz in progress, answers shown on screen, open tabs,
+            # etc.) -- not just their name. Before, only current_user was
+            # deleted, so the next person to log in on this same browser
+            # tab could inherit the previous person's live quiz, and their
+            # answers would be saved under the wrong name. The one thing we
+            # keep is the "already tried restoring from GitHub" flag, so we
+            # don't re-contact GitHub for no reason.
+            keep = {"_restore_attempted"}
+            for key in list(st.session_state.keys()):
+                if key not in keep:
+                    del st.session_state[key]
+            st.query_params.clear()
             st.rerun()
 
     render_centered_header("UPSC / HCS Prelims GS Paper I practice.")
@@ -4580,12 +4670,9 @@ def render_full_question(q, key_prefix, note=None, include_answer_in_copy=False,
         else:
             st.caption("No explanation available for this question yet.")
 
-    correlation = q.get("syllabus_correlation")
-    if correlation:
-        st.caption(
-            f"📖 Syllabus: {correlation['topic']} — Chapter {correlation['chapter_2025_act']} of the "
-            f"Income-tax Act, 2025 (Chapter {correlation['chapter_1961_act']} of the 1961 Act)"
-        )
+    syllabus_text = syllabus_caption_text(q.get("syllabus_correlation"))
+    if syllabus_text:
+        st.caption(syllabus_text)
 
     if copy_for_ai:
         render_copy_button(
@@ -4658,12 +4745,9 @@ def render_reviewed_question(q, user, show_caption=True):
             render_explanation_text(explanation)
         else:
             st.caption("No explanation available for this question yet.")
-        correlation = q.get("syllabus_correlation")
-        if correlation:
-            st.caption(
-                f"📖 Syllabus: {correlation['topic']} — Chapter {correlation['chapter_2025_act']} of the "
-                f"Income-tax Act, 2025 (Chapter {correlation['chapter_1961_act']} of the 1961 Act)"
-            )
+        syllabus_text = syllabus_caption_text(q.get("syllabus_correlation"))
+        if syllabus_text:
+            st.caption(syllabus_text)
 
     my_bookmarks = load_bookmarks().get(user, {})
     is_bookmarked = q["question_id"] in my_bookmarks
@@ -5172,12 +5256,9 @@ def render_question(practice_questions, user):
             render_explanation_text(explanation)
         else:
             st.caption("No explanation available for this question yet.")
-        correlation = q.get("syllabus_correlation")
-        if correlation:
-            st.caption(
-                f"📖 Syllabus: {correlation['topic']} — Chapter {correlation['chapter_2025_act']} of the "
-                f"Income-tax Act, 2025 (Chapter {correlation['chapter_1961_act']} of the 1961 Act)"
-            )
+        syllabus_text = syllabus_caption_text(q.get("syllabus_correlation"))
+        if syllabus_text:
+            st.caption(syllabus_text)
 
     my_bookmarks = load_bookmarks().get(user, {})
     is_bookmarked = q["question_id"] in my_bookmarks
@@ -5271,6 +5352,113 @@ def render_community_notes(question_id, user):
                 st.rerun()
             else:
                 st.warning("Write something before posting.")
+
+
+# ---------- Guess-or-skip report ----------
+# With negative marking, a wrong answer COSTS marks, so guessing is only
+# worth it if you're right often enough. The app already records how sure
+# you felt on every answer (Guessed / Somewhat sure / Confident), so this
+# report checks, for each of those levels, whether your real accuracy beats
+# the "break-even" accuracy for that exam's marking scheme.
+
+# Below this many answers at one confidence level, accuracy is too noisy to
+# base a "guess or skip" verdict on (3 right out of 4 proves nothing).
+GUESS_REPORT_MIN_SAMPLE = 10
+
+
+def break_even_accuracy(scheme):
+    """The accuracy at which attempting a question earns exactly 0 marks on
+    average. Solve  p * marks_correct - (1 - p) * penalty = 0  for p:
+        p = penalty / (marks_correct + penalty)
+    UPSC (+2 / -0.66)  -> 0.66 / 2.66 = about 24.8%
+    HCS  (+1 / -0.25)  -> 0.25 / 1.25 = 20.0%
+    Be right MORE often than this and attempting beats skipping."""
+    penalty = abs(scheme["marks_wrong"])
+    return penalty / (scheme["marks_correct"] + penalty)
+
+
+def expected_marks_per_attempt(accuracy, scheme):
+    """Average marks you gain (or lose) each time you attempt a question,
+    given your accuracy. Positive = attempting pays; negative = skipping
+    would have scored better."""
+    penalty = abs(scheme["marks_wrong"])
+    return accuracy * scheme["marks_correct"] - (1 - accuracy) * penalty
+
+
+def guess_or_skip_stats(graded):
+    """Groups graded responses by marking scheme, then by confidence level.
+    Returns {scheme_label: {"scheme": scheme_dict, "by_conf": {confidence:
+    {"total": n, "correct": n}}}}. Skipped answers are left out (a skip
+    isn't a guess), as are answers with no confidence recorded (older data)
+    and questions whose exam/paper has no marking scheme."""
+    out = {}
+    for r in graded:
+        if r.get("selected") == OPT_SKIPPED:
+            continue
+        confidence = r.get("confidence")
+        if confidence not in (CONF_GUESSED, CONF_SOMEWHAT, CONF_CONFIDENT):
+            continue
+        scheme = marking_for(r.get("exam"), r.get("paper"))
+        if not scheme:
+            continue
+        entry = out.setdefault(scheme["label"], {
+            "scheme": scheme,
+            "by_conf": {c: {"total": 0, "correct": 0} for c in (CONF_GUESSED, CONF_SOMEWHAT, CONF_CONFIDENT)},
+        })
+        bucket = entry["by_conf"][confidence]
+        bucket["total"] += 1
+        if r.get("selected") == r.get("correct_answer"):
+            bucket["correct"] += 1
+    return out
+
+
+def render_guess_or_skip(graded):
+    """One card per marking scheme (UPSC / HCS) answering: "when I feel
+    only Guessed / Somewhat sure / Confident, is attempting actually
+    paying off in marks?" Draws nothing if there's no usable data yet."""
+    stats = guess_or_skip_stats(graded)
+    for label in sorted(stats):
+        scheme = stats[label]["scheme"]
+        be = break_even_accuracy(scheme)
+        any_small = False
+        rows = []
+        for confidence, icon in ((CONF_GUESSED, "🎲"), (CONF_SOMEWHAT, "🤔"), (CONF_CONFIDENT, "💪")):
+            b = stats[label]["by_conf"][confidence]
+            if b["total"] == 0:
+                rows.append({"icon": icon, "label": confidence, "value": "—", "detail": "No answers yet."})
+                continue
+            acc = b["correct"] / b["total"]
+            ev = expected_marks_per_attempt(acc, scheme)
+            counts = f"{b['correct']}/{b['total']} correct"
+            if b["total"] < GUESS_REPORT_MIN_SAMPLE:
+                any_small = True
+                color = "#64748b"
+                verdict = "too early to say"
+            elif acc > be:
+                color = "#15803d"
+                verdict = f"✅ worth attempting ({ev:+.2f} marks per question)"
+            else:
+                color = "#b91c1c"
+                verdict = f"⛔ better to skip ({ev:+.2f} marks per question)"
+            rows.append({
+                "icon": icon, "label": confidence, "value": f"{acc * 100:.0f}%",
+                "value_color": color, "detail": f"{counts} · {verdict}",
+            })
+        footer = [
+            f"Break-even rule: you need to be right more than {be * 100:.1f}% of the time for "
+            f"attempting to earn marks (right = +{scheme['marks_correct']:g}, wrong = "
+            f"{scheme['marks_wrong']:g}). Below that, skipping scores better.",
+            "These numbers use the confidence level you picked while answering, so they are "
+            "only as honest as that slider.",
+        ]
+        if any_small:
+            footer.append(
+                f"Levels with fewer than {GUESS_REPORT_MIN_SAMPLE} answers are too early to trust yet."
+            )
+        render_metric_card(
+            icon="🎯", title="Guess or Skip?", subtitle=label,
+            header_bg="#fffbeb", accent="#fcd34d", rows=rows, footer_lines=footer,
+        )
 
 
 # ---------- Report tab ----------
@@ -5417,6 +5605,10 @@ def render_report(questions, user, source_file_by_id):
             if st.button("Back up my progress now", use_container_width=True):
                 ok, msg = github_backup()
                 st.success("Backed up.") if ok else st.warning(f"Backup failed: {msg}")
+
+    # ---- Guess or skip? -- sits right under the backup button because it
+    # is a direct, practical answer to "should I attempt this on exam day?"
+    render_guess_or_skip(graded)
 
     # ---- Repeatedly missed -- deliberately stays here, below the backup
     # button, rather than moving up with Spaced repetition above: this one
